@@ -1,0 +1,237 @@
+/* Component 680: 1280 x 540, gap 20; open card 752, closed 244 */
+.cards {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  max-width: var(--content);
+  height: calc(540 * var(--u));
+  min-height: 420px;
+  margin: 0 auto;
+}
+
+.card {
+  position: relative;
+  flex: 244 1 0;
+  min-width: 0;
+  overflow: hidden;
+  border-radius: var(--r-card);
+  background: #171717;
+  transition: flex-grow 400ms var(--ease-out);
+}
+
+.open {
+  flex-grow: 752;
+}
+
+.image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 600ms var(--ease-out);
+}
+
+.vision .image {
+  transform: scale(1.1157);
+}
+
+/* Closed: bottom 306px fades to black */
+.shade {
+  position: absolute;
+  inset: auto 0 0;
+  height: 306px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #000 100%);
+  transition: opacity 400ms var(--ease-out);
+}
+
+.mission .shade {
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  -webkit-mask: linear-gradient(transparent, #000 40%);
+  mask: linear-gradient(transparent, #000 40%);
+}
+
+/* Open: Figma "Header" layer — progressive blur + 50% black → clear */
+.open .shade {
+  inset: 0 auto 0 0;
+  width: min(587px, 78%);
+  height: 100%;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.5) 0%, rgba(255, 255, 255, 0) 100%);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  -webkit-mask: linear-gradient(90deg, #000 45%, transparent 100%);
+  mask: linear-gradient(90deg, #000 45%, transparent 100%);
+}
+
+.toggle {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  text-align: left;
+}
+
+.open .toggle {
+  pointer-events: none;
+}
+
+/* Vertical title: Inter SemiBold 40, #f7f7f5, reads bottom to top */
+/* Box 48 x 375 at left 61 / top 132: rotate around its bottom-left corner */
+.vertical {
+  position: absolute;
+  left: 61px;
+  top: calc(100% - 33px);
+  width: 375px;
+  font-size: 40px;
+  line-height: 48px;
+  font-weight: 600;
+  color: #f7f7f5;
+  white-space: nowrap;
+  transform-origin: left top;
+  transform: rotate(-90deg);
+  transition: opacity 300ms var(--ease-out);
+}
+
+.open .vertical {
+  opacity: 0;
+}
+
+.panel {
+  position: absolute;
+  left: 60px;
+  top: 50%;
+  z-index: 1;
+  width: 340px;
+  translate: 0 -50%;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  opacity: 0;
+  transition: opacity 300ms var(--ease-out);
+  pointer-events: none;
+}
+
+.open .panel {
+  opacity: 1;
+  transition-delay: 150ms;
+}
+
+/* Mission/Story open: label sits at the bottom left */
+.mission .panel,
+.story .panel {
+  top: auto;
+  bottom: 48px;
+  translate: none;
+}
+
+/* OUR VISION: Inter SemiBold 17, navy */
+.label {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--navy-900);
+}
+
+.mission .label,
+.story .label {
+  font-size: 40px;
+  color: #f7f7f5;
+}
+
+/* Inter SemiBold 34, white */
+.title {
+  font-size: clamp(26px, calc(20px + 1vw), 34px);
+  line-height: normal;
+  font-weight: 600;
+  color: var(--white);
+}
+
+/* Inter Regular 20, white, 301 wide */
+.body {
+  max-width: 301px;
+  font-size: var(--fs-body);
+  line-height: normal;
+  color: var(--white);
+}
+
+@media (hover: hover) {
+  .card:hover .image {
+    transform: scale(1.03);
+  }
+
+  .vision:hover .image,
+  .vision.open .image {
+    transform: scale(1.1157);
+  }
+}
+
+/* Mobile: accordion, horizontal titles, one open at a time */
+@media (max-width: 767px) {
+  .cards {
+    flex-direction: column;
+    height: auto;
+    min-height: 0;
+    gap: 12px;
+  }
+
+  .card {
+    flex: none;
+    height: 120px;
+    transition: height 400ms var(--ease-out);
+  }
+
+  .open {
+    height: 460px;
+  }
+
+  .shade,
+  .open .shade {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.75) 100%);
+  }
+
+  .vertical {
+    top: auto;
+    bottom: 24px;
+    left: 20px;
+    width: auto;
+    font-size: 26px;
+    line-height: 1.2;
+    transform: none;
+  }
+
+  .panel,
+  .mission .panel,
+  .story .panel {
+    left: 20px;
+    right: 20px;
+    top: auto;
+    bottom: 24px;
+    width: auto;
+    translate: none;
+    gap: 14px;
+  }
+
+  .label {
+    color: var(--white);
+  }
+
+  .mission .label,
+  .story .label {
+    font-size: 26px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .body {
+    max-width: none;
+    font-size: 16px;
+    line-height: 1.45;
+  }
+}

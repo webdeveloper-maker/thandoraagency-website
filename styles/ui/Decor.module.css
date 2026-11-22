@@ -1,0 +1,51 @@
+/*
+ * Grid decor: 714px radial navy glow masked by the 770px line grid,
+ * offset -28px exactly like the Figma "Mask group".
+ */
+.grid {
+  --g: 1;
+  position: absolute;
+  width: calc(714 * var(--u) * var(--g));
+  height: calc(714 * var(--u) * var(--g));
+  pointer-events: none;
+  opacity: 0.5;
+  background: radial-gradient(
+    circle calc(322 * var(--u) * var(--g)) at 50% 54.9%,
+    rgba(15, 25, 65, 1) 0%,
+    rgba(20, 46, 101, 0.75) 25%,
+    rgba(24, 67, 137, 0.5) 50%,
+    rgba(33, 110, 209, 0) 100%
+  );
+  -webkit-mask: url("/images/grid-mask.svg") calc(-28 * var(--u) * var(--g)) calc(-28 * var(--u) * var(--g)) / calc(770 * var(--u) * var(--g))
+    calc(770 * var(--u) * var(--g)) no-repeat;
+  mask: url("/images/grid-mask.svg") calc(-28 * var(--u) * var(--g)) calc(-28 * var(--u) * var(--g)) / calc(770 * var(--u) * var(--g))
+    calc(770 * var(--u) * var(--g)) no-repeat;
+  z-index: 0;
+}
+
+.gridBlue {
+  opacity: 1;
+  background: radial-gradient(
+    circle calc(322 * var(--u) * var(--g)) at 50% 54.9%,
+    rgba(74, 140, 255, 1) 44.23%,
+    rgba(33, 110, 209, 0) 100%
+  );
+}
+
+.mandala {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.mandalaInner {
+  flex: none;
+  will-change: transform;
+}
+
+.mandalaInner img {
+  width: 100%;
+  height: 100%;
+}

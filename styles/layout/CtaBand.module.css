@@ -1,0 +1,116 @@
+/* Desktop - 23: #285afd, 697px tall */
+.band {
+  position: relative;
+  overflow: hidden;
+  height: 697px;
+  background: var(--blue-600-alt);
+  color: var(--white);
+}
+
+.copy {
+  position: relative;
+  z-index: 1;
+  padding: 190px 0 0 80px;
+}
+
+/* Inter Light 38.158 / 47.698, -1.068px */
+.lead {
+  width: 767px;
+  max-width: 100%;
+  font-size: var(--fs-lead-cta);
+  line-height: 1.25;
+  font-weight: 300;
+  letter-spacing: -0.028em;
+}
+
+/* Inter SemiBold 88 / 80, -7.28px */
+.title {
+  margin-top: 62px;
+  font-size: var(--fs-h2-section);
+  line-height: 0.909;
+  font-weight: 600;
+  letter-spacing: -0.0827em;
+  white-space: nowrap;
+}
+
+/* White pill 340x90, Inter SemiBold 24 */
+.button {
+  margin-top: 33px;
+  width: 340px;
+  height: 90px;
+  font-size: 24px;
+  line-height: 28.75px;
+  letter-spacing: -0.0958px;
+  color: #000;
+  box-shadow: none;
+}
+
+.art {
+  position: absolute;
+  left: calc(40% + 2px);
+  bottom: 0;
+  width: 862px;
+}
+
+.art img {
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 1279px) {
+  .band {
+    height: auto;
+    min-height: 600px;
+  }
+
+  .copy {
+    padding: clamp(96px, 13vw, 190px) var(--pad) 0;
+  }
+
+  .art {
+    left: auto;
+    right: -4%;
+    width: min(862px, 62vw);
+  }
+}
+
+@media (max-width: 899px) {
+  .band {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .copy {
+    padding: 72px 20px 40px;
+  }
+
+  .lead br {
+    display: none;
+  }
+
+  .title {
+    margin-top: 28px;
+    white-space: normal;
+  }
+
+  .title br {
+    display: none;
+  }
+
+  .button {
+    margin-top: 28px;
+    width: 100%;
+    max-width: 340px;
+    height: 64px;
+    font-size: 20px;
+  }
+
+  .art {
+    position: relative;
+    right: auto;
+    left: auto;
+    width: 112%;
+    margin-left: -6%;
+  }
+}

@@ -1,0 +1,352 @@
+/*
+ * Hero composition in Figma px via var(--u): exact at 1440px, scaled below.
+ * Frame: 1440 x 910.
+ */
+.wrap {
+  position: relative;
+  background: var(--white);
+}
+
+.stage {
+  position: relative;
+  height: calc(910 * var(--u));
+  min-height: 600px;
+  overflow: hidden;
+}
+
+/* Pinned scene (tablet+, motion allowed): 260vh of scroll, sticky stage */
+@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+  .wrap {
+    height: 260vh;
+  }
+
+  .stage {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    min-height: calc(910 * var(--u));
+  }
+
+  .scene2 {
+    pointer-events: auto;
+  }
+}
+
+.bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.scene1,
+.scene2 {
+  position: absolute;
+  inset: 0;
+}
+
+.scene2 {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Pillars: 577 x 923, right -60 / left -60 (mirrored) */
+.pillar {
+  position: absolute;
+  top: calc(-1 * var(--u));
+  width: calc(577 * var(--u));
+  height: calc(923 * var(--u));
+  z-index: 2;
+}
+
+.pillarScroll {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.pillar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  will-change: transform;
+}
+
+.pillarRight {
+  right: calc(-60 * var(--u));
+}
+
+.pillarLeft {
+  left: calc(-60 * var(--u));
+  top: 0;
+}
+
+.pillarLeft img {
+  /* Mirrored copy of the right pillar. `scale` composes with Motion's transform. */
+  scale: -1 1;
+}
+
+/* Architrave: 1122 x 369, centred, top -71 */
+.arch {
+  position: absolute;
+  top: calc(-71 * var(--u));
+  left: 50%;
+  width: calc(1122 * var(--u));
+  height: calc(369 * var(--u));
+  translate: -50% 0;
+  z-index: 3;
+}
+
+.arch img {
+  width: 100%;
+  height: 100%;
+}
+
+.content {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+}
+
+/* Logo (image 33): visible artwork spans ~353 x 312 at top 141, centred */
+.logo {
+  position: absolute;
+  top: calc(141 * var(--u));
+  left: calc(50% + 0.5 * var(--u));
+  width: calc(353 * var(--u));
+  height: calc(312 * var(--u));
+  translate: -50% 0;
+  object-fit: contain;
+}
+
+/* Headline: Inter Bold 52/50, -1.068px, top 505, width 722, centred +7 */
+.headline {
+  position: absolute;
+  top: calc(505 * var(--u));
+  left: calc(50% + 7 * var(--u));
+  width: calc(722 * var(--u));
+  translate: -50% 0;
+  font-size: calc(52 * var(--u));
+  line-height: calc(50 * var(--u));
+  font-weight: 700;
+  letter-spacing: calc(-1.068 * var(--u));
+  text-align: center;
+  color: #000;
+}
+
+.line {
+  display: block;
+}
+
+/* Sub: Inter 24/30, #767474, -1.068px, top 641, width 569 */
+.sub {
+  position: absolute;
+  top: calc(641 * var(--u));
+  left: calc(50% + 0.5 * var(--u));
+  width: calc(569 * var(--u));
+  translate: -50% 0;
+  font-size: calc(24 * var(--u));
+  line-height: calc(30 * var(--u));
+  letter-spacing: calc(-1.068 * var(--u));
+  text-align: center;
+  color: var(--grey-500);
+}
+
+.cta {
+  position: absolute;
+  top: calc(780 * var(--u));
+  left: calc(50% + 3 * var(--u));
+  translate: -50% 0;
+}
+
+/* Scene 2: typing headline at left 118, top 201 */
+.typing {
+  position: absolute;
+  top: calc(201 * var(--u));
+  left: calc(118 * var(--u));
+  z-index: 3;
+}
+
+.typing p {
+  font-size: calc(100 * var(--u));
+}
+
+.king {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: calc(880 * var(--u));
+  height: auto;
+  z-index: 2;
+  will-change: transform;
+}
+
+.scholar {
+  position: absolute;
+  right: calc(40 * var(--u));
+  bottom: 0;
+  width: calc(382 * var(--u));
+  height: auto;
+  z-index: 2;
+  will-change: transform;
+}
+
+.stacked {
+  display: none;
+}
+
+/* Tablet+ with reduced motion: scene 2 sits statically below scene 1 */
+@media (min-width: 768px) and (prefers-reduced-motion: reduce) {
+  .scene2 {
+    display: none;
+  }
+
+  .stacked {
+    display: block;
+    position: relative;
+    height: calc(910 * var(--u));
+    overflow: hidden;
+    background: url("/images/hero2-bg.avif") center / cover;
+  }
+
+  .stacked p {
+    position: absolute;
+    top: calc(201 * var(--u));
+    left: calc(118 * var(--u));
+    font-size: calc(100 * var(--u));
+  }
+
+  .stacked img {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: calc(880 * var(--u));
+  }
+}
+
+/* Mobile: stacked, pillars cropped to 25% width at the edges */
+@media (max-width: 767px) {
+  .stage {
+    height: auto;
+    min-height: 0;
+    padding: calc(var(--header-h) + 32px) 20px 56px;
+  }
+
+  .scene1 {
+    position: relative;
+    inset: auto;
+  }
+
+  .scene2 {
+    display: none;
+  }
+
+  .pillar {
+    top: 0;
+    width: 25%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .pillar img {
+    width: auto;
+    height: 100%;
+    max-width: none;
+    object-fit: cover;
+  }
+
+  .pillarLeft {
+    left: 0;
+  }
+
+  .pillarLeft img {
+    position: absolute;
+    right: 0;
+  }
+
+  .pillarRight {
+    right: 0;
+  }
+
+  .arch {
+    top: -24px;
+    width: 120%;
+    height: auto;
+  }
+
+  .arch img {
+    height: auto;
+  }
+
+  .content {
+    position: relative;
+    inset: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .logo,
+  .headline,
+  .sub,
+  .cta {
+    position: relative;
+    top: auto;
+    left: auto;
+    translate: none;
+  }
+
+  .logo {
+    width: 160px;
+    height: auto;
+    margin-top: 24px;
+  }
+
+  .headline {
+    width: auto;
+    margin-top: 28px;
+    font-size: var(--fs-h1-hero);
+    line-height: 1.125;
+    letter-spacing: -0.02em;
+  }
+
+  .sub {
+    width: auto;
+    max-width: 30ch;
+    margin-top: 16px;
+    font-size: var(--fs-body-lg);
+    line-height: 1.53;
+    letter-spacing: -0.02em;
+    /* #767474 on white is 4.6:1 — passes AA for body text. */
+  }
+
+  .cta {
+    width: 100%;
+    margin-top: 28px;
+  }
+
+  .cta a {
+    width: 100%;
+  }
+
+  .stacked {
+    display: block;
+    padding: 24px 20px 0;
+    background: url("/images/hero2-bg.avif") center / cover;
+    overflow: hidden;
+  }
+
+  .stacked p {
+    font-size: 40px;
+    letter-spacing: -2.5px;
+  }
+
+  .stacked img {
+    width: 120%;
+    max-width: none;
+    margin: 16px 0 0 -10%;
+  }
+}

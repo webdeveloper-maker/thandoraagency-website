@@ -1,0 +1,56 @@
+/* Brand/Typing headline: Inter SemiBold 100 / 118.272, -7.392px tracking */
+.root {
+  font-size: var(--fs-display-xl);
+  line-height: 1.18272;
+  font-weight: 600;
+  letter-spacing: -0.07392em;
+  text-transform: uppercase;
+  color: var(--navy-900);
+}
+
+.line {
+  position: relative;
+  display: block;
+  white-space: nowrap;
+}
+
+.ghost {
+  visibility: hidden;
+}
+
+.typed {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.line:last-child .ghost {
+  font-size: 1.3em;
+}
+
+.blue {
+  color: var(--blue-600);
+}
+
+/* "remember." is set at 130px in Figma */
+.big {
+  font-size: 1.3em;
+}
+
+.cursor {
+  display: inline-block;
+  font-size: 0.76em;
+  margin-left: 0.04em;
+  font-weight: 400;
+  color: var(--navy-900);
+}
+
+.blink {
+  animation: blink 750ms steps(1) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}

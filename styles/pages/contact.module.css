@@ -1,0 +1,71 @@
+/*
+ * Contact (Figma "Desktop - 51"): white area 0–828, blue info section from
+ * 828. The form card (left 235 / top 160) overlaps into the blue section.
+ */
+.top {
+  position: relative;
+  height: calc(828 * var(--u));
+  min-height: 640px;
+  z-index: 2;
+}
+
+/* Carved symbol: 857.7 x 813.4 at left -280 / top 87 */
+.symbol {
+  position: absolute;
+  left: calc(-280 * var(--u));
+  top: calc(87 * var(--u));
+  width: calc(857.691 * var(--u));
+  height: calc(813.383 * var(--u));
+  pointer-events: none;
+}
+
+.intro {
+  position: absolute;
+  left: calc(92 * var(--u));
+  top: calc(160 * var(--u));
+  z-index: 1;
+}
+
+.form {
+  position: absolute;
+  left: calc(235 * var(--u));
+  top: calc(160 * var(--u));
+}
+
+@media (max-width: 1023px) {
+  .top {
+    height: auto;
+    min-height: 0;
+    padding: calc(var(--header-h) + 40px) var(--pad) 56px;
+    overflow: hidden;
+  }
+
+  .symbol {
+    left: -40%;
+    top: 40px;
+    width: 120%;
+    height: auto;
+    opacity: 0.6;
+  }
+
+  .intro,
+  .form {
+    position: relative;
+    left: auto;
+    top: auto;
+  }
+
+  .form {
+    margin-top: 40px;
+  }
+}
+
+@media (max-width: 767px) {
+  .top {
+    padding-bottom: 0;
+  }
+
+  .form {
+    margin: 40px calc(-1 * var(--pad)) 0;
+  }
+}

@@ -1,0 +1,116 @@
+.pill {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 0;
+  border-radius: var(--r-pill);
+  white-space: nowrap;
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    filter var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out),
+    background-color var(--dur-fast) var(--ease-out);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.pill:hover {
+  transform: translateY(-2px);
+  filter: brightness(0.92);
+}
+
+.pill:active {
+  transform: translateY(0) scale(0.97);
+}
+
+/* md: 48px tall, 24px side padding, Inter SemiBold 16/24 */
+.md {
+  min-height: 48px;
+  padding: 0 24px;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
+}
+
+/* sm: LET'S TALK pills — Inter Bold 12/18, 1.8px tracking, caps */
+.sm {
+  min-height: 42px;
+  padding: 12px 24px;
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+}
+
+.blue {
+  background: var(--blue-600-alt);
+  color: var(--white);
+  box-shadow: var(--shadow-pill);
+}
+
+.blue.sm {
+  background: var(--blue-600);
+  color: #fdfdfd;
+  box-shadow: none;
+}
+
+.white {
+  background: var(--white);
+  color: var(--black-850);
+  box-shadow: var(--shadow-pill);
+}
+
+.white:hover {
+  filter: none;
+  background: #ebebeb;
+}
+
+.outline {
+  background: transparent;
+  color: var(--navy-900);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+
+.rounded {
+  border-radius: var(--r-btn);
+}
+
+.label {
+  position: relative;
+}
+
+.icon {
+  flex: none;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.pill:hover .icon {
+  transform: translateX(4px);
+}
+
+.loading {
+  pointer-events: none;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 767px) {
+  .sm {
+    min-height: 44px;
+  }
+}

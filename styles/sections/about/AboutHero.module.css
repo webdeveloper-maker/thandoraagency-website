@@ -1,0 +1,200 @@
+/* Desktop - 42 (Default state): 1440 x 945 */
+.hero {
+  position: relative;
+  height: calc(945 * var(--u));
+  min-height: 640px;
+  overflow: hidden;
+  background: var(--white);
+}
+
+/* Union: 741 x 690 (rotated -0.38°), box at left 346.74 / top 151.57 */
+.union {
+  position: absolute;
+  left: calc(348.99 * var(--u));
+  top: calc(154 * var(--u));
+  width: calc(741.095 * var(--u));
+  height: calc(690.163 * var(--u));
+  rotate: -0.38deg;
+}
+
+.union img {
+  width: 100%;
+  height: 100%;
+}
+
+/* Human hand (image 62): 959.6 x 839.7 rotated -17.37°, box left -368 / top 76 */
+.handLeft {
+  position: absolute;
+  left: calc(-368 * var(--u));
+  top: calc(76 * var(--u));
+  width: calc(1166.535 * var(--u));
+  height: calc(1087.889 * var(--u));
+  display: grid;
+  place-items: center;
+  z-index: 2;
+}
+
+.handLeft img {
+  width: calc(959.641 * var(--u));
+  height: calc(839.744 * var(--u));
+  max-width: none;
+  object-fit: cover;
+  object-position: 15% center;
+  rotate: -17.37deg;
+}
+
+/* Robot hand (image 63, right half of the artwork): 630.4 x 950.9, rotated -2.99° */
+.handRight {
+  position: absolute;
+  right: calc(-43.56 * var(--u));
+  top: calc(-12.47 * var(--u));
+  width: calc(679.147 * var(--u));
+  height: calc(982.469 * var(--u));
+  display: grid;
+  place-items: center;
+  z-index: 2;
+}
+
+.handRight img {
+  width: calc(630.427 * var(--u));
+  height: calc(950.894 * var(--u));
+  max-width: none;
+  object-fit: cover;
+  object-position: 100% center;
+  rotate: -2.99deg;
+}
+
+/* Logo (image 33, 598 x 515 box at top 180): visible artwork ~405 wide from top 256 */
+.logo {
+  position: absolute;
+  left: calc(50% + 33 * var(--u));
+  top: calc(256 * var(--u));
+  width: calc(405 * var(--u));
+  height: auto;
+  translate: -50% 0;
+  z-index: 1;
+}
+
+/* Statement: left 812 / top 716, 560 wide, Inter Medium 24 / 35 */
+.statement {
+  position: absolute;
+  left: calc(812 * var(--u));
+  top: calc(716 * var(--u));
+  width: calc(560 * var(--u));
+  z-index: 3;
+  font-size: var(--fs-body-lg);
+  line-height: 1.458;
+  font-weight: 500;
+  color: var(--navy-900);
+}
+
+/* Socials: 201 wide, 50px gap; label 11px #9cadc9, handle 17px navy */
+.socials {
+  position: absolute;
+  left: calc(57 * var(--u));
+  bottom: calc(607 * var(--u));
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.socials a {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  min-height: 44px;
+}
+
+.socials img {
+  flex: none;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.socials a:hover img {
+  transform: scale(1.1);
+}
+
+.handle {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.handleLabel {
+  font-size: 11px;
+  letter-spacing: 1.7px;
+  color: var(--slate-300);
+}
+
+.handleValue {
+  font-size: 17px;
+  color: var(--navy-900);
+}
+
+/* Loop arrow: 108 x 125 at left 704 / top 648 */
+.arrow {
+  position: absolute;
+  left: calc(704 * var(--u));
+  top: calc(648 * var(--u));
+  width: calc(125 * var(--u));
+  height: calc(108 * var(--u));
+  z-index: 3;
+  rotate: -90deg;
+  scale: 1 -1;
+}
+
+@media (max-width: 767px) {
+  .hero {
+    height: auto;
+    min-height: 0;
+    padding: calc(var(--header-h) + 24px) 20px 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .union,
+  .arrow,
+  .handLeft,
+  .handRight {
+    display: none;
+  }
+
+  .logo,
+  .statement,
+  .socials {
+    position: relative;
+    left: auto;
+    top: auto;
+    bottom: auto;
+    translate: none;
+  }
+
+  .logo {
+    width: 200px;
+  }
+
+  .statement {
+    width: auto;
+    margin-top: 32px;
+    text-align: center;
+  }
+
+  .socials {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px 24px;
+    margin-top: 32px;
+  }
+
+  .handle {
+    display: none;
+  }
+}

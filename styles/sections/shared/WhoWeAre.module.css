@@ -1,0 +1,89 @@
+/*
+ * Home: banner ends at 1259 → title at 1305, copy at 1337 (left 664),
+ * button at 1618, cards at 1761, next section at 2494.
+ */
+.section {
+  position: relative;
+  overflow-x: clip;
+  padding: calc(46 * var(--u)) 0 calc(193 * var(--u));
+}
+
+/* About: banner ends at 1305 → title at 1365, cards at 1721, next at 2334 */
+.about {
+  padding: calc(60 * var(--u)) 0 calc(73 * var(--u));
+}
+
+.intro {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: calc(539 * var(--u)) minmax(0, 646px);
+  padding-left: var(--inset);
+}
+
+.title {
+  white-space: nowrap;
+}
+
+.side {
+  padding-top: calc(32 * var(--u));
+}
+
+/* Inter Medium 22 / 40, navy; THANDORA Bold #285afd */
+.copy {
+  font-size: var(--fs-intro);
+  line-height: 1.818;
+  font-weight: 500;
+  color: var(--navy-900);
+}
+
+.copy b {
+  font-weight: 700;
+  color: var(--blue-600-alt);
+}
+
+.button {
+  margin-top: calc(41 * var(--u));
+}
+
+.cards {
+  position: relative;
+  z-index: 1;
+  margin-top: calc(95 * var(--u));
+  padding: 0 var(--pad);
+}
+
+.cardsTight {
+  margin-top: calc(84 * var(--u));
+}
+
+@media (max-width: 1023px) {
+  .intro {
+    grid-template-columns: 1fr;
+    padding: 0 var(--pad);
+    row-gap: 16px;
+  }
+
+  .side {
+    padding-top: 0;
+    max-width: 646px;
+  }
+
+  .button {
+    margin-top: 28px;
+  }
+
+  .cards {
+    margin-top: 48px;
+  }
+}
+
+@media (max-width: 767px) {
+  .section {
+    padding: 56px 0 72px;
+  }
+
+  .copy {
+    line-height: 1.6;
+  }
+}

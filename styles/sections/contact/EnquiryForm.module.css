@@ -1,0 +1,320 @@
+/*
+ * Component 684 (Variant3): 1125 x 901 at left 235 / top 160.
+ * Card fills from 35.73% (402px) to the right edge; the peeking king sits at
+ * 26.67% → 74.22% behind it.
+ */
+.wrap {
+  position: relative;
+  width: calc(1125 * var(--u));
+  height: calc(901 * var(--u));
+  min-height: 860px;
+}
+
+.figure {
+  position: absolute;
+  top: 0;
+  left: 26.67%;
+  width: 47.55%;
+  aspect-ratio: 1122 / 1402;
+  z-index: 0;
+}
+
+.figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  scale: -1 1;
+  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.4));
+}
+
+.card {
+  position: absolute;
+  inset: 0 0 0 35.73%;
+  z-index: 1;
+  overflow: hidden;
+  border-radius: var(--r-card);
+  background: #000;
+  color: var(--white);
+}
+
+/* Vertical watermark: 202 x 832 box centred at card 50% + 322.5, top 45.
+   Inside, an 832 x 202 group (mark + Squada One 180) is rotated -90°. */
+.watermark {
+  position: absolute;
+  top: calc(45 * var(--u));
+  left: calc(50% + 221.5 * var(--u));
+  width: calc(202 * var(--u));
+  height: calc(832 * var(--u));
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.watermarkInner {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: calc(832 * var(--u));
+  height: calc(202 * var(--u));
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  white-space: nowrap;
+  transform-origin: left top;
+  transform: rotate(-90deg);
+}
+
+.watermarkInner img {
+  flex: none;
+  width: calc(141 * var(--u));
+  height: calc(131 * var(--u));
+  opacity: 0.2;
+}
+
+.watermarkInner span {
+  font-family: var(--font-display);
+  font-size: calc(180 * var(--u));
+  line-height: 1;
+  opacity: 0.2;
+}
+
+.form,
+.success {
+  position: relative;
+  z-index: 1;
+  width: calc(596.648 * var(--u));
+  min-width: 420px;
+  margin: calc(57 * var(--u)) 0 0 calc(63 * var(--u));
+}
+
+/* "Lets Talk": Inter SemiBold 44 / 33.6, -0.96px, #285dfd */
+.title {
+  padding-bottom: 47px;
+  font-size: var(--fs-h2-form);
+  line-height: 0.764;
+  font-weight: 600;
+  letter-spacing: -0.96px;
+  color: var(--blue-600-alt2);
+}
+
+.success .title {
+  padding: 28px 0 24px;
+  line-height: 1.15;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.full {
+  grid-column: 1 / -1;
+}
+
+/* Label: Inter Medium 15 / 22.5 */
+.label {
+  font-size: 15px;
+  line-height: 22.5px;
+  font-weight: 500;
+}
+
+/* Input: rgba(75,76,81,.54), 1px white 40%, 10px radius, 14/16 padding, 17px text */
+.input {
+  width: 100%;
+  min-height: 56px;
+  padding: 14px 16px;
+  border: 1px solid var(--input-border);
+  border-radius: var(--r-input);
+  background: var(--input-bg);
+  color: var(--white);
+  font-size: 17px;
+  line-height: normal;
+  transition:
+    border-color var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out);
+}
+
+.input::placeholder {
+  color: var(--white);
+  opacity: 1;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--white);
+  box-shadow: 0 0 0 4px rgba(74, 140, 255, 0.35);
+}
+
+.input[aria-invalid="true"] {
+  border-color: #ff7a7a;
+}
+
+.select {
+  appearance: none;
+  padding-right: 44px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none'%3E%3Cpath d='m4 6 4 4 4-4' stroke='%23fff' stroke-width='1.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  cursor: pointer;
+}
+
+.select option {
+  color: #111;
+}
+
+.textarea {
+  height: 158px;
+  min-height: 120px;
+  resize: vertical;
+  line-height: 25.5px;
+}
+
+.error {
+  font-size: 13px;
+  line-height: 1.4;
+  color: #ff8f8f;
+}
+
+.formError {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #ff8f8f;
+}
+
+.submitBar {
+  margin-top: 24px;
+}
+
+/* SEND ENQUIRY: #4a8cff, 205 x 51, Inter SemiBold 15, 0.6px, caps */
+.submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 205px;
+  height: 51px;
+  padding: 14px 32px;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: var(--blue-400);
+  color: var(--white);
+  font-size: 15px;
+  line-height: 22.5px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    filter var(--dur-fast) var(--ease-out);
+}
+
+.submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  filter: brightness(0.92);
+}
+
+.submit:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.submit:disabled {
+  cursor: progress;
+  opacity: 0.85;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.again {
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--blue-400);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* Tablet: card spans the column, art hidden */
+@media (max-width: 1023px) {
+  .wrap {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+  }
+
+  .figure,
+  .watermark {
+    display: none;
+  }
+
+  .card {
+    position: relative;
+    inset: auto;
+  }
+
+  .form,
+  .success {
+    width: auto;
+    min-width: 0;
+    margin: 0;
+    padding: 40px 32px;
+  }
+}
+
+/* Mobile: one column, full-bleed card, sticky submit bar */
+@media (max-width: 767px) {
+  .card {
+    overflow: visible;
+    border-radius: 0;
+  }
+
+  .form,
+  .success {
+    padding: 36px 20px 24px;
+  }
+
+  .title {
+    padding-bottom: 32px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .submitBar {
+    position: sticky;
+    bottom: 0;
+    z-index: 2;
+    margin: 24px -20px 0;
+    padding: 12px 20px max(12px, env(safe-area-inset-bottom));
+    background: rgba(0, 0, 0, 0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .submit {
+    width: 100%;
+  }
+}

@@ -1,0 +1,244 @@
+/* Desktop - 32: 1440 x 1141 */
+.section {
+  position: relative;
+  overflow-x: clip;
+  padding: calc(99 * var(--u)) 0 calc(74 * var(--u));
+}
+
+.intro {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: calc(557 * var(--u)) minmax(0, 646px);
+  padding-left: calc(126 * var(--u));
+}
+
+.side {
+  padding-top: calc(30 * var(--u));
+}
+
+/* Inter Medium 22 / 40, navy; Thandora Bold #285afd */
+.copy {
+  font-size: var(--fs-intro);
+  line-height: 1.818;
+  font-weight: 500;
+  color: var(--navy-900);
+}
+
+.copy b {
+  color: var(--blue-600-alt);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: calc(41 * var(--u)) 0 0 calc(-20 * var(--u));
+}
+
+.arrows {
+  display: flex;
+  gap: 12px;
+}
+
+.arrows button {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--white);
+  color: var(--navy-900);
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out),
+    opacity var(--dur-fast) var(--ease-out);
+}
+
+.arrows button:hover:not(:disabled) {
+  background: var(--navy-900);
+  color: var(--white);
+}
+
+.arrows button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+/* Cards row: left 79, top 517 (99 + 418), gap 30, 1280 x 550 */
+.track {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc(1280 * var(--u));
+  column-gap: 30px;
+  margin-top: calc(99 * var(--u));
+  padding: 0 calc(79 * var(--u));
+  scroll-padding: 0 calc(79 * var(--u));
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+  cursor: grab;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+.track[data-dragging] {
+  cursor: grabbing;
+  scroll-snap-type: none;
+  user-select: none;
+}
+
+.card {
+  position: relative;
+  height: calc(550 * var(--u));
+  min-height: 340px;
+  overflow: hidden;
+  border-radius: 12px;
+  scroll-snap-align: start;
+  color: var(--white);
+}
+
+.card img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* Figma "Header": left 755px, 50% black → clear */
+.cardShade {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: calc(755 * var(--u));
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.5) 0%, rgba(255, 255, 255, 0) 100%);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  -webkit-mask: linear-gradient(90deg, #000 40%, transparent 100%);
+  mask: linear-gradient(90deg, #000 40%, transparent 100%);
+}
+
+.cardText {
+  position: absolute;
+  left: calc(60 * var(--u));
+  bottom: calc(60 * var(--u));
+  width: calc(502 * var(--u));
+  display: flex;
+  flex-direction: column;
+  gap: calc(26 * var(--u));
+}
+
+/* Inter SemiBold 42 */
+.cardText h3 {
+  font-size: var(--fs-card-xl);
+  line-height: normal;
+  font-weight: 600;
+}
+
+/* Inter Medium 24 */
+.cardText p {
+  max-width: 498px;
+  font-size: var(--fs-body-lg);
+  line-height: normal;
+  font-weight: 500;
+}
+
+.dots {
+  display: none;
+}
+
+@media (max-width: 1023px) {
+  .intro {
+    grid-template-columns: 1fr;
+    padding: 0 var(--pad);
+    row-gap: 16px;
+  }
+
+  .side {
+    padding-top: 0;
+  }
+
+  .actions {
+    margin: 28px 0 0;
+  }
+
+  .track {
+    margin-top: 48px;
+    padding: 0 var(--pad);
+    scroll-padding: 0 var(--pad);
+    grid-auto-columns: 85%;
+    column-gap: 16px;
+  }
+
+  .cardShade {
+    width: 100%;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0) 70%);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    -webkit-mask: none;
+    mask: none;
+  }
+
+  .cardText {
+    left: 24px;
+    right: 24px;
+    bottom: 24px;
+    width: auto;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 767px) {
+  .section {
+    padding: 64px 0 56px;
+  }
+
+  .arrows {
+    display: none;
+  }
+
+  .card {
+    height: auto;
+    aspect-ratio: 4 / 5;
+    min-height: 0;
+  }
+
+  .card img {
+    object-position: 72% center;
+  }
+
+  .cardText p {
+    font-size: 15px;
+    line-height: 1.45;
+  }
+
+  .dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+  }
+
+  .dots span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--line);
+    transition:
+      width var(--dur-base) var(--ease-out),
+      background-color var(--dur-base) var(--ease-out);
+  }
+
+  .dots .dotActive {
+    width: 24px;
+    border-radius: 4px;
+    background: var(--blue-600);
+  }
+}

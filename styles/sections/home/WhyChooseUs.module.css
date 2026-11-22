@@ -1,0 +1,222 @@
+/* Desktop - 35: 1440 x 1115 (Default state positions) */
+.section {
+  position: relative;
+}
+
+.stage {
+  position: relative;
+  height: calc(1115 * var(--u));
+  overflow: hidden;
+}
+
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  .stage {
+    position: sticky;
+    top: 0;
+    height: max(100vh, calc(1115 * var(--u)));
+    max-height: calc(1115 * var(--u));
+    min-height: 100vh;
+  }
+}
+
+/* Title at left 125 / top 88; copy at left 742 / top 110 */
+.head {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: calc(617 * var(--u)) minmax(0, 568px);
+  padding: calc(88 * var(--u)) 0 0 var(--inset);
+}
+
+.copy {
+  padding-top: calc(22 * var(--u));
+  font-size: var(--fs-intro);
+  line-height: 1.818;
+  font-weight: 500;
+  color: var(--navy-900);
+}
+
+.copy b {
+  color: var(--blue-600);
+}
+
+/* Cards: left 363, top 426, 582 squares, gap 30 */
+.viewport {
+  position: absolute;
+  left: calc(363 * var(--u));
+  top: calc(426 * var(--u));
+  right: 0;
+  z-index: 1;
+}
+
+.strip {
+  display: flex;
+  gap: 30px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  width: max-content;
+}
+
+.card {
+  position: relative;
+  width: calc(581.962 * var(--u));
+  height: calc(581.962 * var(--u));
+  min-width: 360px;
+  min-height: 360px;
+  overflow: hidden;
+  border-radius: 14.846px;
+  background: #111;
+  color: var(--white);
+}
+
+.card img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 800ms var(--ease-out);
+}
+
+.card:hover img {
+  transform: scale(1.04);
+}
+
+/* rgba(5,5,5,.7) → clear at 55%, plus the bottom "Header" shade */
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(0deg, rgba(5, 5, 5, 0.7) 0%, rgba(5, 5, 5, 0) 55%),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, rgba(255, 255, 255, 0) 74.6%);
+}
+
+.cardText {
+  position: absolute;
+  left: calc(42 * var(--u));
+  right: calc(40 * var(--u));
+  bottom: calc(42 * var(--u));
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: calc(24 * var(--u));
+}
+
+/* Inter SemiBold 64.135 / 60.928, -2.5654px, #f7f4ee */
+.cardText h3 {
+  font-size: var(--fs-h2-close);
+  line-height: 0.95;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  color: #f7f4ee;
+  white-space: pre-wrap;
+}
+
+/* Inter Bold 22 / 40 */
+.cardText p {
+  max-width: 499px;
+  font-size: var(--fs-intro);
+  line-height: 1.818;
+}
+
+/* Sage: 500 x 692, bottom-left; young: 605 x 677, right -42 / top 439 */
+.sage,
+.young {
+  position: absolute;
+  z-index: 2;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.sage {
+  left: 0;
+  bottom: 0;
+  width: calc(500 * var(--u));
+  height: calc(692 * var(--u));
+  box-shadow: 0 -10px 50px rgba(0, 0, 0, 0.5);
+}
+
+.young {
+  right: calc(-42 * var(--u));
+  top: calc(439 * var(--u));
+  width: calc(605 * var(--u));
+  height: calc(677 * var(--u));
+  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+}
+
+.sage img,
+.young img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Below 1024px or reduced motion: no pinning, swipeable row */
+@media (max-width: 1023px), (prefers-reduced-motion: reduce) {
+  .stage {
+    height: auto;
+    padding-bottom: 72px;
+  }
+
+  .viewport {
+    position: relative;
+    left: auto;
+    top: auto;
+    margin-top: 48px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding: 0 var(--pad);
+    scrollbar-width: none;
+  }
+
+  .viewport::-webkit-scrollbar {
+    display: none;
+  }
+
+  .strip {
+    gap: 16px;
+    padding: 0 var(--pad);
+  }
+
+  .card {
+    scroll-snap-align: start;
+  }
+
+  .sage,
+  .young {
+    display: none;
+  }
+}
+
+@media (max-width: 1023px) {
+  .head {
+    grid-template-columns: 1fr;
+    padding: 64px var(--pad) 0;
+    row-gap: 12px;
+  }
+
+  .copy {
+    padding-top: 0;
+    max-width: 568px;
+  }
+
+  .card {
+    width: min(85vw, 420px);
+    height: min(85vw, 420px);
+    min-width: 0;
+    min-height: 0;
+  }
+
+  .cardText {
+    left: 22px;
+    right: 22px;
+    bottom: 22px;
+    gap: 10px;
+  }
+
+  .cardText p {
+    line-height: 1.45;
+  }
+}

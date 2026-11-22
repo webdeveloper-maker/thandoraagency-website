@@ -1,0 +1,243 @@
+/* Section 565:9719: 1440 x 945 */
+.section {
+  position: relative;
+  height: calc(945 * var(--u));
+  min-height: 760px;
+  overflow: hidden;
+}
+
+/* Title left 105 / top 43; copy left 761 / top 80, 561 wide */
+.intro {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: calc(656 * var(--u)) minmax(0, 561px);
+  padding: calc(43 * var(--u)) 0 0 calc(105 * var(--u));
+}
+
+.copy {
+  padding-top: calc(37 * var(--u));
+  font-size: var(--fs-intro);
+  line-height: 1.818;
+  font-weight: 500;
+  color: var(--blue-600);
+}
+
+/* Carved symbol: 857.7 x 813.4 at left 720 / top 215 */
+.symbol {
+  position: absolute;
+  left: calc(720 * var(--u));
+  top: calc(215 * var(--u));
+  width: calc(857.691 * var(--u));
+  height: calc(813.383 * var(--u));
+  pointer-events: none;
+}
+
+/* Note: left 870 / top 614, 418 wide, Inter Medium 24 / 35 */
+.note {
+  position: absolute;
+  left: calc(870 * var(--u));
+  top: calc(614 * var(--u));
+  width: calc(418 * var(--u));
+  z-index: 2;
+  font-size: var(--fs-body-lg);
+  line-height: 1.458;
+  font-weight: 500;
+  color: var(--navy-900);
+}
+
+.note b {
+  color: var(--blue-600);
+}
+
+/* Arrow: 170 x 146 at left 769 / top 506, rotated 180° */
+.arrow {
+  position: absolute;
+  left: calc(769 * var(--u));
+  top: calc(506 * var(--u));
+  width: calc(170 * var(--u));
+  height: calc(146 * var(--u));
+  rotate: 180deg;
+  z-index: 2;
+}
+
+/* Deck: left 134 / top 375, five 495px cards offset by 25px */
+.deckWrap {
+  position: absolute;
+  left: calc(134 * var(--u));
+  top: calc(375 * var(--u));
+  z-index: 3;
+}
+
+.deck {
+  position: relative;
+  width: calc(595 * var(--u));
+  height: calc(495 * var(--u));
+  min-width: 400px;
+  min-height: 300px;
+  cursor: pointer;
+}
+
+.card {
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: calc(495 * var(--u));
+  min-width: 300px;
+  aspect-ratio: 1;
+  height: auto;
+  overflow: hidden;
+  border-radius: var(--r-card);
+  background: var(--white);
+  box-shadow: -10px 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.card:first-child {
+  box-shadow: none;
+}
+
+.cardImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Bottom 377px: 50% black → 18% black (Figma "Header" overlay) */
+.card::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 76%;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, rgba(160, 160, 160, 0.18) 100%);
+}
+
+.cardText {
+  position: absolute;
+  left: calc(48 * var(--u));
+  right: calc(48 * var(--u));
+  bottom: calc(60 * var(--u));
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: var(--white);
+}
+
+/* Inter SemiBold 32, -0.6px, soft shadow */
+.cardText h3 {
+  font-size: clamp(22px, calc(14.667px + 1.2037vw), 32px);
+  line-height: 1.15;
+  font-weight: 600;
+  letter-spacing: -0.6px;
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.cardBody {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+/* Inter Medium 22 / 30 */
+.cardBody p {
+  flex: 1;
+  font-size: var(--fs-intro);
+  line-height: 1.36;
+  font-weight: 500;
+}
+
+.cardBody img {
+  flex: none;
+  width: calc(50 * var(--u));
+  height: calc(50 * var(--u));
+  min-width: 32px;
+  min-height: 32px;
+  transform: rotate(180deg);
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--navy-900);
+}
+
+.controls button {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--white);
+  color: var(--navy-900);
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out);
+}
+
+.controls button:hover {
+  background: var(--navy-900);
+  color: var(--white);
+}
+
+@media (max-width: 1023px) {
+  .section {
+    height: auto;
+    min-height: 0;
+    padding-bottom: 64px;
+  }
+
+  .intro {
+    grid-template-columns: 1fr;
+    padding: 64px var(--pad) 0;
+    row-gap: 12px;
+  }
+
+  .copy {
+    padding-top: 0;
+  }
+
+  .symbol,
+  .arrow {
+    display: none;
+  }
+
+  .note {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: auto;
+    margin: 24px var(--pad) 0;
+  }
+
+  .deckWrap {
+    position: relative;
+    left: auto;
+    top: auto;
+    margin: 40px var(--pad) 0;
+  }
+
+  .deck {
+    width: min(100%, 420px);
+    height: auto;
+    aspect-ratio: 1.12;
+    min-width: 0;
+    min-height: 0;
+  }
+
+  .card {
+    width: calc(100% - 100px);
+    min-width: 0;
+  }
+
+  .cardText {
+    left: 20px;
+    right: 20px;
+    bottom: 22px;
+  }
+}

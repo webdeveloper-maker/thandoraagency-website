@@ -1,0 +1,154 @@
+.section {
+  padding: calc(120 * var(--u)) var(--pad) calc(140 * var(--u));
+  background: var(--white);
+}
+
+.head {
+  max-width: 1190px;
+  margin: 0 auto;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.581px;
+  line-height: 18.872px;
+  font-weight: 600;
+  letter-spacing: 1.7613px;
+  text-transform: uppercase;
+  color: var(--blue-600);
+}
+
+.eyebrow span {
+  width: 6px;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--blue-600);
+}
+
+.title {
+  max-width: 760px;
+  padding-top: 24px;
+  font-size: var(--fs-h2-close);
+  line-height: 1.05;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--navy-900);
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  max-width: 1190px;
+  margin: 56px auto 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card {
+  overflow: hidden;
+  border-radius: var(--r-card);
+  border: 1px solid var(--line);
+  background: var(--white);
+}
+
+.media {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: radial-gradient(circle at 70% 30%, #216ed1 0%, var(--navy-900) 60%);
+}
+
+.media img {
+  width: 96px;
+  height: auto;
+  opacity: 0.85;
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+
+.card:hover .media img {
+  transform: scale(1.05);
+}
+
+.meta {
+  display: grid;
+  gap: 8px;
+  padding: 24px 28px 28px;
+}
+
+.meta h3 {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--navy-900);
+}
+
+.flow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 15px;
+  color: var(--grey-600);
+}
+
+.flow span {
+  display: inline-flex;
+  gap: 8px;
+  opacity: 0;
+  animation: step-in 500ms var(--ease-out) forwards;
+}
+
+.flow i {
+  font-style: normal;
+  color: var(--blue-600);
+}
+
+@keyframes step-in {
+  from {
+    opacity: 0;
+    transform: translateX(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.label {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--blue-600);
+}
+
+@media (max-width: 767px) {
+  .section {
+    padding: 72px 0;
+  }
+
+  .head {
+    padding: 0 20px;
+  }
+
+  .cards {
+    display: flex;
+    gap: 16px;
+    margin-top: 36px;
+    padding: 0 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding: 0 20px;
+    scrollbar-width: none;
+  }
+
+  .cards::-webkit-scrollbar {
+    display: none;
+  }
+
+  .card {
+    flex: 0 0 85%;
+    scroll-snap-align: start;
+  }
+}

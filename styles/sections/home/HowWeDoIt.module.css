@@ -1,0 +1,224 @@
+/* Frame 2085665682: 1440 x 1115 */
+.section {
+  position: relative;
+}
+
+.stage {
+  position: relative;
+  height: calc(1115 * var(--u));
+  overflow: hidden;
+  background: var(--white);
+}
+
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  .section {
+    height: calc(1115 * var(--u) + 240vh);
+  }
+
+  .stage {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    min-height: calc(1115 * var(--u));
+  }
+}
+
+/* Title (617 wide, 88/80) + copy (568 wide), row starts at left 125 / top 98 */
+.intro {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: calc(617 * var(--u)) minmax(0, 568px);
+  padding: calc(98 * var(--u)) 0 0 var(--inset);
+}
+
+.title {
+  line-height: 0.909;
+}
+
+.copy {
+  font-size: var(--fs-intro);
+  line-height: 1.818;
+  font-weight: 500;
+  color: var(--navy-900);
+}
+
+.copy b {
+  color: var(--blue-600-alt);
+}
+
+/* Temple frames: 592 wide at left 30, sitting on a baseline at y = 870 */
+.temple {
+  position: absolute;
+  left: calc(30 * var(--u));
+  bottom: calc(245 * var(--u));
+  width: calc(592 * var(--u));
+  height: calc(601 * var(--u));
+  z-index: 1;
+  transform-origin: 50% 100%;
+}
+
+.temple img {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+  scale: -1 1;
+}
+
+/* Note: left 779 / top 498, 400 wide, Inter Medium 20 / 25, blue */
+.note {
+  position: absolute;
+  left: calc(779 * var(--u));
+  top: calc(498 * var(--u));
+  width: calc(400 * var(--u));
+  z-index: 1;
+  font-size: clamp(15px, calc(11.667px + 0.5787vw), 20px);
+  line-height: 1.25;
+  font-weight: 500;
+  color: var(--blue-600);
+}
+
+/* Curly arrow: 196 x 116 at left 631 / top 602 (mirrored) */
+.arrow {
+  position: absolute;
+  left: calc(631 * var(--u));
+  top: calc(602 * var(--u));
+  width: calc(196 * var(--u));
+  height: calc(116 * var(--u));
+  z-index: 1;
+  scale: -1 1;
+}
+
+/* Steps: stacked at left 44 / top 897 (hidden layer in Figma), 515 wide */
+.steps {
+  position: absolute;
+  left: calc(44 * var(--u));
+  top: calc(897 * var(--u));
+  width: calc(515 * var(--u));
+  min-width: 380px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  z-index: 1;
+}
+
+.step {
+  position: absolute;
+  inset: 0 auto auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  opacity: 0;
+  translate: 0 16px;
+  transition:
+    opacity 400ms var(--ease-out),
+    translate 400ms var(--ease-out);
+  color: var(--navy-900);
+}
+
+.stepActive {
+  opacity: 1;
+  translate: 0 0;
+}
+
+.stepDone {
+  translate: 0 -16px;
+}
+
+/* Inter SemiBold 34 */
+.step h3 {
+  font-size: clamp(22px, calc(16px + 1.25vw), 34px);
+  line-height: normal;
+  font-weight: 600;
+}
+
+/* Inter Regular 20 */
+.step p {
+  font-size: var(--fs-body);
+  line-height: normal;
+}
+
+.progress {
+  position: absolute;
+  left: calc(44 * var(--u));
+  top: calc(860 * var(--u));
+  display: flex;
+  gap: 6px;
+  z-index: 1;
+}
+
+.progress span {
+  width: 28px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--line);
+  transition: background-color var(--dur-base) var(--ease-out);
+}
+
+.progress .progressOn {
+  background: var(--blue-600);
+}
+
+/* No pinning: show every step as a list under the finished temple */
+@media (max-width: 1023px), (prefers-reduced-motion: reduce) {
+  .stage {
+    height: auto;
+    padding-bottom: 64px;
+  }
+
+  .temple {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    width: min(592px, 86%);
+    height: auto;
+    aspect-ratio: 592 / 601;
+    margin: 40px auto 0;
+  }
+
+  .steps {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: auto;
+    min-width: 0;
+    display: grid;
+    gap: 28px;
+    margin: 40px var(--pad) 0;
+  }
+
+  .step {
+    position: relative;
+    opacity: 1;
+    translate: none;
+  }
+}
+
+@media (min-width: 1024px) and (prefers-reduced-motion: reduce) {
+  .note,
+  .arrow {
+    display: none;
+  }
+}
+
+@media (max-width: 1023px) {
+  .intro {
+    grid-template-columns: 1fr;
+    padding: 64px var(--pad) 0;
+    row-gap: 12px;
+  }
+
+  .note {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: auto;
+    margin: 32px var(--pad) 0;
+  }
+
+  .arrow {
+    display: none;
+  }
+}

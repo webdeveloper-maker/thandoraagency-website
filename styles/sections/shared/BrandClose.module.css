@@ -1,0 +1,82 @@
+/* Home: 47px above, 880-wide column, 80px before the CTA band */
+.section {
+  position: relative;
+  overflow: hidden;
+  padding: calc(47 * var(--u)) var(--pad) calc(80 * var(--u));
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 880px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Logo box 450 x 399; the artwork is zoomed 132.91% like the Figma crop */
+.logo {
+  width: calc(450 * var(--u));
+  height: calc(399 * var(--u));
+  min-width: 240px;
+  min-height: 213px;
+  display: grid;
+  place-items: center;
+}
+
+.logo img {
+  width: 87.5%;
+  height: auto;
+}
+
+/* About: logo 302 x 283 showing the mark only, 51px gap */
+.about .logo {
+  width: calc(302 * var(--u));
+  height: calc(283 * var(--u));
+  min-width: 180px;
+  min-height: 169px;
+  overflow: hidden;
+  place-items: start center;
+  margin-bottom: 19px;
+}
+
+.about .logo img {
+  width: 132%;
+  max-width: none;
+  margin-top: 4%;
+}
+
+/* Inter Bold 64 / 70.4, -1.92px, navy */
+.title {
+  padding-top: 32px;
+  font-size: var(--fs-h2-close);
+  line-height: 1.1;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--navy-900);
+}
+
+/* Inter Regular 24 / 39.6, #62646b; promise in Bold #285afd */
+.copy {
+  max-width: 540px;
+  margin: 18px auto 0;
+  font-size: var(--fs-body-lg);
+  line-height: 1.65;
+  color: var(--grey-600);
+}
+
+.copy b {
+  color: var(--blue-600-alt);
+}
+
+@media (max-width: 767px) {
+  .section {
+    padding: 56px 20px 64px;
+  }
+
+  .title br {
+    display: none;
+  }
+}

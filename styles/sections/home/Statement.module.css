@@ -1,0 +1,76 @@
+/* Section 624:4083: #285afd, 1440 x 445 */
+.section {
+  position: relative;
+  height: calc(445 * var(--u));
+  min-height: 380px;
+  background: var(--blue-600-alt);
+  color: var(--white);
+}
+
+.copy {
+  position: relative;
+  z-index: 2;
+  padding: calc(104 * var(--u)) 0 0 var(--pad);
+}
+
+/* Inter SemiBold 40 / 50, -3px */
+.text {
+  width: calc(837 * var(--u));
+  font-size: var(--fs-statement);
+  line-height: 1.25;
+  font-weight: 600;
+  letter-spacing: -0.075em;
+  margin-bottom: calc(37 * var(--u));
+}
+
+/* Highlight: white text that fills navy left to right */
+.fill {
+  --p: 0%;
+  color: transparent;
+  background-image: linear-gradient(90deg, var(--navy-900) var(--p), var(--white) var(--p));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* VR sculpture: 500 x 501, flush right, 54px above the band */
+.art {
+  position: absolute;
+  right: 0;
+  top: calc(-54 * var(--u));
+  width: calc(500 * var(--u));
+  z-index: 1;
+}
+
+.art img {
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 1023px) {
+  .section {
+    height: auto;
+    min-height: 0;
+    padding-bottom: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .copy {
+    padding: 64px var(--pad) 0;
+  }
+
+  .text {
+    width: auto;
+    max-width: 640px;
+    margin-bottom: 28px;
+  }
+
+  .art {
+    position: relative;
+    top: auto;
+    width: min(420px, 86%);
+    margin: 24px 0 0 auto;
+  }
+}

@@ -1,0 +1,34 @@
+/* Inter SemiBold 88 / 131.04, -7.28px tracking, navy with blue last word */
+.title {
+  font-size: var(--fs-h2-section);
+  line-height: 1.489;
+  font-weight: 600;
+  letter-spacing: -0.0827em;
+  color: var(--navy-900);
+}
+
+.light {
+  color: var(--white);
+}
+
+.line {
+  display: inline;
+}
+
+.word {
+  display: inline-block;
+  will-change: transform;
+}
+
+.highlight {
+  color: var(--blue-600);
+  /* Negative tracking pushes the final glyph past its box; keep it unclipped. */
+  padding-right: 0.18em;
+  margin-right: -0.1em;
+}
+
+@media (max-width: 767px) {
+  .title {
+    line-height: 1.09;
+  }
+}

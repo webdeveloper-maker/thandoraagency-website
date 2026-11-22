@@ -1,0 +1,192 @@
+.section {
+  position: relative;
+  overflow-x: clip;
+  padding: calc(var(--header-h) + 60 * var(--u)) 0 calc(140 * var(--u));
+}
+
+.intro {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: calc(557 * var(--u)) minmax(0, 646px);
+  padding-left: calc(126 * var(--u));
+}
+
+.copy {
+  padding-top: calc(30 * var(--u));
+  font-size: var(--fs-intro);
+  line-height: 1.818;
+  font-weight: 500;
+  color: var(--navy-900);
+}
+
+.copy b {
+  color: var(--blue-600-alt);
+}
+
+/* Chips: 9999px pills, Inter Medium 15 / 22.5 */
+.chipsBar {
+  position: relative;
+  z-index: 3;
+  margin-top: calc(56 * var(--u));
+  padding: 0 var(--inset);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.chip {
+  position: relative;
+  min-height: 44px;
+  padding: 10px 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  background: var(--white);
+  color: var(--navy-900);
+  font-size: 15px;
+  line-height: 22.5px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition:
+    color var(--dur-base) var(--ease-out),
+    border-color var(--dur-base) var(--ease-out);
+}
+
+.chip:hover {
+  border-color: var(--blue-400);
+}
+
+.chipOn {
+  color: var(--white);
+  border-color: transparent;
+}
+
+.chipBg {
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: var(--blue-400);
+}
+
+.chipLabel {
+  position: relative;
+}
+
+/* Two staggered 583px columns; the right one starts 500px lower */
+.grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, calc(583 * var(--u))));
+  justify-content: space-between;
+  gap: 24px;
+  max-width: 1190px;
+  margin: calc(64 * var(--u)) auto 0;
+  padding: 0 var(--pad);
+  box-sizing: content-box;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: calc(48 * var(--u));
+}
+
+.columnRight {
+  position: relative;
+  padding-top: calc(500 * var(--u));
+}
+
+/* Sits at the top of the right column, inside its 500px offset */
+.converse {
+  position: absolute;
+  top: calc(80 * var(--u));
+  left: 0;
+  display: inline-flex;
+  gap: 8px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid currentColor;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--blue-600);
+}
+
+.converse span {
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.converse:hover span {
+  transform: translateX(4px);
+}
+
+@media (max-width: 1023px) {
+  .intro {
+    grid-template-columns: 1fr;
+    padding: 0 var(--pad);
+    row-gap: 12px;
+  }
+
+  .copy {
+    padding-top: 0;
+  }
+
+  .chipsBar {
+    padding: 0 var(--pad);
+    margin-top: 32px;
+  }
+}
+
+/* Mobile: sticky scrollable chip row with edge fade, single column */
+@media (max-width: 767px) {
+  .section {
+    padding-bottom: 72px;
+  }
+
+  .chipsBar {
+    position: sticky;
+    top: var(--header-h-compact);
+    margin: 28px 0 0;
+    padding: 10px 0;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    -webkit-mask: linear-gradient(90deg, transparent, #000 20px, #000 calc(100% - 28px), transparent);
+    mask: linear-gradient(90deg, transparent, #000 20px, #000 calc(100% - 28px), transparent);
+  }
+
+  .chips {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 0 20px;
+    scrollbar-width: none;
+  }
+
+  .chips::-webkit-scrollbar {
+    display: none;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .column {
+    gap: 16px;
+  }
+
+  .columnRight {
+    padding-top: 0;
+    transform: none !important;
+  }
+
+  .converse {
+    position: static;
+    align-self: flex-start;
+    margin: 8px 0;
+    order: 99;
+  }
+}
