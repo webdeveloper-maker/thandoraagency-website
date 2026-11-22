@@ -10,9 +10,9 @@
   position: absolute;
   inset: 0;
   overflow: hidden;
-  background: url("/images/banner-bg.avif") center / 100% 100% no-repeat;
-  -webkit-mask: url("/images/banner-bg.avif") center / 100% 100% no-repeat;
-  mask: url("/images/banner-bg.avif") center / 100% 100% no-repeat;
+  background: url("../../../public/images/banner-bg.avif") center / 100% 100% no-repeat;
+  -webkit-mask: url("../../../public/images/banner-bg.avif") center / 100% 100% no-repeat;
+  mask: url("../../../public/images/banner-bg.avif") center / 100% 100% no-repeat;
 }
 
 .flip .bg {

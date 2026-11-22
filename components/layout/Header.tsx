@@ -8,6 +8,7 @@ import { nav } from "@/content/site";
 import { PillButton } from "@/components/ui/PillButton";
 import { ease } from "@/lib/motion";
 import styles from "@/styles/layout/Header.module.css";
+import { asset } from "@/lib/asset";
 
 /** Parse "rgb(a)(r, g, b[, a])" → [r, g, b, a], or null. */
 const parseRgb = (value: string) => {
@@ -149,9 +150,9 @@ export function Header() {
 
           <Link href="/" className={styles.logo} aria-label="Thandora — home">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img className={styles.logoDark} src="/images/logo-black.svg" alt="" width={240} height={60} />
+            <img className={styles.logoDark} src={asset("/images/logo-black.svg")} alt="" width={240} height={60} />
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img className={styles.logoLight} src="/images/logo-white.svg" alt="" width={240} height={60} />
+            <img className={styles.logoLight} src={asset("/images/logo-white.svg")} alt="" width={240} height={60} />
           </Link>
 
           <div className={styles.actions}>

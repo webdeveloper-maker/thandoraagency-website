@@ -8,6 +8,7 @@ import { SectionTitle } from "@/components/ui/SectionTitle";
 import { u } from "@/lib/u";
 import { useMedia } from "@/lib/useMedia";
 import styles from "@/styles/sections/home/WhyChooseUs.module.css";
+import { asset } from "@/lib/asset";
 
 /**
  * "Why choose Us." (Figma "Desktop - 35", Variant2 → Default).
@@ -82,11 +83,11 @@ export function WhyChooseUs() {
 
         <motion.div className={styles.sage} style={live ? { x: sageX, y: sageY } : undefined} aria-hidden>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/why-sage.avif" alt="" width={600} height={792} loading="lazy" />
+          <img src={asset("/images/why-sage.avif")} alt="" width={600} height={792} loading="lazy" />
         </motion.div>
         <motion.div className={styles.young} style={live ? { x: youngX, y: youngY } : undefined} aria-hidden>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/why-young.avif" alt="" width={705} height={777} loading="lazy" />
+          <img src={asset("/images/why-young.avif")} alt="" width={705} height={777} loading="lazy" />
         </motion.div>
       </div>
     </section>

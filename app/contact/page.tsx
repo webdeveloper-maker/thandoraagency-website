@@ -3,6 +3,7 @@ import { ContactInfo } from "@/components/sections/contact/ContactInfo";
 import { ContactIntro } from "@/components/sections/contact/ContactIntro";
 import { EnquiryForm } from "@/components/sections/contact/EnquiryForm";
 import styles from "@/styles/pages/contact.module.css";
+import { asset } from "@/lib/asset";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -14,7 +15,7 @@ export default function ContactPage() {
     <>
       <section className={styles.top} aria-label="Enquiry">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img className={styles.symbol} src="/images/contact-carved-symbol.svg" alt="" width={858} height={813} aria-hidden />
+        <img className={styles.symbol} src={asset("/images/contact-carved-symbol.svg")} alt="" width={858} height={813} aria-hidden />
         <div className={styles.intro}>
           <ContactIntro />
         </div>

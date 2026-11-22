@@ -7,6 +7,7 @@ import { PillButton } from "@/components/ui/PillButton";
 import { Reveal } from "@/components/ui/Reveal";
 import { u } from "@/lib/u";
 import styles from "@/styles/sections/home/Statement.module.css";
+import { asset } from "@/lib/asset";
 
 function Fill({ children, progress }: { children: ReactNode; progress: MotionValue<string> | string }) {
   return (
@@ -33,7 +34,7 @@ export function Statement() {
   return (
     <section ref={ref} className={styles.section} aria-label="Tradition meets technology">
       <Mandala
-        src="/images/union-statement.svg"
+        src={asset("/images/union-statement.svg")}
         width={465.933}
         height={433.911}
         style={{ left: u(852), top: u(-84), width: u(610.318), height: u(595.884) }}
@@ -54,7 +55,7 @@ export function Statement() {
 
       <motion.div className={styles.art} style={{ y: reduce ? 0 : artY }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/images/statement-sculpture.avif" alt="" width={500} height={501} loading="lazy" />
+        <img src={asset("/images/statement-sculpture.avif")} alt="" width={500} height={501} loading="lazy" />
       </motion.div>
     </section>
   );

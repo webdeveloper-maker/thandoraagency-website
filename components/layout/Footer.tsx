@@ -5,6 +5,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from "motion/react"
 import { useRef } from "react";
 import { footer } from "@/content/site";
 import styles from "@/styles/layout/Footer.module.css";
+import { asset } from "@/lib/asset";
 
 const isExternal = (href: string) => /^(https?:|mailto:|tel:)/.test(href);
 
@@ -35,7 +36,7 @@ export function Footer() {
       <div className={styles.inner}>
         <div className={styles.brand}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/logo-mark-white.avif" alt="Thandora" width={39} height={36} />
+          <img src={asset("/images/logo-mark-white.avif")} alt="Thandora" width={39} height={36} />
           <p className={styles.tagline}>
             {footer.tagline[0]}
             <br />
@@ -69,7 +70,7 @@ export function Footer() {
 
       <motion.div className={styles.wordmark} style={{ y: reduce ? 0 : y }} aria-hidden>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/images/logo-mark-white.avif" alt="" width={217} height={202} />
+        <img src={asset("/images/logo-mark-white.avif")} alt="" width={217} height={202} />
         <span>THANDORA</span>
       </motion.div>
     </footer>

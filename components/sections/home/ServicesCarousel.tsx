@@ -8,6 +8,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { u } from "@/lib/u";
 import styles from "@/styles/sections/home/ServicesCarousel.module.css";
+import { asset } from "@/lib/asset";
 
 /**
  * "What we Do." (Figma "Desktop - 32"): heading, intro and a snap carousel of
@@ -67,7 +68,7 @@ export function ServicesCarousel() {
   return (
     <section className={styles.section} aria-labelledby="whatwedo-title">
       <Mandala
-        src="/images/union-whatwedo.svg"
+        src={asset("/images/union-whatwedo.svg")}
         width={442.643}
         height={412.221}
         style={{ left: u(-13), top: 0, width: u(579.811), height: u(566.098) }}

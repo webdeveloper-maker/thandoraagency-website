@@ -14,6 +14,7 @@ import { TypingLoop } from "@/components/ui/TypingLoop";
 import { ease } from "@/lib/motion";
 import { useMedia } from "@/lib/useMedia";
 import styles from "@/styles/sections/home/HeroHome.module.css";
+import { asset } from "@/lib/asset";
 
 /**
  * Home hero (Figma "Featured service" 624:4121).
@@ -60,7 +61,7 @@ export function HeroHome() {
       <div className={styles.stage} onPointerMove={onPointerMove}>
         {/* Scene 1 — temple arch */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img className={styles.bg} src="/images/hero-bg.avif" alt="" width={1440} height={910} fetchPriority="high" />
+        <img className={styles.bg} src={asset("/images/hero-bg.avif")} alt="" width={1440} height={910} fetchPriority="high" />
 
         <motion.div className={styles.scene1} style={live ? { opacity: s1Opacity } : undefined}>
           <motion.div
@@ -71,7 +72,7 @@ export function HeroHome() {
           >
             <motion.div className={styles.pillarScroll} style={live ? { x: pillarL } : undefined}>
               <motion.img
-                src="/images/hero-pillar.avif"
+                src={asset("/images/hero-pillar.avif")}
                 alt=""
                 width={577}
                 height={923}
@@ -88,7 +89,7 @@ export function HeroHome() {
           >
             <motion.div className={styles.pillarScroll} style={live ? { x: pillarR } : undefined}>
               <motion.img
-                src="/images/hero-pillar.avif"
+                src={asset("/images/hero-pillar.avif")}
                 alt=""
                 width={577}
                 height={923}
@@ -99,7 +100,7 @@ export function HeroHome() {
           </motion.div>
           <motion.div className={styles.arch} style={live ? { y: archY } : undefined}>
             <motion.img
-              src="/images/hero-arch.avif"
+              src={asset("/images/hero-arch.avif")}
               alt=""
               width={1122}
               height={369}
@@ -112,7 +113,7 @@ export function HeroHome() {
           <motion.div className={styles.content} style={live ? { y: s1Y } : undefined}>
             <motion.img
               className={styles.logo}
-              src="/images/brand-logo-stacked.avif"
+              src={asset("/images/brand-logo-stacked.avif")}
               alt="Thandora — Whoever has ears, let them hear."
               width={521}
               height={449}
@@ -164,13 +165,13 @@ export function HeroHome() {
         {/* Scene 2 — typing headline (hidden layer in Figma) */}
         <motion.div className={styles.scene2} style={live ? { opacity: s2Opacity } : undefined} aria-hidden={live ? undefined : true}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img className={styles.bg} src="/images/hero2-bg.avif" alt="" width={1440} height={910} loading="lazy" />
+          <img className={styles.bg} src={asset("/images/hero2-bg.avif")} alt="" width={1440} height={910} loading="lazy" />
           <motion.div className={styles.typing} style={live ? { y: typeY } : undefined}>
             <TypingLoop />
           </motion.div>
           <motion.img
             className={styles.king}
-            src="/images/hero2-king.avif"
+            src={asset("/images/hero2-king.avif")}
             alt=""
             width={880}
             height={557}
@@ -179,7 +180,7 @@ export function HeroHome() {
           />
           <motion.img
             className={styles.scholar}
-            src="/images/hero2-scholar.avif"
+            src={asset("/images/hero2-scholar.avif")}
             alt=""
             width={382}
             height={597}
@@ -193,7 +194,7 @@ export function HeroHome() {
       <div className={styles.stacked}>
         <TypingLoop />
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/images/hero2-king.avif" alt="" width={880} height={557} loading="lazy" />
+        <img src={asset("/images/hero2-king.avif")} alt="" width={880} height={557} loading="lazy" />
       </div>
     </section>
   );

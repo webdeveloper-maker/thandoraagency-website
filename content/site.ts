@@ -1,3 +1,4 @@
+import { asset } from "@/lib/asset";
 /**
  * Site-wide content. Copy matches the Figma frames word for word.
  * Contact details marked TODO are placeholders in Figma and still need
@@ -29,7 +30,7 @@ export const socials = [
     footerLabel: "Instagram",
     handle: "@tandora.agency",
     href: "https://www.instagram.com/tandora.agency",
-    icon: "/images/icon-instagram.svg",
+    icon: asset("/images/icon-instagram.svg"),
     iconSize: { w: 41, h: 41 },
   },
   {
@@ -38,7 +39,7 @@ export const socials = [
     footerLabel: "Facebook",
     handle: "@tandora.agency",
     href: "https://www.facebook.com/tandora.agency",
-    icon: "/images/icon-facebook.svg",
+    icon: asset("/images/icon-facebook.svg"),
     iconSize: { w: 41, h: 41 },
   },
   {
@@ -47,7 +48,7 @@ export const socials = [
     footerLabel: "X / Twitter",
     handle: "@tandora",
     href: "https://x.com/tandora",
-    icon: "/images/icon-x.svg",
+    icon: asset("/images/icon-x.svg"),
     iconSize: { w: 40, h: 46 },
   },
 ] as const;

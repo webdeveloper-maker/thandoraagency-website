@@ -2,6 +2,7 @@ import { Mandala } from "@/components/ui/Decor";
 import { Reveal } from "@/components/ui/Reveal";
 import { u } from "@/lib/u";
 import styles from "@/styles/sections/shared/BrandClose.module.css";
+import { asset } from "@/lib/asset";
 
 /**
  * Brand close: logo + "You build the business. We'll take care of the brand."
@@ -12,13 +13,13 @@ export function BrandClose({ variant = "home" }: { variant?: "home" | "about" })
   return (
     <section className={`${styles.section} ${variant === "about" ? styles.about : ""}`} aria-labelledby="close-title">
       <Mandala
-        src="/images/union-close.svg"
+        src={asset("/images/union-close.svg")}
         width={724.033}
         height={674.273}
         style={{ left: u(827), top: u(291), width: u(948.4), height: u(925.971) }}
       />
       <Mandala
-        src="/images/union-close.svg"
+        src={asset("/images/union-close.svg")}
         width={724.033}
         height={674.273}
         style={{ left: u(-269), top: u(391), width: u(948.4), height: u(925.971) }}
@@ -27,7 +28,7 @@ export function BrandClose({ variant = "home" }: { variant?: "home" | "about" })
       <div className={styles.inner}>
         <Reveal className={styles.logo}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/brand-logo-stacked.avif" alt="Thandora — Whoever has ears, let them hear." width={398} height={352} loading="lazy" />
+          <img src={asset("/images/brand-logo-stacked.avif")} alt="Thandora — Whoever has ears, let them hear." width={398} height={352} loading="lazy" />
         </Reveal>
         <Reveal delay={0.08}>
           <h2 id="close-title" className={styles.title}>

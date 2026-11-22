@@ -6,6 +6,7 @@ import { PillButton } from "@/components/ui/PillButton";
 import { Reveal } from "@/components/ui/Reveal";
 import { useCanHover } from "@/lib/useMedia";
 import styles from "@/styles/sections/shared/GradientBanner.module.css";
+import { asset } from "@/lib/asset";
 
 type Props = {
   /** "notch-bottom" = Banner 624:3957; "notch-top" = the flipped Banner 624:4108. */
@@ -42,15 +43,15 @@ export function GradientBanner({ shape = "notch-bottom", eyebrow, title, body, b
       <div className={styles.bg} aria-hidden>
         <div className={`${styles.glow} ${styles.g1}`}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/banner-ellipse-697.svg" alt="" />
+          <img src={asset("/images/banner-ellipse-697.svg")} alt="" />
         </div>
         <div className={`${styles.glow} ${styles.g2}`}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/banner-ellipse-698.svg" alt="" />
+          <img src={asset("/images/banner-ellipse-698.svg")} alt="" />
         </div>
         <div className={`${styles.glow} ${styles.g3}`}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/banner-ellipse-699.svg" alt="" />
+          <img src={asset("/images/banner-ellipse-699.svg")} alt="" />
         </div>
       </div>
 
@@ -74,12 +75,12 @@ export function GradientBanner({ shape = "notch-bottom", eyebrow, title, body, b
       {art === "symbol" ? (
         <motion.div className={styles.symbol} style={{ rotate: reduce ? 0 : tilt }} aria-hidden>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/banner-symbol.avif" alt="" width={434} height={415} loading="lazy" />
+          <img src={asset("/images/banner-symbol.avif")} alt="" width={434} height={415} loading="lazy" />
         </motion.div>
       ) : (
         <Reveal className={styles.scholar} x={80} y={0}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/banner2-scholar.avif" alt="" width={588} height={397} loading="lazy" />
+          <img src={asset("/images/banner2-scholar.avif")} alt="" width={588} height={397} loading="lazy" />
         </Reveal>
       )}
     </section>

@@ -9,6 +9,7 @@ import { SectionTitle } from "@/components/ui/SectionTitle";
 import { ease } from "@/lib/motion";
 import { u } from "@/lib/u";
 import styles from "@/styles/sections/about/Believe.module.css";
+import { asset } from "@/lib/asset";
 
 /**
  * "What we Believe." (Figma section 565:9719). Five value cards sit in an
@@ -44,14 +45,14 @@ export function Believe() {
       </div>
 
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img className={styles.symbol} src="/images/carved-symbol.svg" alt="" width={858} height={813} aria-hidden />
+      <img className={styles.symbol} src={asset("/images/carved-symbol.svg")} alt="" width={858} height={813} aria-hidden />
       <Reveal className={styles.note}>
         <p>
           By the way , those aren’t just random carvings, they are <b>numbers in Thamiz</b> like 1, 2, 3 ... Look it up...!!
         </p>
       </Reveal>
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img className={styles.arrow} src="/images/arrow-loop.avif" alt="" width={170} height={146} aria-hidden />
+      <img className={styles.arrow} src={asset("/images/arrow-loop.avif")} alt="" width={170} height={146} aria-hidden />
 
       <div className={styles.deckWrap}>
         <div
@@ -79,7 +80,7 @@ export function Believe() {
                   <div className={styles.cardBody}>
                     <p>{card.body}</p>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src="/images/icon-quote.svg" alt="" width={50} height={50} />
+                    <img src={asset("/images/icon-quote.svg")} alt="" width={50} height={50} />
                   </div>
                 </div>
               </motion.article>

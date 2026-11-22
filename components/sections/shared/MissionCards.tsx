@@ -3,17 +3,18 @@
 import { useState } from "react";
 import { useCanHover } from "@/lib/useMedia";
 import styles from "@/styles/sections/shared/MissionCards.module.css";
+import { asset } from "@/lib/asset";
 
 const CARDS = [
   {
     id: "vision",
     label: "OUR VISION",
-    image: "/images/vision.avif",
+    image: asset("/images/vision.avif"),
     title: "Shaping the Future of Digital Growth",
     body: "Our vision is to become a trusted digital marketing agency that empowers businesses to grow, connect with their audiences and build a strong digital identity. We aspire to make a meaningful impact through creativity, innovation and effective digital strategies. ",
   },
-  { id: "mission", label: "OUR MISSION", image: "/images/mission.avif" },
-  { id: "story", label: "OUR STORY", image: "/images/story.avif" },
+  { id: "mission", label: "OUR MISSION", image: asset("/images/mission.avif") },
+  { id: "story", label: "OUR STORY", image: asset("/images/story.avif") },
 ] as const;
 
 /**

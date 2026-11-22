@@ -8,6 +8,7 @@ import { enquiryOptions } from "@/content/pages";
 import { enquirySchema, sendEnquiry, type Enquiry } from "@/lib/enquiry";
 import { ease } from "@/lib/motion";
 import styles from "@/styles/sections/contact/EnquiryForm.module.css";
+import { asset } from "@/lib/asset";
 
 type Status = "idle" | "sending" | "sent" | "error";
 
@@ -88,7 +89,7 @@ export function EnquiryForm() {
         transition={{ duration: 1.1, ease: ease.out, delay: 0.3 }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/images/contact-figure.avif" alt="" width={1024} height={1280} />
+        <img src={asset("/images/contact-figure.avif")} alt="" width={1024} height={1280} />
       </motion.div>
 
       <motion.div
@@ -100,7 +101,7 @@ export function EnquiryForm() {
         <div className={styles.watermark} aria-hidden>
           <div className={styles.watermarkInner}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/logo-mark-white.avif" alt="" width={141} height={131} />
+            <img src={asset("/images/logo-mark-white.avif")} alt="" width={141} height={131} />
             <span>THANDORA</span>
           </div>
         </div>

@@ -10,6 +10,7 @@ import { ease } from "@/lib/motion";
 import { u } from "@/lib/u";
 import { useMedia } from "@/lib/useMedia";
 import styles from "@/styles/sections/home/HowWeDoIt.module.css";
+import { asset } from "@/lib/asset";
 
 /** Build-up order of the temple frames (step 4 file is the finished temple). */
 const FRAME_ORDER = [0, 1, 2, 4, 3];
@@ -40,7 +41,7 @@ export function HowWeDoIt() {
     <section ref={ref} className={styles.section} aria-labelledby="how-title">
       <div className={styles.stage}>
         <Mandala
-          src="/images/union-how.svg"
+          src={asset("/images/union-how.svg")}
           width={959.728}
           height={893.766}
           style={{ left: u(248), top: u(-78.42), width: u(1257.131), height: u(1227.399) }}
@@ -83,7 +84,7 @@ export function HowWeDoIt() {
           </p>
         </Reveal>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img className={styles.arrow} src="/images/arrow-curl.avif" alt="" width={196} height={116} aria-hidden />
+        <img className={styles.arrow} src={asset("/images/arrow-curl.avif")} alt="" width={196} height={116} aria-hidden />
 
         <ol className={styles.steps} aria-label="Our process">
           {processSteps.map((s, i) => (

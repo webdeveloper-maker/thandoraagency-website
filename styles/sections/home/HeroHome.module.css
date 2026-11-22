@@ -208,7 +208,7 @@
     position: relative;
     height: calc(910 * var(--u));
     overflow: hidden;
-    background: url("/images/hero2-bg.avif") center / cover;
+    background: url("../../../public/images/hero2-bg.avif") center / cover;
   }
 
   .stacked p {
@@ -335,7 +335,7 @@
   .stacked {
     display: block;
     padding: 24px 20px 0;
-    background: url("/images/hero2-bg.avif") center / cover;
+    background: url("../../../public/images/hero2-bg.avif") center / cover;
     overflow: hidden;
   }
 

@@ -12,6 +12,7 @@ import { ease } from "@/lib/motion";
 import { u } from "@/lib/u";
 import styles from "@/styles/sections/services/ServiceCatalogue.module.css";
 import { ServiceCard } from "@/components/sections/services/ServiceCard";
+import { asset } from "@/lib/asset";
 
 type Filter = ServiceCategory | "all";
 const isFilter = (v: string | null): v is Filter => serviceCategories.some((c) => c.id === v);
@@ -54,7 +55,7 @@ export function ServiceCatalogue() {
   return (
     <section className={styles.section} aria-labelledby="catalogue-title">
       <Mandala
-        src="/images/union-whatwedo.svg"
+        src={asset("/images/union-whatwedo.svg")}
         width={442.643}
         height={412.221}
         style={{ left: u(-13), top: u(60), width: u(579.811), height: u(566.098) }}

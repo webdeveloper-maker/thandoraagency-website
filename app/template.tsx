@@ -1,4 +1,5 @@
 import styles from "@/styles/app/template.module.css";
+import { asset } from "@/lib/asset";
 
 /**
  * Remounts on every navigation, so the navy curtain (with the logo mark)
@@ -10,7 +11,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
     <>
       <div className={styles.curtain} aria-hidden>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/images/logo-mark-white.avif" alt="" width={64} height={60} />
+        <img src={asset("/images/logo-mark-white.avif")} alt="" width={64} height={60} />
       </div>
       {children}
     </>

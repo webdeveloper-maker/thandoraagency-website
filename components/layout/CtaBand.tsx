@@ -1,6 +1,7 @@
 import { PillButton } from "@/components/ui/PillButton";
 import { Reveal } from "@/components/ui/Reveal";
 import styles from "@/styles/layout/CtaBand.module.css";
+import { asset } from "@/lib/asset";
 
 /** CTA band (Figma "Desktop - 23"), shared by Home, Services and About. */
 export function CtaBand() {
@@ -28,7 +29,7 @@ export function CtaBand() {
       </div>
       <Reveal className={styles.art} x={40} y={0}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/images/cta-scene.avif" alt="" width={862} height={485} loading="lazy" />
+        <img src={asset("/images/cta-scene.avif")} alt="" width={862} height={485} loading="lazy" />
       </Reveal>
     </section>
   );
