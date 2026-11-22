@@ -11,10 +11,22 @@ const CARDS = [
     label: "OUR VISION",
     image: asset("/images/vision.avif"),
     title: "Shaping the Future of Digital Growth",
-    body: "Our vision is to become a trusted digital marketing agency that empowers businesses to grow, connect with their audiences and build a strong digital identity. We aspire to make a meaningful impact through creativity, innovation and effective digital strategies. ",
+    body: "Our vision is to become a trusted digital marketing agency that empowers businesses to grow, connect with their audiences and build a strong digital identity. We aspire to make a meaningful impact through creativity, innovation and effective digital strategies.",
   },
-  { id: "mission", label: "OUR MISSION", image: asset("/images/mission.avif") },
-  { id: "story", label: "OUR STORY", image: asset("/images/story.avif") },
+  {
+    id: "mission",
+    label: "OUR MISSION",
+    image: asset("/images/mission.avif"),
+    title: "Turning Business Goals Into Digital Success",
+    body: "Our mission is to deliver creative, result-focused digital marketing solutions that help businesses strengthen their online presence, reach the right audience and achieve their goals. We are committed to understanding every brand and creating strategies that make a difference.",
+  },
+  {
+    id: "story",
+    label: "OUR STORY",
+    image: asset("/images/story.avif"),
+    title: "Every Great Brand Begins With a Story",
+    body: "THANDORA was founded with a simple idea: every business deserves to be seen, heard and remembered. We started our journey with a passion for creativity, technology and digital marketing. Our goal is to help businesses build a meaningful online presence through innovative ideas, strategic thinking and creative digital solutions.",
+  },
 ] as const;
 
 /**
@@ -53,12 +65,8 @@ export function MissionCards() {
 
             <div id={`${card.id}-panel`} className={styles.panel} aria-hidden={!open}>
               <p className={styles.label}>{card.label}</p>
-              {"title" in card && (
-                <>
-                  <h3 className={styles.title}>{card.title}</h3>
-                  <p className={styles.body}>{card.body}</p>
-                </>
-              )}
+              <h3 className={styles.title}>{card.title}</h3>
+              <p className={styles.body}>{card.body}</p>
             </div>
           </article>
         );

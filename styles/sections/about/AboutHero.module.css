@@ -2,7 +2,7 @@
 .hero {
   position: relative;
   height: calc(945 * var(--u));
-  min-height: 640px;
+  min-height: calc(640 * var(--s));
   overflow: hidden;
   background: var(--white);
 }
@@ -10,7 +10,7 @@
 /* Union: 741 x 690 (rotated -0.38°), box at left 346.74 / top 151.57 */
 .union {
   position: absolute;
-  left: calc(348.99 * var(--u));
+  left: calc(50% - 371.01 * var(--u));
   top: calc(154 * var(--u));
   width: calc(741.095 * var(--u));
   height: calc(690.163 * var(--u));
@@ -78,7 +78,7 @@
 /* Statement: left 812 / top 716, 560 wide, Inter Medium 24 / 35 */
 .statement {
   position: absolute;
-  left: calc(812 * var(--u));
+  left: calc(50% + 92 * var(--u));
   top: calc(716 * var(--u));
   width: calc(560 * var(--u));
   z-index: 3;
@@ -96,7 +96,7 @@
   z-index: 3;
   display: flex;
   flex-direction: column;
-  gap: 50px;
+  gap: calc(50 * var(--s));
   margin: 0;
   padding: 0;
   list-style: none;
@@ -105,8 +105,8 @@
 .socials a {
   display: flex;
   align-items: center;
-  gap: 20px;
-  min-height: 44px;
+  gap: calc(20 * var(--s));
+  min-height: calc(44 * var(--s));
 }
 
 .socials img {
@@ -121,32 +121,51 @@
 .handle {
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: calc(7 * var(--s));
   font-weight: 500;
   white-space: nowrap;
 }
 
 .handleLabel {
-  font-size: 11px;
+  font-size: calc(11 * var(--s));
   letter-spacing: 1.7px;
   color: var(--slate-300);
 }
 
 .handleValue {
-  font-size: 17px;
+  font-size: calc(17 * var(--s));
   color: var(--navy-900);
 }
 
 /* Loop arrow: 108 x 125 at left 704 / top 648 */
 .arrow {
   position: absolute;
-  left: calc(704 * var(--u));
+  left: calc(50% - 16 * var(--u));
   top: calc(648 * var(--u));
   width: calc(125 * var(--u));
   height: calc(108 * var(--u));
   z-index: 3;
   rotate: -90deg;
   scale: 1 -1;
+}
+
+/* Desktop: fit the whole 1440 x 945 frame on screen (width or height,
+   whichever is tighter). Centre pieces are anchored to 50% so they stay
+   centred when the frame is narrower than the window. */
+@media (min-width: 1024px) {
+  .hero {
+    --u: min(2px, calc(100vw / 1440), calc(100svh / 945));
+    --s: max(1px, var(--u));
+    min-height: 0;
+  }
+
+  .statement {
+    font-size: calc(24 * var(--u));
+  }
+
+  .socials {
+    gap: calc(50 * var(--u));
+  }
 }
 
 @media (max-width: 767px) {

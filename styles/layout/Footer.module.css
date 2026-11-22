@@ -2,8 +2,8 @@
 .footer {
   position: relative;
   overflow: hidden;
-  height: 512px;
-  padding: 81px 45.08px 0;
+  height: calc(512 * var(--s));
+  padding: calc(81 * var(--s)) calc(45.08 * var(--s)) 0;
   background: var(--black-950);
   color: var(--white);
 }
@@ -11,24 +11,24 @@
 .inner {
   display: grid;
   grid-template-columns: 385.95fr 257.3fr 257.3fr 257.3fr;
-  column-gap: 64px;
-  max-width: 1349.84px;
+  column-gap: calc(64 * var(--s));
+  max-width: calc(1349.84 * var(--s));
   margin: 0 auto;
   position: relative;
   z-index: 1;
 }
 
 .brand img {
-  width: 38.523px;
-  height: 36px;
+  width: calc(38.523 * var(--s));
+  height: calc(36 * var(--s));
   object-fit: cover;
 }
 
 /* Inter Medium 20/23, white 70% */
 .tagline {
-  padding-top: 24px;
-  font-size: 20px;
-  line-height: 23px;
+  padding-top: calc(24 * var(--s));
+  font-size: calc(20 * var(--s));
+  line-height: calc(23 * var(--s));
   font-weight: 500;
   color: rgba(255, 255, 255, 0.7);
 }
@@ -36,8 +36,8 @@
 /* Heading 4: Inter SemiBold 12.581 / 13.21, 1.7613px tracking, white 40% */
 .heading {
   margin: 0;
-  font-size: 12.581px;
-  line-height: 13.21px;
+  font-size: calc(12.581 * var(--s));
+  line-height: calc(13.21 * var(--s));
   font-weight: 600;
   letter-spacing: 1.7613px;
   text-transform: uppercase;
@@ -46,9 +46,9 @@
 
 .col ul {
   display: grid;
-  gap: 12px;
+  gap: calc(12 * var(--s));
   margin: 0;
-  padding: 24px 0 0;
+  padding: calc(24 * var(--s)) 0 0;
   list-style: none;
 }
 
@@ -56,8 +56,8 @@
 .link {
   position: relative;
   display: inline-block;
-  font-size: 15px;
-  line-height: 22.5px;
+  font-size: calc(15 * var(--s));
+  line-height: calc(22.5 * var(--s));
   color: rgba(255, 255, 255, 0.65);
   transition: color var(--dur-fast) var(--ease-out);
 }
@@ -94,24 +94,24 @@
   bottom: -9px;
   display: flex;
   align-items: flex-end;
-  gap: 18px;
+  gap: calc(18 * var(--s));
   translate: calc(-50% + 0.5px) 0;
   pointer-events: none;
   white-space: nowrap;
 }
 
 .wordmark img {
-  width: 217px;
-  height: 202px;
+  width: calc(217 * var(--s));
+  height: calc(202 * var(--s));
   object-fit: cover;
   opacity: 0.05;
 }
 
 .wordmark span {
   display: block;
-  height: 259px;
+  height: calc(259 * var(--s));
   font-family: var(--font-display);
-  font-size: 300px;
+  font-size: calc(300 * var(--s));
   line-height: normal;
   color: #999;
   opacity: 0.1;

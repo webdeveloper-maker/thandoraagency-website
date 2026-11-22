@@ -5,7 +5,7 @@
 .top {
   position: relative;
   height: calc(828 * var(--u));
-  min-height: 640px;
+  min-height: calc(640 * var(--s));
   z-index: 2;
 }
 

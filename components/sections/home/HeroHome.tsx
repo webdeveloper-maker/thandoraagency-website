@@ -11,7 +11,7 @@ import {
 import { useRef, type PointerEvent } from "react";
 import { PillButton } from "@/components/ui/PillButton";
 import { TypingLoop } from "@/components/ui/TypingLoop";
-import { ease } from "@/lib/motion";
+import { ease, scrollRange } from "@/lib/motion";
 import { useMedia } from "@/lib/useMedia";
 import styles from "@/styles/sections/home/HeroHome.module.css";
 import { asset } from "@/lib/asset";
@@ -42,14 +42,14 @@ export function HeroHome() {
   };
 
   // Scene 1 exits
-  const s1Opacity = useTransform(p, [0.12, 0.34], [1, 0]);
+  const s1Opacity = useTransform(p, (v) => scrollRange(v, 0.12, 0.34, 1, 0));
   const s1Y = useTransform(p, [0.1, 0.34], [0, -60]);
   const pillarL = useTransform(p, [0.05, 0.34], ["0%", "-55%"]);
   const pillarR = useTransform(p, [0.05, 0.34], ["0%", "55%"]);
   const archY = useTransform(p, [0.05, 0.34], ["0%", "-110%"]);
 
   // Scene 2 enters
-  const s2Opacity = useTransform(p, [0.24, 0.42], [0, 1]);
+  const s2Opacity = useTransform(p, (v) => scrollRange(v, 0.24, 0.42, 0, 1));
   const typeY = useTransform(p, [0.28, 0.46], [40, 0]);
   const kingY = useTransform(p, [0.4, 0.62, 0.72, 0.86], ["100%", "0%", "0%", "105%"]);
   const scholarX = useTransform(p, [0.74, 0.92], ["110%", "0%"]);
@@ -165,7 +165,7 @@ export function HeroHome() {
         {/* Scene 2 — typing headline (hidden layer in Figma) */}
         <motion.div className={styles.scene2} style={live ? { opacity: s2Opacity } : undefined} aria-hidden={live ? undefined : true}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img className={styles.bg} src={asset("/images/hero2-bg.avif")} alt="" width={1440} height={910} loading="lazy" />
+          <img className={styles.bg} src={asset("/images/hero2-bg.avif")} alt="" width={1440} height={910} loading="eager" fetchPriority="low" />
           <motion.div className={styles.typing} style={live ? { y: typeY } : undefined}>
             <TypingLoop />
           </motion.div>
@@ -175,7 +175,7 @@ export function HeroHome() {
             alt=""
             width={880}
             height={557}
-            loading="lazy"
+            loading="eager" fetchPriority="low"
             style={live ? { y: kingY } : undefined}
           />
           <motion.img
@@ -184,7 +184,7 @@ export function HeroHome() {
             alt=""
             width={382}
             height={597}
-            loading="lazy"
+            loading="eager" fetchPriority="low"
             style={live ? { x: scholarX } : undefined}
           />
         </motion.div>
@@ -194,7 +194,7 @@ export function HeroHome() {
       <div className={styles.stacked}>
         <TypingLoop />
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={asset("/images/hero2-king.avif")} alt="" width={880} height={557} loading="lazy" />
+        <img src={asset("/images/hero2-king.avif")} alt="" width={880} height={557} loading="eager" fetchPriority="low" />
       </div>
     </section>
   );

@@ -17,7 +17,7 @@
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: calc(539 * var(--u)) minmax(0, 646px);
+  grid-template-columns: calc(539 * var(--u)) minmax(0, calc(646 * var(--s)));
   padding-left: var(--inset);
 }
 

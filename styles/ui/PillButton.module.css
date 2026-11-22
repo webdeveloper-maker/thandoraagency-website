@@ -3,7 +3,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: calc(8 * var(--s));
   border: 0;
   border-radius: var(--r-pill);
   white-space: nowrap;
@@ -26,19 +26,19 @@
 
 /* md: 48px tall, 24px side padding, Inter SemiBold 16/24 */
 .md {
-  min-height: 48px;
-  padding: 0 24px;
-  font-size: 16px;
-  line-height: 24px;
+  min-height: calc(48 * var(--s));
+  padding: 0 calc(24 * var(--s));
+  font-size: calc(16 * var(--s));
+  line-height: calc(24 * var(--s));
   font-weight: 600;
 }
 
 /* sm: LET'S TALK pills — Inter Bold 12/18, 1.8px tracking, caps */
 .sm {
-  min-height: 42px;
-  padding: 12px 24px;
-  font-size: 12px;
-  line-height: 18px;
+  min-height: calc(42 * var(--s));
+  padding: calc(12 * var(--s)) calc(24 * var(--s));
+  font-size: calc(12 * var(--s));
+  line-height: calc(18 * var(--s));
   font-weight: 700;
   letter-spacing: 1.8px;
   text-transform: uppercase;
@@ -87,7 +87,7 @@
 }
 
 .pill:hover .icon {
-  transform: translateX(4px);
+  transform: translateX(calc(4 * var(--s)));
 }
 
 .loading {
@@ -95,8 +95,8 @@
 }
 
 .spinner {
-  width: 16px;
-  height: 16px;
+  width: calc(16 * var(--s));
+  height: calc(16 * var(--s));
   border-radius: 50%;
   border: 2px solid currentColor;
   border-right-color: transparent;

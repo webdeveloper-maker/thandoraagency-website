@@ -2,7 +2,7 @@
 .section {
   position: relative;
   height: calc(811 * var(--u));
-  min-height: 640px;
+  min-height: calc(640 * var(--s));
   background: var(--blue-600-alt);
   color: var(--white);
   overflow: hidden;
@@ -22,7 +22,7 @@
   position: relative;
   z-index: 1;
   width: calc(730 * var(--u));
-  min-width: 520px;
+  min-width: calc(520 * var(--s));
   padding: calc(251 * var(--u)) 0 0 calc(92 * var(--u));
 }
 
@@ -37,32 +37,32 @@
 
 .details {
   display: flex;
-  gap: 40px;
-  margin: 36px 0 0;
+  gap: calc(40 * var(--s));
+  margin: calc(36 * var(--s)) 0 0;
 }
 
 .item {
-  width: 204px;
+  width: calc(204 * var(--s));
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: calc(7 * var(--s));
   font-weight: 500;
 }
 
 .wide {
-  width: 242px;
+  width: calc(242 * var(--s));
 }
 
 /* Label: Inter Medium 14, 1.7px, white */
 .item dt {
-  font-size: 14px;
+  font-size: calc(14 * var(--s));
   letter-spacing: 1.7px;
 }
 
 /* Value: Inter Medium 24, navy */
 .item dd {
   margin: 0;
-  font-size: clamp(18px, calc(15.333px + 0.5926vw), 24px);
+  font-size: max(clamp(18px, calc(15.333px + 0.5926vw), 24px), calc(24 * var(--u)));
   color: var(--navy-900);
   white-space: nowrap;
 }
@@ -79,7 +79,7 @@
 .item a {
   text-decoration: underline;
   text-decoration-color: transparent;
-  text-underline-offset: 4px;
+  text-underline-offset: calc(4 * var(--s));
   transition: text-decoration-color var(--dur-fast) var(--ease-out);
 }
 
@@ -92,7 +92,7 @@
 .map {
   display: block;
   width: calc(450 * var(--u));
-  min-width: 300px;
+  min-width: calc(300 * var(--s));
   margin-top: calc(38 * var(--u));
   overflow: hidden;
   border-radius: var(--r-card);
@@ -112,16 +112,16 @@
 .toast {
   position: fixed;
   left: 50%;
-  bottom: max(24px, env(safe-area-inset-bottom));
+  bottom: max(calc(24 * var(--s)), env(safe-area-inset-bottom));
   z-index: 60;
   translate: -50% 0;
-  padding: 12px 20px;
+  padding: calc(12 * var(--s)) calc(20 * var(--s));
   border-radius: var(--r-pill);
   background: var(--navy-900);
   color: var(--white);
-  font-size: 14px;
+  font-size: calc(14 * var(--s));
   font-weight: 600;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 calc(10 * var(--s)) calc(30 * var(--s)) rgba(0, 0, 0, 0.25);
 }
 
 @media (max-width: 1023px) {

@@ -1,12 +1,13 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { useId, useState, type ReactNode } from "react";
+import { AnimatePresence, motion, useMotionValue, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { useEffect, useId, useState, type ReactNode } from "react";
 import { useForm, type FieldError } from "react-hook-form";
 import { enquiryOptions } from "@/content/pages";
 import { enquirySchema, sendEnquiry, type Enquiry } from "@/lib/enquiry";
-import { ease } from "@/lib/motion";
+import { ease, scrollRange } from "@/lib/motion";
+import { useMedia } from "@/lib/useMedia";
 import styles from "@/styles/sections/contact/EnquiryForm.module.css";
 import { asset } from "@/lib/asset";
 
@@ -44,11 +45,31 @@ function Field({
  * Enquiry form card (Figma "Component 684"): black card with the vertical
  * THANDORA watermark. On desktop the peeking king (image 67) slides in behind
  * the card (Default → Variant3).
+ *
+ * Desktop: the card starts shifted right (partly off screen) and slides left
+ * into place as the visitor scrolls down. Focusing any field settles it at
+ * once so the form is never half hidden while in use.
+ * Mobile / tablet: it slides in from the right when scrolled into view.
  */
 export function EnquiryForm() {
   const uid = useId();
   const reduce = useReducedMotion();
   const [status, setStatus] = useState<Status>("idle");
+
+  // Scroll-linked slide (desktop, motion allowed).
+  const live = useMedia("(min-width: 1024px) and (prefers-reduced-motion: no-preference)") && !reduce;
+  const settled = useMotionValue(0);
+  const [slideDist, setSlideDist] = useState(400);
+  useEffect(() => {
+    const measure = () => setSlideDist(Math.max(200, window.innerHeight * 0.5));
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, []);
+  const { scrollY } = useScroll();
+  const cardX = useTransform([scrollY, settled], ([y, done]: number[]) =>
+    done ? "0%" : `${scrollRange(y, 0, slideDist, 42, 0)}%`,
+  );
   const {
     register,
     handleSubmit,
@@ -94,8 +115,12 @@ export function EnquiryForm() {
 
       <motion.div
         className={styles.card}
-        initial={reduce ? false : { opacity: 0, x: 60 }}
-        animate={{ opacity: 1, x: 0 }}
+        onFocusCapture={() => settled.set(1)}
+        style={live ? { x: cardX } : undefined}
+        initial={reduce ? false : live ? { opacity: 0 } : { opacity: 0, x: 80 }}
+        animate={live ? { opacity: 1 } : undefined}
+        whileInView={live ? undefined : { opacity: 1, x: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.8, ease: ease.out }}
       >
         <div className={styles.watermark} aria-hidden>

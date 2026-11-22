@@ -30,9 +30,9 @@
 /* Inter Regular + SemiBold 36 */
 .title {
   position: absolute;
-  left: 40px;
-  right: 40px;
-  bottom: 40px;
+  left: calc(40 * var(--s));
+  right: calc(40 * var(--s));
+  bottom: calc(40 * var(--s));
   z-index: 1;
   font-size: var(--fs-card-title);
   line-height: 1.15;
@@ -51,21 +51,21 @@
 /* White in-card button, 12px radius */
 .button {
   position: absolute;
-  right: 32px;
-  bottom: 32px;
+  right: calc(32 * var(--s));
+  bottom: calc(32 * var(--s));
   z-index: 1;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  min-height: 48px;
-  padding: 0 24px;
+  gap: calc(8 * var(--s));
+  min-height: calc(48 * var(--s));
+  padding: 0 calc(24 * var(--s));
   border-radius: var(--r-btn);
   background: var(--white);
   color: var(--black-850);
-  font-size: 16px;
+  font-size: calc(16 * var(--s));
   font-weight: 600;
   opacity: 0;
-  translate: 0 16px;
+  translate: 0 calc(16 * var(--s));
   transition:
     opacity var(--dur-base) var(--ease-out),
     translate var(--dur-base) var(--ease-out);
@@ -76,7 +76,7 @@
 }
 
 .button:hover svg {
-  transform: translateX(4px);
+  transform: translateX(calc(4 * var(--s)));
 }
 
 /* Default state (hover / keyboard focus) */
@@ -112,12 +112,12 @@
   }
 
   .title {
-    bottom: 104px;
+    bottom: calc(104 * var(--s));
   }
 
   .card:hover .title,
   .card:focus-within .title {
-    right: 40px;
+    right: calc(40 * var(--s));
     white-space: normal;
     transform: none;
   }

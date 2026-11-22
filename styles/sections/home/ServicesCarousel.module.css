@@ -2,6 +2,10 @@
 .section {
   position: relative;
   overflow-x: clip;
+}
+
+.stage {
+  position: relative;
   padding: calc(99 * var(--u)) 0 calc(74 * var(--u));
 }
 
@@ -9,7 +13,7 @@
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: calc(557 * var(--u)) minmax(0, 646px);
+  grid-template-columns: calc(557 * var(--u)) minmax(0, calc(646 * var(--s)));
   padding-left: calc(126 * var(--u));
 }
 
@@ -38,14 +42,14 @@
 
 .arrows {
   display: flex;
-  gap: 12px;
+  gap: calc(12 * var(--s));
 }
 
 .arrows button {
   display: grid;
   place-items: center;
-  width: 48px;
-  height: 48px;
+  width: calc(48 * var(--s));
+  height: calc(48 * var(--s));
   border: 1px solid var(--line);
   border-radius: 50%;
   background: var(--white);
@@ -73,7 +77,7 @@
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: calc(1280 * var(--u));
-  column-gap: 30px;
+  column-gap: calc(30 * var(--s));
   margin-top: calc(99 * var(--u));
   padding: 0 calc(79 * var(--u));
   scroll-padding: 0 calc(79 * var(--u));
@@ -97,9 +101,9 @@
 .card {
   position: relative;
   height: calc(550 * var(--u));
-  min-height: 340px;
+  min-height: calc(340 * var(--s));
   overflow: hidden;
-  border-radius: 12px;
+  border-radius: calc(12 * var(--s));
   scroll-snap-align: start;
   color: var(--white);
 }
@@ -111,6 +115,7 @@
   height: 100%;
   object-fit: cover;
   pointer-events: none;
+  transition: transform 900ms var(--ease-out);
 }
 
 /* Figma "Header": left 755px, 50% black → clear */
@@ -119,8 +124,8 @@
   inset: 0 auto 0 0;
   width: calc(755 * var(--u));
   background: linear-gradient(90deg, rgba(0, 0, 0, 0.5) 0%, rgba(255, 255, 255, 0) 100%);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(calc(14 * var(--s)));
+  -webkit-backdrop-filter: blur(calc(14 * var(--s)));
   -webkit-mask: linear-gradient(90deg, #000 40%, transparent 100%);
   mask: linear-gradient(90deg, #000 40%, transparent 100%);
 }
@@ -140,11 +145,75 @@
   font-size: var(--fs-card-xl);
   line-height: normal;
   font-weight: 600;
+  transform-origin: left bottom;
+  transition: transform 600ms var(--ease-out);
+}
+
+/* Hover arrow (Figma hover state): 72px white circle, bottom-right. */
+.cardGo {
+  position: absolute;
+  right: calc(88 * var(--u));
+  bottom: calc(52 * var(--u));
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: max(48px, calc(72 * var(--u)));
+  height: max(48px, calc(72 * var(--u)));
+  border-radius: 50%;
+  background: var(--white);
+  color: #000;
+  box-shadow: 0 calc(8 * var(--s)) calc(24 * var(--s)) rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  scale: 0.6;
+  transition:
+    opacity 400ms var(--ease-out),
+    scale 500ms var(--ease-out),
+    background-color var(--dur-fast) var(--ease-out);
+}
+
+.cardGo svg {
+  width: 45%;
+  height: 45%;
+  transition: translate 400ms var(--ease-out);
+}
+
+.cardGo:hover svg {
+  translate: 12% 0;
+}
+
+.cardGo:focus-visible {
+  opacity: 1;
+  scale: 1;
+  outline-color: var(--white);
+}
+
+/* Hover: zoom the image, lift the title, reveal the arrow. */
+@media (hover: hover) {
+  .card:hover img {
+    transform: scale(1.06);
+  }
+
+  .card:hover h3 {
+    transform: scale(1.08);
+  }
+
+  .card:hover .cardGo {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+/* Touch screens have no hover: keep the arrow visible. */
+@media (hover: none) {
+  .cardGo {
+    opacity: 1;
+    scale: 1;
+  }
 }
 
 /* Inter Medium 24 */
 .cardText p {
-  max-width: 498px;
+  max-width: calc(498 * var(--s));
   font-size: var(--fs-body-lg);
   line-height: normal;
   font-weight: 500;
@@ -240,5 +309,59 @@
     width: 24px;
     border-radius: 4px;
     background: var(--blue-600);
+  }
+}
+
+/*
+ * Pinned (desktop): the 1440 x 1141 frame is scaled to fit the screen and
+ * centred; scrolling down moves the card row left (transform set in JS).
+ * Kept last so it overrides the base rules above.
+ */
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  .stage {
+    --u: min(2px, calc(100vw / 1440), calc(100vh / 1141));
+    --s: max(1px, var(--u));
+    --frame-x: max(0px, calc((100vw - 1440 * var(--u)) / 2));
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .intro {
+    grid-template-columns: calc(557 * var(--u)) calc(646 * var(--u));
+    padding-left: calc(var(--frame-x) + 126 * var(--u));
+  }
+
+  .intro h2 {
+    font-size: calc(88 * var(--u));
+  }
+
+  .copy {
+    font-size: calc(22 * var(--u));
+  }
+
+  .track {
+    overflow: visible;
+    scroll-snap-type: none;
+    padding: 0 calc(var(--frame-x) + 79 * var(--u));
+    cursor: default;
+    will-change: transform;
+  }
+
+  .card {
+    min-height: 0;
+  }
+
+  .cardText h3 {
+    font-size: calc(42 * var(--u));
+  }
+
+  .cardText p {
+    max-width: none;
+    font-size: calc(24 * var(--u));
   }
 }

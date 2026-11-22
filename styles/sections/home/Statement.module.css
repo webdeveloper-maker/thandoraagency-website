@@ -2,7 +2,7 @@
 .section {
   position: relative;
   height: calc(445 * var(--u));
-  min-height: 380px;
+  min-height: calc(380 * var(--s));
   background: var(--blue-600-alt);
   color: var(--white);
 }

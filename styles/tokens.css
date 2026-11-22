@@ -2,7 +2,7 @@
  * Thandora design tokens.
  * Desktop values come from the Figma frames (1440px). Fluid tokens use
  * clamp() so they scale from the 360px mobile target and land exactly on
- * the Figma size at 1440px.
+ * the Figma size at 1440px; above 1440 they keep scaling with --u.
  */
 :root {
   /* Colour */
@@ -29,39 +29,45 @@
   --font-display: var(--font-squada), var(--font-sans);
 
   /* Fluid type scale: clamp(mobile, fluid, desktop) */
-  --fs-display-xl: clamp(40px, calc(20px + 5.5556vw), 100px);
-  --fs-h2-section: clamp(44px, calc(29.333px + 4.0741vw), 88px);
-  --fs-h2-close: clamp(36px, calc(26.667px + 2.5926vw), 64px);
-  --fs-h1-hero: clamp(32px, calc(25.333px + 1.8519vw), 52px);
-  --fs-card-xl: clamp(24px, calc(18px + 1.6667vw), 42px);
-  --fs-h2-banner: clamp(26px, calc(21.333px + 1.2963vw), 40px);
-  --fs-statement: clamp(24px, calc(18.667px + 1.4815vw), 40px);
-  --fs-lead-cta: clamp(22px, calc(16.614px + 1.4961vw), 38.158px);
-  --fs-lead-contact: clamp(26px, calc(21.947px + 1.1257vw), 38.158px);
-  --fs-h2-form: clamp(32px, calc(28px + 1.1111vw), 44px);
-  --fs-card-title: clamp(24px, calc(20px + 1.1111vw), 36px);
-  --fs-eyebrow: clamp(14px, calc(10.667px + 0.9259vw), 24px);
-  --fs-body-lg: clamp(17px, calc(14.667px + 0.6481vw), 24px);
-  --fs-intro: clamp(17px, calc(15.333px + 0.463vw), 22px);
-  --fs-body: clamp(16px, calc(14.667px + 0.3704vw), 20px);
-  --fs-wordmark: clamp(96px, calc(28px + 18.889vw), 300px);
+  --fs-display-xl: max(clamp(40px, calc(20px + 5.5556vw), 100px), calc(100 * var(--u)));
+  --fs-h2-section: max(clamp(44px, calc(29.333px + 4.0741vw), 88px), calc(88 * var(--u)));
+  --fs-h2-close: max(clamp(36px, calc(26.667px + 2.5926vw), 64px), calc(64 * var(--u)));
+  --fs-h1-hero: max(clamp(32px, calc(25.333px + 1.8519vw), 52px), calc(52 * var(--u)));
+  --fs-card-xl: max(clamp(24px, calc(18px + 1.6667vw), 42px), calc(42 * var(--u)));
+  --fs-h2-banner: max(clamp(26px, calc(21.333px + 1.2963vw), 40px), calc(40 * var(--u)));
+  --fs-statement: max(clamp(24px, calc(18.667px + 1.4815vw), 40px), calc(40 * var(--u)));
+  --fs-lead-cta: max(clamp(22px, calc(16.614px + 1.4961vw), 38.158px), calc(38.158 * var(--u)));
+  --fs-lead-contact: max(clamp(26px, calc(21.947px + 1.1257vw), 38.158px), calc(38.158 * var(--u)));
+  --fs-h2-form: max(clamp(32px, calc(28px + 1.1111vw), 44px), calc(44 * var(--u)));
+  --fs-card-title: max(clamp(24px, calc(20px + 1.1111vw), 36px), calc(36 * var(--u)));
+  --fs-eyebrow: max(clamp(14px, calc(10.667px + 0.9259vw), 24px), calc(24 * var(--u)));
+  --fs-body-lg: max(clamp(17px, calc(14.667px + 0.6481vw), 24px), calc(24 * var(--u)));
+  --fs-intro: max(clamp(17px, calc(15.333px + 0.463vw), 22px), calc(22 * var(--u)));
+  --fs-body: max(clamp(16px, calc(14.667px + 0.3704vw), 20px), calc(20 * var(--u)));
+  --fs-wordmark: max(clamp(96px, calc(28px + 18.889vw), 300px), calc(300 * var(--u)));
 
   /* Layout */
-  /* One Figma pixel: exactly 1px at >=1440px, scaling down with the viewport. */
-  --u: min(1px, calc(100vw / 1440));
-  --frame: 1440px;
-  --content: 1280px;
-  --pad: clamp(20px, 5.5556vw, 80px);
-  --inset: clamp(20px, calc(-15px + 9.7222vw), 125px);
-  --header-h: 126px;
-  --header-h-compact: 72px;
+  /*
+   * One Figma pixel. Tracks the viewport width (exact at 1440px), so every
+   * screen shows the same composition as the 1440 frame; capped at 2px for
+   * very wide monitors.
+   */
+  --u: min(2px, calc(100vw / 1440));
+  /* Fixed sizes (buttons, type, gaps): 1px up to 1440px, then grow with --u. */
+  --s: max(1px, var(--u));
+  --frame: calc(1440 * var(--s));
+  --content: calc(1280 * var(--s));
+  --pad: max(clamp(20px, 5.5556vw, 80px), calc(80 * var(--u)));
+  --inset: max(clamp(20px, calc(-15px + 9.7222vw), 125px), calc(125 * var(--u)));
+  --header-h: calc(126 * var(--s));
+  --header-h-compact: calc(72 * var(--s));
 
   /* Shape & depth */
   --r-pill: 9999px;
-  --r-card: 18px;
-  --r-team: 16px;
-  --r-btn: 12px;
-  --r-input: 10px;
+  --r-card: calc(18 * var(--s));
+  --r-team: calc(16 * var(--s));
+  --r-btn: calc(12 * var(--s));
+  --r-input: calc(10 * var(--s));
   --shadow-pill: 0 4px 5px rgba(3, 115, 95, 0.24);
   --shadow-banner-text: 0 1px 3px rgba(0, 0, 0, 0.14);
   --shadow-art: 0 10px 30px rgba(0, 0, 0, 0.4);

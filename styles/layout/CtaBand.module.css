@@ -2,7 +2,7 @@
 .band {
   position: relative;
   overflow: hidden;
-  height: 697px;
+  height: calc(697 * var(--s));
   background: var(--blue-600-alt);
   color: var(--white);
 }
@@ -10,12 +10,12 @@
 .copy {
   position: relative;
   z-index: 1;
-  padding: 190px 0 0 80px;
+  padding: calc(190 * var(--s)) 0 0 calc(80 * var(--s));
 }
 
 /* Inter Light 38.158 / 47.698, -1.068px */
 .lead {
-  width: 767px;
+  width: calc(767 * var(--s));
   max-width: 100%;
   font-size: var(--fs-lead-cta);
   line-height: 1.25;
@@ -25,7 +25,7 @@
 
 /* Inter SemiBold 88 / 80, -7.28px */
 .title {
-  margin-top: 62px;
+  margin-top: calc(62 * var(--s));
   font-size: var(--fs-h2-section);
   line-height: 0.909;
   font-weight: 600;
@@ -35,11 +35,11 @@
 
 /* White pill 340x90, Inter SemiBold 24 */
 .button {
-  margin-top: 33px;
-  width: 340px;
-  height: 90px;
-  font-size: 24px;
-  line-height: 28.75px;
+  margin-top: calc(33 * var(--s));
+  width: calc(340 * var(--s));
+  height: calc(90 * var(--s));
+  font-size: calc(24 * var(--s));
+  line-height: calc(28.75 * var(--s));
   letter-spacing: -0.0958px;
   color: #000;
   box-shadow: none;
@@ -49,7 +49,7 @@
   position: absolute;
   left: calc(40% + 2px);
   bottom: 0;
-  width: 862px;
+  width: calc(862 * var(--s));
 }
 
 .art img {

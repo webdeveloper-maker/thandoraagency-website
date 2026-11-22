@@ -58,11 +58,6 @@ export const whyReasons = [
     body: "Open communication and a collaborative approach at every stage.",
     image: asset("/images/why-clear-communication.avif"),
   },
-  {
-    title: "Continuous Improvement.",
-    body: "Open communication and a collaborative approach at every stage.",
-    image: asset("/images/why-continuous-improvement.avif"),
-  },
 ] as const;
 
 /** Temple build-up frames, shown in order as the process steps advance. */

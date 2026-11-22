@@ -4,13 +4,13 @@
   flex-direction: column;
   gap: calc(200 * var(--u));
   width: calc(407 * var(--u));
-  min-width: 300px;
+  min-width: calc(300 * var(--s));
 }
 
 .head {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: calc(10 * var(--s));
 }
 
 /* CONTACT US: Inter Bold 24 / 18.872, 1.7613px, caps, blue */
@@ -44,7 +44,7 @@
 .socials {
   display: flex;
   flex-direction: column;
-  gap: 60px;
+  gap: calc(60 * var(--s));
   margin: 0;
   padding: 0;
   list-style: none;
@@ -53,9 +53,9 @@
 .socials a {
   display: flex;
   align-items: center;
-  gap: 20px;
-  width: 201px;
-  min-height: 44px;
+  gap: calc(20 * var(--s));
+  width: calc(201 * var(--s));
+  min-height: calc(44 * var(--s));
 }
 
 .socials img {
@@ -70,20 +70,20 @@
 .handle {
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: calc(7 * var(--s));
   font-weight: 500;
   white-space: nowrap;
 }
 
 /* Label 11px #9cadc9, 1.7px; handle 17px navy */
 .label {
-  font-size: 11px;
+  font-size: calc(11 * var(--s));
   letter-spacing: 1.7px;
   color: var(--slate-300);
 }
 
 .value {
-  font-size: 17px;
+  font-size: calc(17 * var(--s));
   color: var(--navy-900);
 }
 

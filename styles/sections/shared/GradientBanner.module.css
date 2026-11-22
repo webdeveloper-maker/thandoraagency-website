@@ -2,7 +2,7 @@
 .banner {
   position: relative;
   height: calc(360 * var(--u));
-  min-height: 300px;
+  min-height: calc(300 * var(--s));
   color: var(--white);
 }
 
@@ -87,25 +87,25 @@
   translate: 0 -50%;
   display: flex;
   flex-direction: column;
-  gap: 36px;
+  gap: calc(36 * var(--s));
   width: calc(920 * var(--u));
   z-index: 1;
 }
 
 .withEyebrow .copy {
   top: calc(50% + 0.5 * var(--u));
-  gap: 30px;
+  gap: calc(30 * var(--s));
 }
 
 .text {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: calc(10 * var(--s));
   filter: drop-shadow(var(--shadow-banner-text));
 }
 
 .withEyebrow .text {
-  gap: 16px;
+  gap: calc(16 * var(--s));
 }
 
 /* Inter Medium 18, 0.5px tracking, uppercase */

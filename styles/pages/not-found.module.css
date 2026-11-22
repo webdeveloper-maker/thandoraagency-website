@@ -2,15 +2,15 @@
   display: grid;
   place-items: center;
   align-content: center;
-  gap: 24px;
+  gap: calc(24 * var(--s));
   min-height: 100vh;
-  padding: calc(var(--header-h) + 40px) var(--pad) 80px;
+  padding: calc(var(--header-h) + calc(40 * var(--s))) var(--pad) calc(80 * var(--s));
   text-align: center;
 }
 
 .code {
   font-family: var(--font-display);
-  font-size: clamp(96px, 20vw, 220px);
+  font-size: max(clamp(96px, 20vw, 220px), calc(220 * var(--u)));
   line-height: 1;
   color: var(--navy-900);
   opacity: 0.12;

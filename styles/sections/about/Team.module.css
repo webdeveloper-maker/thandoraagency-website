@@ -5,7 +5,7 @@
 }
 
 .inner {
-  max-width: 1190px;
+  max-width: calc(1190 * var(--s));
   margin: 0 auto;
   text-align: center;
 }
@@ -14,9 +14,9 @@
 .eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  font-size: 12.581px;
-  line-height: 18.872px;
+  gap: calc(8 * var(--s));
+  font-size: calc(12.581 * var(--s));
+  line-height: calc(18.872 * var(--s));
   font-weight: 600;
   letter-spacing: 1.7613px;
   text-transform: uppercase;
@@ -24,15 +24,15 @@
 }
 
 .eyebrow span {
-  width: 6px;
-  height: 6px;
-  border-radius: 3px;
+  width: calc(6 * var(--s));
+  height: calc(6 * var(--s));
+  border-radius: calc(3 * var(--s));
   background: var(--blue-600);
 }
 
 /* Inter SemiBold 64 / 67.2, -1.92px, #050505 */
 .title {
-  padding-top: 32px;
+  padding-top: calc(32 * var(--s));
   font-size: var(--fs-h2-close);
   line-height: 1.05;
   font-weight: 600;
@@ -44,8 +44,8 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 24px;
-  margin: 64px 0 0;
+  gap: calc(24 * var(--s));
+  margin: calc(64 * var(--s)) 0 0;
   padding: 0;
   list-style: none;
   text-align: center;
@@ -84,9 +84,9 @@
 
 /* Inter SemiBold 20 / 21, -0.6px */
 .name {
-  padding-top: 24px;
-  font-size: 20px;
-  line-height: 21px;
+  padding-top: calc(24 * var(--s));
+  font-size: calc(20 * var(--s));
+  line-height: calc(21 * var(--s));
   font-weight: 600;
   letter-spacing: -0.6px;
   color: var(--black-950);
@@ -94,9 +94,9 @@
 
 /* Inter Regular 15 / 24.75, #62646b */
 .role {
-  padding-top: 8px;
-  font-size: 15px;
-  line-height: 24.75px;
+  padding-top: calc(8 * var(--s));
+  font-size: calc(15 * var(--s));
+  line-height: calc(24.75 * var(--s));
   color: var(--grey-600);
 }
 

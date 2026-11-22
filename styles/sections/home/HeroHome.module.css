@@ -1,5 +1,6 @@
 /*
- * Hero composition in Figma px via var(--u): exact at 1440px, scaled below.
+ * Hero composition in Figma px via var(--u): exact at 1440 x 910, scaled to
+ * fit the viewport on desktop.
  * Frame: 1440 x 910.
  */
 .wrap {
@@ -10,7 +11,7 @@
 .stage {
   position: relative;
   height: calc(910 * var(--u));
-  min-height: 600px;
+  min-height: calc(600 * var(--s));
   overflow: hidden;
 }
 
@@ -21,9 +22,14 @@
   }
 
   .stage {
+    /* Fit the whole 1440 x 910 frame on screen: scale by width or height,
+       whichever is tighter, so every desktop shows the full composition. */
+    --u: min(2px, calc(100vw / 1440), calc(100svh / 910));
+    --s: max(1px, var(--u));
     position: sticky;
     top: 0;
     height: 100vh;
+    height: 100svh;
     min-height: calc(910 * var(--u));
   }
 
