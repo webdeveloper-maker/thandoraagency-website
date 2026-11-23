@@ -1,9 +1,21 @@
 /* Section 565:9719: 1440 x 945 */
 .section {
   position: relative;
+}
+
+.stage {
+  position: relative;
   height: calc(945 * var(--u));
   min-height: calc(760 * var(--s));
   overflow: hidden;
+}
+
+/* Note + arrow travel together (they fade out as the deck splits). */
+.noteWrap {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
 }
 
 /* Title left 105 / top 43; copy left 761 / top 80, 561 wide */
@@ -112,6 +124,11 @@
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, rgba(160, 160, 160, 0.18) 100%);
 }
 
+/* Deck: only the front card's text shows (the others peek out behind it). */
+.card[aria-hidden="true"] .cardText {
+  opacity: 0;
+}
+
 .cardText {
   position: absolute;
   left: calc(48 * var(--u));
@@ -186,10 +203,15 @@
 }
 
 @media (max-width: 1023px) {
-  .section {
+  .stage {
     height: auto;
     min-height: 0;
     padding-bottom: 64px;
+  }
+
+  .noteWrap {
+    position: relative;
+    inset: auto;
   }
 
   .intro {
@@ -239,5 +261,129 @@
     left: 20px;
     right: 20px;
     bottom: 22px;
+  }
+}
+
+/* Pinned row (desktop only; the markup exists only in that mode). */
+.rowWrap {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.row {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  will-change: transform;
+}
+
+.rowCard {
+  transition: opacity 500ms var(--ease-out);
+}
+
+.ahead {
+  opacity: 0.3;
+}
+
+.progress {
+  position: absolute;
+  height: calc(3 * var(--s));
+  border-radius: 2px;
+  background: var(--line);
+  overflow: hidden;
+}
+
+.progress span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--blue-600);
+  transform-origin: left center;
+}
+
+.rowEnd {
+  position: absolute;
+  top: 0;
+  width: 0;
+  height: 0;
+}
+
+/*
+ * Pinned (desktop): the 1440 x 945 frame is scaled to fit the screen and
+ * centred; scroll fans the deck into a row and walks it sideways (timeline
+ * in Believe.tsx). Kept last so it overrides the base rules above.
+ */
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  .section {
+    height: 400vh;
+  }
+
+  .stage {
+    --u: min(2px, calc(100vw / 1440), calc(100vh / 945));
+    --s: max(1px, var(--u));
+    --frame-x: max(0px, calc((100vw - 1440 * var(--u)) / 2));
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    min-height: 0;
+  }
+
+  .intro {
+    grid-template-columns: calc(656 * var(--u)) calc(561 * var(--u));
+    padding-left: calc(var(--frame-x) + 105 * var(--u));
+  }
+
+  .intro h2 {
+    font-size: calc(88 * var(--u));
+  }
+
+  .copy {
+    font-size: calc(22 * var(--u));
+  }
+
+  .symbol {
+    left: calc(var(--frame-x) + 720 * var(--u));
+  }
+
+  .note {
+    left: calc(var(--frame-x) + 870 * var(--u));
+    font-size: calc(24 * var(--u));
+  }
+
+  .arrow {
+    left: calc(var(--frame-x) + 769 * var(--u));
+  }
+
+  /* Deck spot: left 134 / top 375, 495 square cards. */
+  .row {
+    left: calc(var(--frame-x) + 134 * var(--u));
+    top: calc(375 * var(--u));
+    width: calc(495 * var(--u));
+    height: calc(495 * var(--u));
+  }
+
+  .rowCard {
+    min-width: 0;
+  }
+
+  .rowCard .cardText h3 {
+    font-size: calc(32 * var(--u));
+  }
+
+  .rowCard .cardBody p {
+    font-size: calc(22 * var(--u));
+  }
+
+  .progress {
+    left: calc(var(--frame-x) + 134 * var(--u));
+    top: calc(898 * var(--u));
+    width: calc(320 * var(--u));
+  }
+
+  .rowEnd {
+    left: calc(var(--frame-x) + 1306 * var(--u));
   }
 }
