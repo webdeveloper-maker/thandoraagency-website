@@ -1,0 +1,243 @@
+/*
+ * Services hero (Figma "Desktop - 37"): 1440 x 945. Positions below are the
+ * Figma frame's, in Figma px. The temple layers were matched against the
+ * prototype at 1:1, so each image sits at its native size.
+ */
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: var(--white);
+}
+
+/* Gradient Thandora mark: 840 x 858 at left 785 / top -134 (anchored to the
+   frame centre so it stays put when the frame is narrower than the window). */
+.mark {
+  position: absolute;
+  left: calc(50% + 65 * var(--u));
+  top: calc(-134 * var(--u));
+  width: calc(840 * var(--u));
+  height: calc(858 * var(--u));
+  pointer-events: none;
+  z-index: 0;
+}
+
+.mark img {
+  width: 100%;
+  height: 100%;
+}
+
+.frame {
+  position: relative;
+}
+
+.copy {
+  position: relative;
+  z-index: 2;
+}
+
+/* SERVICES: Inter Bold 24, blue, caps */
+.eyebrow {
+  font-size: var(--fs-eyebrow);
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--blue-600);
+}
+
+/* Caps, navy, "BRAND" blue. Figma sets this in Inter's display cut (narrower
+   than the web font), so SemiBold 98 / 86 at -0.06em matches its 937px line. */
+.title {
+  margin-top: calc(13.4 * var(--u));
+  font-size: var(--fs-display-xl);
+  line-height: 0.8776;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: var(--navy-900);
+}
+
+/* Each line rises out of its own mask on load. */
+.line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+  margin-bottom: -0.06em;
+}
+
+.lineInner {
+  display: inline-block;
+}
+
+/* Temple box: left -143 / top 236.5, 1467 wide; clipped at the frame bottom
+   (945) so the layers rise out of the ground. */
+.temple {
+  position: absolute;
+  left: calc(-143 * var(--u));
+  top: calc(236.5 * var(--u));
+  width: calc(1467 * var(--u));
+  height: calc(708.5 * var(--u));
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.tower,
+.middle,
+.front {
+  position: absolute;
+}
+
+.tower img,
+.middle img,
+.front img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Gopuram + wall: 780 x 734 at (0, 0) of the box (furthest back) */
+.tower {
+  left: 0;
+  top: 0;
+  width: calc(780 * var(--u));
+  height: calc(734 * var(--u));
+  z-index: 1;
+}
+
+/* Long hall: 1464 x 416 at (2.9, 318) */
+.middle {
+  left: calc(2.9 * var(--u));
+  top: calc(318 * var(--u));
+  width: calc(1464.2 * var(--u));
+  height: calc(415.9 * var(--u));
+  z-index: 2;
+}
+
+/* Front pavilion: 812 x 358 at (654.3, 350) (nearest) */
+.front {
+  left: calc(654.3 * var(--u));
+  top: calc(350 * var(--u));
+  width: calc(811.9 * var(--u));
+  height: calc(358.2 * var(--u));
+  z-index: 3;
+}
+
+/* Note: Inter Medium 20 / 25, blue; "Services" navy. Left 988 / top 463. */
+.note {
+  position: relative;
+  z-index: 2;
+  font-size: max(clamp(15px, calc(11.667px + 0.5787vw), 20px), calc(20 * var(--u)));
+  line-height: 1.25;
+  font-weight: 500;
+  color: var(--blue-600);
+}
+
+/* Arrow: 60 x 92 at left 920 / top 513, from the note down to the hall roof */
+.arrow {
+  position: absolute;
+  left: calc(920 * var(--u));
+  top: calc(513 * var(--u));
+  width: calc(60 * var(--u));
+  height: calc(92 * var(--u));
+  color: var(--navy-900);
+  overflow: visible;
+  z-index: 2;
+}
+
+/* Desktop: the whole 1440 x 945 frame fits the screen (width or height,
+   whichever is tighter) and is centred in the window. */
+@media (min-width: 1024px) {
+  .hero {
+    --u: min(2px, calc(100vw / 1440), calc(100svh / 945));
+    --s: max(1px, var(--u));
+    height: calc(945 * var(--u));
+  }
+
+  .frame {
+    width: calc(1440 * var(--u));
+    height: 100%;
+    margin: 0 auto;
+  }
+
+  .copy {
+    position: absolute;
+    left: calc(469 * var(--u));
+    top: calc(127.2 * var(--u));
+    white-space: nowrap;
+  }
+
+  .eyebrow {
+    font-size: calc(24 * var(--u));
+  }
+
+  .title {
+    font-size: calc(98 * var(--u));
+    letter-spacing: -0.06em;
+  }
+
+  .note {
+    position: absolute;
+    left: calc(988 * var(--u));
+    top: calc(462.5 * var(--u));
+    width: calc(380 * var(--u));
+    font-size: calc(20 * var(--u));
+  }
+}
+
+/* Tablet / mobile: text stacks above the temple, which is shown larger and
+   cropped to the window. */
+@media (max-width: 1023px) {
+  .hero {
+    padding: calc(var(--header-h) + 32px) var(--pad) 0;
+  }
+
+  /* Note under the headline; the temple closes the hero as its ground line. */
+  .frame {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .copy {
+    order: 1;
+  }
+
+  .note {
+    order: 2;
+  }
+
+  .temple {
+    order: 3;
+  }
+
+  .mark {
+    left: 35%;
+    top: 40px;
+    width: 90vw;
+    height: auto;
+    aspect-ratio: 840 / 858;
+  }
+
+  .grid,
+  .arrow {
+    display: none;
+  }
+
+  .title {
+    margin-top: 14px;
+  }
+
+  .note {
+    max-width: 380px;
+    margin-top: 24px;
+  }
+
+  .temple {
+    --u: calc(100vw / 1360);
+    flex: none;
+    position: relative;
+    left: auto;
+    top: auto;
+    margin: 24px 0 0 calc(-1 * var(--pad) - 20 * var(--u));
+  }
+}

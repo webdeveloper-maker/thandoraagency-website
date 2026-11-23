@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { CtaBand } from "@/components/layout/CtaBand";
 import { ServiceCatalogue } from "@/components/sections/services/ServiceCatalogue";
+import { ServicesHero } from "@/components/sections/services/ServicesHero";
 import { ServicesInAction } from "@/components/sections/services/ServicesInAction";
 
 export const metadata: Metadata = {
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
 export default function ServicesPage() {
   return (
     <>
+      <ServicesHero />
       {/* The catalogue reads ?category= from the URL, so it renders on the client. */}
       <Suspense>
         <ServiceCatalogue />

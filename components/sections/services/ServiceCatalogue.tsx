@@ -63,7 +63,7 @@ export function ServiceCatalogue() {
       <GridDecor style={{ left: u(860), top: u(-120) }} />
 
       <div className={styles.intro}>
-        <SectionTitle as="h1" id="catalogue-title" lead="What we" highlight="Do." />
+        <SectionTitle as="h2" id="catalogue-title" lead="What we" highlight="Do." />
         <Reveal>
           <p className={styles.copy}>
             At <b>Thandora</b>, we help businesses grow online through search engine optimization (SEO) and social media

@@ -1,7 +1,8 @@
 .section {
   position: relative;
   overflow-x: clip;
-  padding: calc(var(--header-h) + 60 * var(--u)) 0 calc(140 * var(--u));
+  /* Follows the services hero, so no header offset is needed. */
+  padding: calc(140 * var(--u)) 0;
 }
 
 .intro {
@@ -142,6 +143,7 @@
 /* Mobile: sticky scrollable chip row with edge fade, single column */
 @media (max-width: 767px) {
   .section {
+    padding-top: 64px;
     padding-bottom: 72px;
   }
 
