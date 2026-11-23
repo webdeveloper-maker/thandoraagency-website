@@ -143,8 +143,9 @@
 /* Inter SemiBold 42 */
 .cardText h3 {
   font-size: var(--fs-card-xl);
-  line-height: normal;
-  font-weight: 600;
+  line-height: 1.2;
+  font-weight: 500;
+  letter-spacing: -0.01em;
   transform-origin: left bottom;
   transition: transform 600ms var(--ease-out);
 }
@@ -211,12 +212,12 @@
   }
 }
 
-/* Inter Medium 24 */
+/* Inter Regular 24 / 29 */
 .cardText p {
   max-width: calc(498 * var(--s));
   font-size: var(--fs-body-lg);
-  line-height: normal;
-  font-weight: 500;
+  line-height: 1.21;
+  font-weight: 400;
 }
 
 .dots {
@@ -313,55 +314,40 @@
 }
 
 /*
- * Pinned (desktop): the 1440 x 1141 frame is scaled to fit the screen and
- * centred; scrolling down moves the card row left (transform set in JS).
- * Kept last so it overrides the base rules above.
+ * Desktop: everything at page scale (exact at 1440). The heading block
+ * scrolls normally; only the card rail pins, centred in the window, while
+ * scrolling moves the row left (transform set in JS). Kept last.
  */
 @media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
   .stage {
-    --u: min(2px, calc(100vw / 1440), calc(100vh / 1141));
-    --s: max(1px, var(--u));
-    --frame-x: max(0px, calc((100vw - 1440 * var(--u)) / 2));
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    overflow: hidden;
+    padding-bottom: calc(99 * var(--u));
   }
 
-  .intro {
-    grid-template-columns: calc(557 * var(--u)) calc(646 * var(--u));
-    padding-left: calc(var(--frame-x) + 126 * var(--u));
-  }
-
-  .intro h2 {
-    font-size: calc(88 * var(--u));
-  }
-
-  .copy {
-    font-size: calc(22 * var(--u));
+  .actions {
+    justify-content: flex-start;
   }
 
   .track {
+    margin-top: 0;
     overflow: visible;
     scroll-snap-type: none;
-    padding: 0 calc(var(--frame-x) + 79 * var(--u));
     cursor: default;
     will-change: transform;
   }
 
+  /* Tall enough for the scroll distance (inline height, set in JS). */
+  .pin {
+    position: relative;
+  }
+
+  .rail {
+    position: sticky;
+    top: calc(50vh - 275 * var(--u));
+    overflow: hidden;
+    padding-bottom: calc(1 * var(--u));
+  }
+
   .card {
     min-height: 0;
-  }
-
-  .cardText h3 {
-    font-size: calc(42 * var(--u));
-  }
-
-  .cardText p {
-    max-width: none;
-    font-size: calc(24 * var(--u));
   }
 }

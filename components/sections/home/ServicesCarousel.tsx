@@ -22,22 +22,25 @@ const END = 0.97;
  * "What we Do." (Figma "Desktop - 32"): heading, intro and a row of featured
  * service cards with the next card peeking in from the right.
  *
- * Desktop: the section pins (scaled to fit the screen) and scrolling down
- * moves the row left, card by card. The arrow buttons and keyboard arrows
- * scroll the page to the matching card.
+ * Desktop: two parts at full design scale. The heading block scrolls
+ * normally; then only the card row pins (centred on screen) and scrolling
+ * down moves it left, card by card. Keyboard arrows on the row scroll the
+ * page to the matching card.
  * Mobile / reduced motion: a swipeable snap carousel; arrows move one card.
  *
  * Hover (Figma hover state): the image zooms, the title grows slightly and a
  * white arrow button appears bottom-right, linking to the Services page.
  */
 export function ServicesCarousel() {
-  const sectionRef = useRef<HTMLElement>(null);
+  const pinRef = useRef<HTMLDivElement>(null);
+  const railRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
   const live = useMedia("(min-width: 1024px) and (prefers-reduced-motion: no-preference)") && !reduce;
   const [index, setIndex] = useState(0);
   const [travel, setTravel] = useState(0);
   const travelMV = useMotionValue(0);
+
   const drag = useRef<{ x: number; left: number; moved: boolean } | null>(null);
   const last = featuredServices.length - 1;
 
@@ -67,12 +70,23 @@ export function ServicesCarousel() {
     measure();
     window.addEventListener("resize", measure);
     return () => window.removeEventListener("resize", measure);
-  }, [live, travelMV]);
+  }, [live, travel, travelMV]);
 
   /** Row offset (0 → travel) that brings card i to the left margin. */
   const offsetFor = (i: number) => Math.min(i * step(), travelMV.get());
 
-  const { scrollYProgress: p } = useScroll({ target: sectionRef, offset: ["start start", "end end"] });
+  const { scrollY } = useScroll();
+  // Read live from the layout on each scroll frame: sections above can change
+  // height after mount (other pinned sections measure themselves), so a
+  // position stored at load would go stale.
+  const p = useTransform(scrollY, () => {
+    const pin = pinRef.current;
+    const rail = railRef.current;
+    if (!pin || !rail) return 0;
+    const stickTop = parseFloat(getComputedStyle(rail).top) || 0;
+    const len = Math.max(1, pin.offsetHeight - rail.offsetHeight);
+    return Math.min(1, Math.max(0, (stickTop - pin.getBoundingClientRect().top) / len));
+  });
   const trackX = useTransform([p, travelMV], ([v, dist]: number[]) => {
     const t = Math.min(1, Math.max(0, (v - START) / (END - START)));
     return -t * dist;
@@ -88,13 +102,15 @@ export function ServicesCarousel() {
   const goTo = (i: number) => {
     const clamped = Math.max(0, Math.min(last, i));
     if (live) {
-      const sec = sectionRef.current;
-      if (!sec) return;
-      const top = sec.getBoundingClientRect().top + window.scrollY;
-      const length = sec.offsetHeight - window.innerHeight;
       const dist = travelMV.get();
       const t = dist ? offsetFor(clamped) / dist : clamped / last;
-      scrollToY(top + (START + (END - START) * t) * length);
+      const pin = pinRef.current;
+      const rail = railRef.current;
+      if (!pin || !rail) return;
+      const stickTop = parseFloat(getComputedStyle(rail).top) || 0;
+      const start = pin.getBoundingClientRect().top + window.scrollY - stickTop;
+      const len = pin.offsetHeight - rail.offsetHeight;
+      scrollToY(start + (START + (END - START) * t) * len);
       return;
     }
     trackRef.current?.scrollTo({ left: clamped * step(), behavior: "smooth" });
@@ -133,12 +149,7 @@ export function ServicesCarousel() {
   };
 
   return (
-    <section
-      ref={sectionRef}
-      className={styles.section}
-      style={live && travel ? { height: `calc(100vh + ${Math.round(travel / (END - START))}px)` } : undefined}
-      aria-labelledby="whatwedo-title"
-    >
+    <section className={styles.section} aria-labelledby="whatwedo-title">
       <div className={styles.stage}>
         <Mandala
           src={asset("/images/union-whatwedo.svg")}
@@ -159,74 +170,85 @@ export function ServicesCarousel() {
             </Reveal>
             <Reveal delay={0.1} className={styles.actions}>
               <PillButton href="/services/">THANDORA’s Services</PillButton>
-              <div className={styles.arrows}>
-                <button type="button" aria-label="Previous service" onClick={() => goTo(index - 1)} disabled={index === 0}>
-                  <svg width="20" height="20" viewBox="0 0 16 16" fill="none" aria-hidden>
-                    <path d="M13.164 8H2.834M6.75 4.083 2.833 8l3.917 3.917" stroke="currentColor" strokeWidth="1.5" />
-                  </svg>
-                </button>
-                <button type="button" aria-label="Next service" onClick={() => goTo(index + 1)} disabled={index === last}>
-                  <svg width="20" height="20" viewBox="0 0 16 16" fill="none" aria-hidden>
-                    <path d="M2.836 8h10.33M9.25 4.083 13.167 8 9.25 11.917" stroke="currentColor" strokeWidth="1.5" />
-                  </svg>
-                </button>
-              </div>
+              {!live && (
+                <div className={styles.arrows}>
+                  <button type="button" aria-label="Previous service" onClick={() => goTo(index - 1)} disabled={index === 0}>
+                    <svg width="20" height="20" viewBox="0 0 16 16" fill="none" aria-hidden>
+                      <path d="M13.164 8H2.834M6.75 4.083 2.833 8l3.917 3.917" stroke="currentColor" strokeWidth="1.5" />
+                    </svg>
+                  </button>
+                  <button type="button" aria-label="Next service" onClick={() => goTo(index + 1)} disabled={index === last}>
+                    <svg width="20" height="20" viewBox="0 0 16 16" fill="none" aria-hidden>
+                      <path d="M2.836 8h10.33M9.25 4.083 13.167 8 9.25 11.917" stroke="currentColor" strokeWidth="1.5" />
+                    </svg>
+                  </button>
+                </div>
+              )}
             </Reveal>
           </div>
         </div>
 
-        <motion.div
-          ref={trackRef}
-          className={styles.track}
-          style={live ? { x: trackX } : undefined}
-          role="region"
-          aria-roledescription="carousel"
-          aria-label="Featured services"
-          tabIndex={0}
-          onPointerDown={onPointerDown}
-          onPointerMove={onPointerMove}
-          onPointerUp={endDrag}
-          onPointerLeave={endDrag}
-          onKeyDown={(e) => {
-            if (e.key === "ArrowRight") {
-              e.preventDefault();
-              goTo(index + 1);
-            }
-            if (e.key === "ArrowLeft") {
-              e.preventDefault();
-              goTo(index - 1);
-            }
-          }}
-        >
-          {featuredServices.map((s, i) => (
-            <article
-              key={s.id}
-              data-card
-              className={styles.card}
-              style={{ backgroundColor: s.color }}
-              aria-roledescription="slide"
-              aria-label={`${i + 1} of ${featuredServices.length}: ${s.title}`}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={s.image} alt="" width={1280} height={550} loading="eager" fetchPriority="low" draggable={false} />
-              <div className={styles.cardShade} aria-hidden />
-              <div className={styles.cardText}>
-                <h3>{s.title}</h3>
-                <p>{s.body}</p>
-              </div>
-              <Link href="/services/" className={styles.cardGo} aria-label={`Explore ${s.title}`} draggable={false}>
-                <svg viewBox="0 0 24 24" fill="none" aria-hidden>
-                  <path d="M4 12h15M13 5.5 19.5 12 13 18.5" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </Link>
-            </article>
-          ))}
-        </motion.div>
+      </div>
 
-        <div className={styles.dots} aria-hidden>
-          {featuredServices.map((s, i) => (
-            <span key={s.id} className={i === index ? styles.dotActive : ""} />
-          ))}
+      <div
+        ref={pinRef}
+        className={styles.pin}
+        style={live && travel ? { height: `calc(${Math.round(travel / (END - START))}px + 550 * var(--u))` } : undefined}
+      >
+        <div ref={railRef} className={styles.rail}>
+          <motion.div
+            ref={trackRef}
+            className={styles.track}
+            style={live ? { x: trackX } : undefined}
+            role="region"
+            aria-roledescription="carousel"
+            aria-label="Featured services"
+            tabIndex={0}
+            onPointerDown={onPointerDown}
+            onPointerMove={onPointerMove}
+            onPointerUp={endDrag}
+            onPointerLeave={endDrag}
+            onKeyDown={(e) => {
+              if (e.key === "ArrowRight") {
+                e.preventDefault();
+                goTo(index + 1);
+              }
+              if (e.key === "ArrowLeft") {
+                e.preventDefault();
+                goTo(index - 1);
+              }
+            }}
+          >
+            {featuredServices.map((s, i) => (
+              <article
+                key={s.id}
+                data-card
+                className={styles.card}
+                style={{ backgroundColor: s.color }}
+                aria-roledescription="slide"
+                aria-label={`${i + 1} of ${featuredServices.length}: ${s.title}`}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={s.image} alt="" width={1280} height={550} loading="eager" fetchPriority="low" draggable={false} />
+                <div className={styles.cardShade} aria-hidden />
+                <div className={styles.cardText}>
+                  <h3>{s.title}</h3>
+                  <p>{s.body}</p>
+                </div>
+                <Link href="/services/" className={styles.cardGo} aria-label={`Explore ${s.title}`} draggable={false}>
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden>
+                    <path d="M4 12h15M13 5.5 19.5 12 13 18.5" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </Link>
+              </article>
+            ))}
+          </motion.div>
+
+          <div className={styles.dots} aria-hidden>
+            {featuredServices.map((s, i) => (
+              <span key={s.id} className={i === index ? styles.dotActive : ""} />
+            ))}
+          </div>
         </div>
       </div>
     </section>

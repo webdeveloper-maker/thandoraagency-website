@@ -1,11 +1,19 @@
 /* Desktop - 35: 1440 x 1115 (Default state positions) */
 .section {
   position: relative;
+  overflow-x: clip;
 }
 
+/* Heading part: Figma y 0 → 423 */
+.top {
+  position: relative;
+  height: calc(423 * var(--u));
+}
+
+/* Card band: Figma y 423 → 1115 (positions below are relative to it) */
 .stage {
   position: relative;
-  height: calc(1115 * var(--u));
+  height: calc(692 * var(--u));
   overflow: hidden;
 }
 
@@ -30,11 +38,11 @@
   color: var(--blue-600);
 }
 
-/* Cards: left 363, top 426, 582 squares, gap 30 */
+/* Cards: left 363, top 426 (3 into the band), 582 squares, gap 30 */
 .viewport {
   position: absolute;
   left: calc(363 * var(--u));
-  top: calc(426 * var(--u));
+  top: calc(3 * var(--u));
   right: 0;
   z-index: 1;
 }
@@ -111,7 +119,7 @@
   line-height: 1.818;
 }
 
-/* Sage: 500 x 692, bottom-left; young: 605 x 677, right -42 / top 439 */
+/* Sage bottom-left, young bottom-right */
 /* The sculptures are transparent cut-outs: no box, no rectangular shadow.
    drop-shadow follows the figure's outline instead. */
 .sage,
@@ -121,18 +129,20 @@
   pointer-events: none;
 }
 
+/* The images are trimmed to the solid figure (no padding or baked shadow),
+   shown at the Figma scale and set flush to the frame edges they stand on. */
 .sage {
   left: 0;
   bottom: 0;
-  width: calc(500 * var(--u));
-  height: calc(692 * var(--u));
+  width: calc(387.5 * var(--u));
+  height: calc(535.8 * var(--u));
 }
 
 .young {
-  right: calc(-42 * var(--u));
-  top: calc(439 * var(--u));
-  width: calc(605 * var(--u));
-  height: calc(677 * var(--u));
+  right: 0;
+  bottom: 0;
+  width: calc(514 * var(--u));
+  height: calc(564.6 * var(--u));
 }
 
 .sage img,
@@ -146,6 +156,10 @@
 
 /* Below 1024px or reduced motion: no pinning, swipeable row */
 @media (max-width: 1023px), (prefers-reduced-motion: reduce) {
+  .top {
+    height: auto;
+  }
+
   .stage {
     height: auto;
     padding-bottom: 72px;
@@ -155,7 +169,8 @@
     position: relative;
     left: auto;
     top: auto;
-    margin-top: 48px;
+    margin-top: 0;
+    padding-top: 48px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scroll-padding: 0 var(--pad);
@@ -213,49 +228,23 @@
 }
 
 /*
- * Pinned (desktop): the whole 1440 x 1115 frame is scaled to fit the screen
- * (width or height, whichever is tighter) and centred, so the heading, all
- * cards and their text are always visible while the row scrolls sideways.
- * Kept last so it overrides the base rules above.
+ * Desktop: page scale (exact at 1440). The heading part scrolls normally;
+ * the card band pins to the bottom of the window while the sculptures slide in and
+ * the cards scroll sideways (transforms set in JS). Kept last.
  */
 @media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  .pin {
+    position: relative;
+  }
+
+  /* Pinned to the bottom of the window: the sculptures stand on its edge. */
   .stage {
-    --u: min(2px, calc(100vw / 1440), calc(100vh / 1115));
-    --s: max(1px, var(--u));
-    /* Left edge of the centred 1440 frame. */
-    --frame-x: max(0px, calc((100vw - 1440 * var(--u)) / 2));
     position: sticky;
-    top: 0;
-    height: 100vh;
-  }
-
-  .head {
-    grid-template-columns: calc(617 * var(--u)) calc(568 * var(--u));
-    padding-left: calc(var(--frame-x) + 125 * var(--u));
-  }
-
-  .head h2 {
-    font-size: calc(88 * var(--u));
-  }
-
-  .copy {
-    font-size: calc(22 * var(--u));
-  }
-
-  .viewport {
-    left: calc(var(--frame-x) + 363 * var(--u));
+    top: max(0px, calc(100vh - 692 * var(--u)));
   }
 
   .card {
     min-width: 0;
     min-height: 0;
-  }
-
-  .cardText h3 {
-    font-size: max(28px, calc(64 * var(--u)));
-  }
-
-  .cardText p {
-    font-size: max(14px, calc(22 * var(--u)));
   }
 }
