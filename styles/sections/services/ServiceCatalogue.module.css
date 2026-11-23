@@ -1,36 +1,38 @@
+/*
+ * "What we Do." (Figma Services frame): black section; title + filter chips
+ * top left, two staggered columns of 583 x 661 cards (left x 117, right x 760,
+ * the right one 498 lower) with the intro copy and the "Start a conversation"
+ * button at the top of the right column.
+ */
 .section {
   position: relative;
   overflow-x: clip;
-  /* Follows the services hero, so no header offset is needed. */
-  padding: calc(140 * var(--u)) 0;
+  padding: calc(70 * var(--u)) 0 calc(140 * var(--u));
+  background: #000;
+  color: var(--white);
+}
+
+/* Dark Thandora marks behind the cards (the light SVG at 10% reads as charcoal on black). */
+.mark {
+  z-index: 0;
+}
+
+.gridDecor {
+  opacity: 0.55;
 }
 
 .intro {
   position: relative;
   z-index: 1;
-  display: grid;
-  grid-template-columns: calc(557 * var(--u)) minmax(0, calc(646 * var(--s)));
-  padding-left: calc(126 * var(--u));
+  padding-left: calc(117 * var(--u));
 }
 
-.copy {
-  padding-top: calc(30 * var(--u));
-  font-size: var(--fs-intro);
-  line-height: 1.818;
-  font-weight: 500;
-  color: var(--navy-900);
-}
-
-.copy b {
-  color: var(--blue-600-alt);
-}
-
-/* Chips: 9999px pills, Inter Medium 15 / 22.5 */
+/* Chips: white pills with black text; the active one is blue. Top 208. */
 .chipsBar {
   position: relative;
   z-index: 3;
-  margin-top: calc(56 * var(--u));
-  padding: 0 var(--inset);
+  margin-top: calc(48 * var(--u));
+  padding-left: calc(117 * var(--u));
 }
 
 .chips {
@@ -41,33 +43,39 @@
 
 .chip {
   position: relative;
-  min-height: calc(44 * var(--s));
-  padding: calc(10 * var(--s)) calc(22 * var(--s));
-  border: 1px solid var(--line);
+  min-height: calc(40 * var(--s));
+  padding: calc(8 * var(--s)) calc(20 * var(--s));
+  border: 0;
   border-radius: var(--r-pill);
   background: var(--white);
-  color: var(--navy-900);
-  font-size: calc(15 * var(--s));
+  color: #000;
+  font-size: calc(14 * var(--s));
   line-height: calc(22.5 * var(--s));
   font-weight: 500;
   white-space: nowrap;
   transition:
     color var(--dur-base) var(--ease-out),
-    border-color var(--dur-base) var(--ease-out);
+    background-color var(--dur-base) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
 }
 
 .chip:hover {
-  border-color: var(--blue-400);
+  background: #e8edff;
 }
 
-.chipOn {
+.chip:active {
+  transform: scale(0.97);
+}
+
+.chipOn,
+.chipOn:hover {
   color: var(--white);
-  border-color: transparent;
+  background: var(--white);
 }
 
 .chipBg {
   position: absolute;
-  inset: -1px;
+  inset: 0;
   border-radius: inherit;
   background: var(--blue-400);
 }
@@ -76,83 +84,130 @@
   position: relative;
 }
 
-/* Two staggered 583px columns; the right one starts 500px lower */
-.grid {
+/* Cards + the right column's copy, from x 117, 70 below the chips */
+.body {
   position: relative;
   z-index: 1;
+  max-width: calc(1224 * var(--u));
+  margin: calc(70 * var(--u)) 0 0 calc(117 * var(--u));
+}
+
+/* Two staggered 583px columns, 1224 wide in all (x 117 → 1341) */
+.grid {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, calc(583 * var(--u))));
   justify-content: space-between;
-  gap: calc(24 * var(--s));
-  max-width: calc(1190 * var(--s));
-  margin: calc(64 * var(--u)) auto 0;
-  padding: 0 var(--pad);
-  box-sizing: content-box;
 }
 
 .column {
   display: flex;
   flex-direction: column;
-  gap: calc(48 * var(--u));
+  gap: calc(53 * var(--u));
 }
 
 .columnRight {
   position: relative;
-  padding-top: calc(500 * var(--u));
+  padding-top: calc(498 * var(--u));
 }
 
-/* Sits at the top of the right column, inside its 500px offset */
-.converse {
+/* Copy (Inter Medium 22 / 40, white) and button at the top of the right column. */
+.aside {
   position: absolute;
-  top: calc(80 * var(--u));
-  left: 0;
+  top: 0;
+  left: calc(643 * var(--u));
+  z-index: 1;
+  width: calc(420 * var(--u));
+  min-width: calc(320 * var(--s));
+}
+
+.copy {
+  font-size: var(--fs-intro);
+  line-height: 1.818;
+  font-weight: 500;
+  color: var(--white);
+}
+
+.copy b {
+  color: var(--blue-600-alt);
+}
+
+/* START A CONVERSATION: blue pill, 229 x 43, 387 below the copy top */
+.converse {
   display: inline-flex;
-  gap: calc(8 * var(--s));
-  padding-bottom: calc(4 * var(--s));
-  border-bottom: 1px solid currentColor;
-  font-size: calc(18 * var(--s));
+  align-items: center;
+  justify-content: center;
+  min-height: calc(43 * var(--s));
+  margin-top: calc(36 * var(--u));
+  padding: 0 calc(26 * var(--s));
+  border-radius: var(--r-pill);
+  background: var(--blue-600);
+  color: var(--white);
+  font-size: calc(12 * var(--s));
   font-weight: 600;
-  color: var(--blue-600);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    transform var(--dur-base) var(--ease-out);
 }
 
-.converse span {
-  transition: transform var(--dur-base) var(--ease-out);
-}
-
-.converse:hover span {
-  transform: translateX(calc(4 * var(--s)));
+.converse:hover {
+  background: var(--blue-400);
+  transform: translateY(-2px);
 }
 
 @media (max-width: 1023px) {
-  .intro {
-    grid-template-columns: 1fr;
+  .intro,
+  .chipsBar {
     padding: 0 var(--pad);
-    row-gap: 12px;
-  }
-
-  .copy {
-    padding-top: 0;
   }
 
   .chipsBar {
+    margin-top: 28px;
+  }
+
+  .body {
+    max-width: none;
+    margin: 32px 0 0;
     padding: 0 var(--pad);
-    margin-top: 32px;
+  }
+
+  .grid {
+    column-gap: 20px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .column {
+    gap: 20px;
+  }
+
+  .columnRight {
+    padding-top: 0;
+    transform: none !important;
+  }
+
+  .aside {
+    position: static;
+    width: auto;
+    max-width: 560px;
+    min-width: 0;
+    margin-bottom: 36px;
   }
 }
 
-/* Mobile: sticky scrollable chip row with edge fade, single column */
+/* Mobile: sticky scrollable chip row, one column */
 @media (max-width: 767px) {
   .section {
-    padding-top: 64px;
-    padding-bottom: 72px;
+    padding: 64px 0 72px;
   }
 
   .chipsBar {
     position: sticky;
     top: var(--header-h-compact);
-    margin: 28px 0 0;
+    margin: 24px 0 0;
     padding: 10px 0;
-    background: rgba(255, 255, 255, 0.92);
+    background: rgba(0, 0, 0, 0.88);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     -webkit-mask: linear-gradient(90deg, transparent, #000 20px, #000 calc(100% - 28px), transparent);
@@ -170,25 +225,16 @@
     display: none;
   }
 
+  .body {
+    margin-top: 24px;
+  }
+
   .grid {
     grid-template-columns: 1fr;
     gap: 16px;
-    margin-top: 24px;
   }
 
   .column {
     gap: 16px;
-  }
-
-  .columnRight {
-    padding-top: 0;
-    transform: none !important;
-  }
-
-  .converse {
-    position: static;
-    align-self: flex-start;
-    margin: 8px 0;
-    order: 99;
   }
 }

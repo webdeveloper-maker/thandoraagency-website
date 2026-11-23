@@ -1,141 +1,102 @@
-/* Service card: 583 x 661, 18px radius, bronze #986d46 → black */
+/*
+ * Service card: 583 x 661, 18px radius, vertical gradient (--from → --to).
+ * --k is one Figma px of this card (container units), so the icon, shadow
+ * and text keep their Figma proportions at any card width.
+ */
 .card {
+  --k: calc(100cqw / 583);
   position: relative;
   width: 100%;
   aspect-ratio: 583 / 661;
+  container-type: inline-size;
   overflow: hidden;
   border-radius: var(--r-card);
-  background: linear-gradient(160deg, #986d46 0%, #4a3322 55%, #050505 100%);
+  background: linear-gradient(180deg, var(--from) 0%, var(--to) 100%);
   color: var(--white);
   isolation: isolate;
 }
 
-.art {
+/* Soft highlight from the top, as on the Figma cards. */
+.card::before {
+  content: "";
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform var(--dur-slow) var(--ease-out);
+  background: radial-gradient(120% 70% at 50% 0%, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+  pointer-events: none;
 }
 
-.shade {
+/* 3D icon at its Figma size, centred on x = 50%, y = 239. */
+.icon {
   position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(152, 109, 70, 0) 0%, rgba(5, 5, 5, 0.85) 100%);
-  opacity: 0;
-  transition: opacity var(--dur-base) var(--ease-out);
+  left: 50%;
+  top: calc(239 * var(--k));
+  width: calc(var(--icon-w) * var(--k));
+  height: calc(var(--icon-h) * var(--k));
+  translate: -50% -50%;
+  object-fit: contain;
+  pointer-events: none;
+  transition:
+    scale 700ms var(--ease-out),
+    translate 700ms var(--ease-out);
+  will-change: scale;
 }
 
-/* Inter Regular + SemiBold 36 */
+/* Ground shadow under the icon: 300 x 34 ellipse at y = 466. */
+.ground {
+  position: absolute;
+  left: 50%;
+  top: calc(466 * var(--k));
+  width: calc(300 * var(--k));
+  height: calc(34 * var(--k));
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(0, 0, 0, 0.32), rgba(0, 0, 0, 0));
+  transition:
+    scale 700ms var(--ease-out),
+    opacity 700ms var(--ease-out);
+}
+
+/* Label: SemiBold 24 caps, name: Regular 30, from left 56 / bottom 70. */
 .title {
   position: absolute;
-  left: calc(40 * var(--s));
-  right: calc(40 * var(--s));
-  bottom: calc(40 * var(--s));
+  left: calc(56 * var(--k));
+  right: calc(40 * var(--k));
+  bottom: calc(70 * var(--k));
   z-index: 1;
-  font-size: var(--fs-card-title);
-  line-height: 1.15;
-  transform-origin: left bottom;
-  transition: transform var(--dur-base) var(--ease-out);
+  display: flex;
+  flex-direction: column;
+  gap: calc(4 * var(--k));
 }
 
 .short {
-  font-weight: 400;
+  font-size: max(15px, calc(24 * var(--k)));
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: 0.01em;
 }
 
 .full {
-  font-weight: 600;
+  font-size: max(17px, calc(30 * var(--k)));
+  line-height: 1.2;
+  font-weight: 400;
 }
 
-/* White in-card button, 12px radius */
-.button {
-  position: absolute;
-  right: calc(32 * var(--s));
-  bottom: calc(32 * var(--s));
-  z-index: 1;
-  display: inline-flex;
-  align-items: center;
-  gap: calc(8 * var(--s));
-  min-height: calc(48 * var(--s));
-  padding: 0 calc(24 * var(--s));
-  border-radius: var(--r-btn);
-  background: var(--white);
-  color: var(--black-850);
-  font-size: calc(16 * var(--s));
-  font-weight: 600;
-  opacity: 0;
-  translate: 0 calc(16 * var(--s));
-  transition:
-    opacity var(--dur-base) var(--ease-out),
-    translate var(--dur-base) var(--ease-out);
-}
-
-.button svg {
-  transition: transform var(--dur-base) var(--ease-out);
-}
-
-.button:hover svg {
-  transform: translateX(calc(4 * var(--s)));
-}
-
-/* Default state (hover / keyboard focus) */
-.card:hover .shade,
-.card:focus-within .shade {
-  opacity: 1;
-}
-
-.card:hover .art,
-.card:focus-within .art {
-  transform: scale(1.04);
-}
-
-/* Title turns vertical, reading bottom to top along the left edge */
-.card:hover .title,
-.card:focus-within .title {
-  right: auto;
-  white-space: nowrap;
-  transform: translateX(1.15em) rotate(-90deg);
-}
-
-.card:hover .button,
-.card:focus-within .button {
-  opacity: 1;
-  translate: 0 0;
-}
-
-/* Touch devices have no hover: keep the button visible */
-@media (hover: none) {
-  .button {
-    opacity: 1;
-    translate: 0 0;
+/* Hover: the icon zooms in and lifts; its shadow tightens beneath it. */
+@media (hover: hover) {
+  .card:hover .icon {
+    scale: 1.12;
+    translate: -50% calc(-50% - 14 * var(--k));
   }
 
-  .title {
-    bottom: calc(104 * var(--s));
-  }
-
-  .card:hover .title,
-  .card:focus-within .title {
-    right: calc(40 * var(--s));
-    white-space: normal;
-    transform: none;
+  .card:hover .ground {
+    scale: 0.82;
+    opacity: 0.7;
   }
 }
 
-@media (max-width: 767px) {
-  .card {
-    aspect-ratio: 0.88;
-  }
-
-  .title {
-    left: 24px;
-    right: 24px;
-  }
-
-  .button {
-    left: 24px;
-    right: auto;
-    bottom: 24px;
+@media (prefers-reduced-motion: reduce) {
+  .icon,
+  .ground {
+    transition: none;
   }
 }

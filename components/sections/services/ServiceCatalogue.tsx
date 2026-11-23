@@ -45,32 +45,40 @@ export function ServiceCatalogue() {
     router.replace(`${pathname}${qs ? `?${qs}` : ""}`, { scroll: false });
   };
 
-  const card = {
-    initial: reduce ? { opacity: 0 } : { opacity: 0, scale: 0.96 },
-    animate: { opacity: 1, scale: 1 },
-    exit: reduce ? { opacity: 0 } : { opacity: 0, scale: 0.96 },
-    transition: { duration: 0.3, ease: ease.out },
-  };
+  // Filter transition: leaving cards shrink and fade, the rest slide to their
+  // new places (layout), and incoming cards rise in one after another.
+  const card = (order: number) => ({
+    initial: reduce ? { opacity: 0 } : { opacity: 0, y: 48, scale: 0.94 },
+    animate: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: { duration: 0.55, ease: ease.out, delay: reduce ? 0 : order * 0.07 },
+    },
+    exit: reduce ? { opacity: 0 } : { opacity: 0, scale: 0.9, transition: { duration: 0.25, ease: ease.out } },
+    transition: { layout: { duration: 0.5, ease: ease.out } },
+  });
 
   return (
     <section className={styles.section} aria-labelledby="catalogue-title">
       <Mandala
+        className={styles.mark}
         src={asset("/images/union-whatwedo.svg")}
         width={442.643}
         height={412.221}
-        style={{ left: u(-13), top: u(60), width: u(579.811), height: u(566.098) }}
+        style={{ left: u(860), top: u(-40), width: u(820), height: u(800) }}
       />
-      <GridDecor style={{ left: u(860), top: u(-120) }} />
+      <Mandala
+        className={styles.mark}
+        src={asset("/images/union-whatwedo.svg")}
+        width={442.643}
+        height={412.221}
+        style={{ left: u(-330), top: u(1500), width: u(820), height: u(800) }}
+      />
+      <GridDecor tone="blue" className={styles.gridDecor} style={{ left: u(-120), top: u(-260) }} />
 
       <div className={styles.intro}>
-        <SectionTitle as="h2" id="catalogue-title" lead="What we" highlight="Do." />
-        <Reveal>
-          <p className={styles.copy}>
-            At <b>Thandora</b>, we help businesses grow online through search engine optimization (SEO) and social media
-            marketing. Our website design and development services create responsive, user-friendly websites. We run
-            targeted Google Ads and pay-per-click (PPC) campaigns to generate leads.
-          </p>
-        </Reveal>
+        <SectionTitle as="h2" id="catalogue-title" lead="What we" highlight="Do." tone="light" />
       </div>
 
       <div className={styles.chipsBar}>
@@ -101,28 +109,42 @@ export function ServiceCatalogue() {
         </LayoutGroup>
       </div>
 
-      <div ref={gridRef} className={styles.grid} aria-live="polite">
-        <div className={styles.column}>
-          <AnimatePresence mode="popLayout" initial={false}>
-            {columns[0].map((s) => (
-              <motion.div key={s.slug} layout={!reduce} {...card}>
-                <ServiceCard service={s} />
-              </motion.div>
-            ))}
-          </AnimatePresence>
+      <div className={styles.body}>
+        <div className={styles.aside}>
+          <Reveal>
+            <p className={styles.copy}>
+              At <b>Thandora</b>, we help businesses grow online through search engine optimization (SEO) and social
+              media marketing. Our website design and development services create responsive, user-friendly websites.
+              We run targeted Google Ads and pay-per-click (PPC) campaigns to generate leads.
+            </p>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <Link href="/contact/" className={styles.converse}>
+              Start a conversation
+            </Link>
+          </Reveal>
         </div>
-        <motion.div className={`${styles.column} ${styles.columnRight}`} style={reduce ? undefined : { y: rightY }}>
-          <Link href="/contact/" className={styles.converse}>
-            Start a conversation <span aria-hidden>→</span>
-          </Link>
-          <AnimatePresence mode="popLayout" initial={false}>
-            {columns[1].map((s) => (
-              <motion.div key={s.slug} layout={!reduce} {...card}>
-                <ServiceCard service={s} />
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </motion.div>
+
+        <div ref={gridRef} className={styles.grid} aria-live="polite">
+          <div className={styles.column}>
+            <AnimatePresence mode="popLayout" initial={false}>
+              {columns[0].map((s, j) => (
+                <motion.div key={s.slug} layout={!reduce} {...card(j * 2)}>
+                  <ServiceCard service={s} />
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </div>
+          <motion.div className={`${styles.column} ${styles.columnRight}`} style={reduce ? undefined : { y: rightY }}>
+            <AnimatePresence mode="popLayout" initial={false}>
+              {columns[1].map((s, j) => (
+                <motion.div key={s.slug} layout={!reduce} {...card(j * 2 + 1)}>
+                  <ServiceCard service={s} />
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
