@@ -8,6 +8,10 @@
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  /* Decorations that bleed past a section's edge must never widen the page
+     (it would scroll sideways and leave a gap at the edge). clip, unlike
+     hidden, keeps position: sticky working. */
+  overflow-x: clip;
 }
 
 html.lenis,

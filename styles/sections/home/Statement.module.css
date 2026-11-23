@@ -1,6 +1,7 @@
 /* Section 624:4083: #285afd, 1440 x 445 */
 .section {
   position: relative;
+  overflow-x: clip;
   height: calc(445 * var(--u));
   min-height: calc(380 * var(--s));
   background: var(--blue-600-alt);
