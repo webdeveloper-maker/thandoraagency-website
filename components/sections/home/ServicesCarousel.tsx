@@ -14,9 +14,9 @@ import { useMedia } from "@/lib/useMedia";
 import styles from "@/styles/sections/home/ServicesCarousel.module.css";
 import { asset } from "@/lib/asset";
 
-/** Scroll progress window over which the cards travel (holds at both ends). */
-const START = 0.08;
-const END = 0.92;
+/** Scroll progress window over which the cards travel (short holds at both ends). */
+const START = 0.03;
+const END = 0.97;
 
 /**
  * "What we Do." (Figma "Desktop - 32"): heading, intro and a row of featured
@@ -48,18 +48,29 @@ export function ServicesCarousel() {
     return card.offsetWidth + parseFloat(getComputedStyle(track).columnGap || "0");
   };
 
-  // Pinned mode: distance the row travels = every card but the first.
+  // Pinned mode: the row travels until the last card's right edge meets the
+  // frame's right margin, measured from the real layout. (Stepping a full
+  // card per index left blank space beside the last card whenever the frame
+  // is scaled to the window height, and the page kept scrolling over it.)
   useLayoutEffect(() => {
     if (!live) return;
     const measure = () => {
-      const t = last * step();
+      const track = trackRef.current;
+      const cards = track?.querySelectorAll<HTMLElement>("[data-card]");
+      if (!track || !cards?.length) return;
+      const lastCard = cards[cards.length - 1];
+      const padRight = parseFloat(getComputedStyle(track).paddingRight || "0");
+      const t = Math.max(0, lastCard.offsetLeft + lastCard.offsetWidth + padRight - track.clientWidth);
       setTravel(t);
       travelMV.set(t);
     };
     measure();
     window.addEventListener("resize", measure);
     return () => window.removeEventListener("resize", measure);
-  }, [live, last, travelMV]);
+  }, [live, travelMV]);
+
+  /** Row offset (0 → travel) that brings card i to the left margin. */
+  const offsetFor = (i: number) => Math.min(i * step(), travelMV.get());
 
   const { scrollYProgress: p } = useScroll({ target: sectionRef, offset: ["start start", "end end"] });
   const trackX = useTransform([p, travelMV], ([v, dist]: number[]) => {
@@ -69,7 +80,9 @@ export function ServicesCarousel() {
   useMotionValueEvent(p, "change", (v) => {
     if (!live) return;
     const t = Math.min(1, Math.max(0, (v - START) / (END - START)));
-    setIndex(Math.round(t * last));
+    const s = step();
+    if (t >= 0.995) setIndex(last);
+    else setIndex(s ? Math.min(last, Math.round((t * travelMV.get()) / s)) : 0);
   });
 
   const goTo = (i: number) => {
@@ -79,7 +92,9 @@ export function ServicesCarousel() {
       if (!sec) return;
       const top = sec.getBoundingClientRect().top + window.scrollY;
       const length = sec.offsetHeight - window.innerHeight;
-      scrollToY(top + (START + ((END - START) * clamped) / last) * length);
+      const dist = travelMV.get();
+      const t = dist ? offsetFor(clamped) / dist : clamped / last;
+      scrollToY(top + (START + (END - START) * t) * length);
       return;
     }
     trackRef.current?.scrollTo({ left: clamped * step(), behavior: "smooth" });
