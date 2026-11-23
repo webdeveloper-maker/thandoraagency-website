@@ -131,6 +131,12 @@
   justify-content: flex-end;
 }
 
+/* Let's Talk: same weight and tracking as the menu */
+.cta {
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+
 /* Inline desktop nav: HOME · SERVICES · WORK · ABOUT · CONTACT, uppercase
    and letter-spaced, revealed on header hover (see desktop media block). */
 .nav ul {
@@ -146,10 +152,12 @@
   position: relative;
   display: inline-block;
   padding: calc(8 * var(--s)) 0;
-  font-size: calc(16 * var(--s));
+  /* Inter Medium 15, 0.12em tracking: uppercase but light enough to sit
+     with the rest of the Inter type (Bold + 0.2em read heavy and spread). */
+  font-size: calc(15 * var(--s));
   line-height: 1;
-  font-weight: 700;
-  letter-spacing: 0.2em;
+  font-weight: 500;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   white-space: nowrap;
   color: var(--fg);
@@ -160,7 +168,7 @@
   content: "";
   position: absolute;
   left: 0;
-  right: 0.2em;
+  right: 0.12em;
   bottom: 2px;
   height: 1.5px;
   background: currentColor;
