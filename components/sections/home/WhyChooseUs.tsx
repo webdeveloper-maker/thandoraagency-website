@@ -38,9 +38,14 @@ export function WhyChooseUs() {
     const measure = () => {
       const strip = stripRef.current;
       if (!strip) return;
-      // Strip's untransformed left edge (offset within the page frame).
-      const visible = window.innerWidth - (strip.parentElement?.getBoundingClientRect().left ?? 0);
-      setTravel(Math.max(0, strip.scrollWidth - Math.min(visible, window.innerWidth) + 80));
+      // The row ends with the last card standing between the two sculptures
+      // (Figma: its left edge at frame x 465), not tucked behind the right one.
+      const lastCard = strip.lastElementChild as HTMLElement | null;
+      const viewport = strip.parentElement;
+      if (!lastCard || !viewport) return;
+      const unit = lastCard.offsetWidth / 581.962; // px per Figma px
+      const lastLeft = viewport.getBoundingClientRect().left + lastCard.offsetLeft;
+      setTravel(Math.max(0, lastLeft - 465 * unit));
     };
     measure();
     window.addEventListener("resize", measure);
@@ -61,19 +66,24 @@ export function WhyChooseUs() {
   });
   // While pinned the scroll only moves the cards (short holds at both ends).
   const stripX = useTransform(p, (v) => -scrollRange(v, 0.04, 0.96, 0, 1) * travel);
-  // The sculptures and cards arrive as the band scrolls into view, so it is
-  // never empty on screen. Triggered by the band itself: the sculptures start
+  // The sculptures and cards arrive each time the band scrolls into view, so
+  // it is never empty on screen. Triggered by the band itself: the sculptures start
   // pushed outside it, where its overflow clips them, so they could never
   // reach an in-view threshold of their own.
-  const bandIn = useInView(railRef, { once: true, amount: 0.3 });
-  const enter = (from: Record<string, string | number>, delay = 0) =>
-    live
-      ? {
-          initial: from,
-          animate: bandIn ? { x: 0, y: 0, opacity: 1 } : from,
-          transition: { duration: 1.1, ease: ease.out, delay },
-        }
-      : {};
+  // Not `once`: they slide back out when the band leaves the screen, so the
+  // entrance plays again every time the visitor scrolls back to it.
+  const bandIn = useInView(railRef, { amount: 0.3 });
+  // The start state is set on the first render whatever the screen size:
+  // `live` is false on that render (media query not read yet), and motion
+  // only applies `initial` once, so gating it on `live` left the figures
+  // already in place with nothing to animate. Without the pinned layout
+  // (mobile, reduced motion) they simply show at rest.
+  const rest = { x: 0, y: 0, opacity: 1 };
+  const enter = (from: Record<string, string | number>, delay = 0) => ({
+    initial: reduce ? false : from,
+    animate: !live || bandIn ? rest : from,
+    transition: { duration: live ? 1.1 : 0, ease: ease.out, delay: live ? delay : 0 },
+  });
 
   return (
     <section className={styles.section} aria-labelledby="why-title">

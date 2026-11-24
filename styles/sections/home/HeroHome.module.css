@@ -189,13 +189,14 @@
   will-change: transform;
 }
 
+/* Stone bust: behind the king and his desk (Figma) */
 .scholar {
   position: absolute;
   right: calc(40 * var(--u));
   bottom: 0;
   width: calc(382 * var(--u));
   height: auto;
-  z-index: 2;
+  z-index: 1;
   will-change: transform;
 }
 

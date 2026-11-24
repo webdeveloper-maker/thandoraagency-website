@@ -21,8 +21,8 @@ import { asset } from "@/lib/asset";
  *
  * Desktop: a pinned scroll scene. Scene 1 is the temple arch exactly as in
  * Figma; scrolling hands over to the hidden Figma layer — the typing
- * headline "BECOME THE BRAND PEOPLE REMEMBER." with the king, then the stone
- * scholar, sliding in from the bottom and right.
+ * headline "BECOME THE BRAND PEOPLE REMEMBER." with the king and the stone
+ * scholar arriving together, from the bottom and the right.
  * Mobile / reduced motion: the two scenes simply stack.
  */
 export function HeroHome() {
@@ -51,8 +51,11 @@ export function HeroHome() {
   // Scene 2 enters
   const s2Opacity = useTransform(p, (v) => scrollRange(v, 0.24, 0.42, 0, 1));
   const typeY = useTransform(p, [0.28, 0.46], [40, 0]);
-  const kingY = useTransform(p, [0.4, 0.62, 0.72, 0.86], ["100%", "0%", "0%", "105%"]);
-  const scholarX = useTransform(p, [0.74, 0.92], ["110%", "0%"]);
+  // Both figures arrive together and stay (Figma: the king at his desk in
+  // front of the stone bust): the king rises from the bottom while the bust
+  // slides in from the right over the same stretch of scroll.
+  const kingY = useTransform(p, [0.4, 0.62], ["100%", "0%"]);
+  const scholarX = useTransform(p, [0.4, 0.62], ["110%", "0%"]);
 
   const live = pinned && !reduce;
 

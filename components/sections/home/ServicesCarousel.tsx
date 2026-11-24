@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useMotionValue, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { motion, type MotionStyle, useMotionValue, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { useEffect, useLayoutEffect, useRef, useState, type PointerEvent } from "react";
 import { featuredServices } from "@/content/home";
 import { scrollToY } from "@/components/layout/SmoothScroll";
@@ -32,6 +32,7 @@ const END = 0.97;
  * white arrow button appears bottom-right, linking to the Services page.
  */
 export function ServicesCarousel() {
+  const sectionRef = useRef<HTMLElement>(null);
   const pinRef = useRef<HTMLDivElement>(null);
   const railRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -76,6 +77,15 @@ export function ServicesCarousel() {
   const offsetFor = (i: number) => Math.min(i * step(), travelMV.get());
 
   const { scrollY } = useScroll();
+  // White → black as the section rises into view (Figma prototype): 0 while
+  // its top is in the lower part of the screen, 1 once it reaches the upper
+  // third. CSS mixes every colour in the section from this one value.
+  const dark = useTransform(scrollY, () => {
+    const sec = sectionRef.current;
+    if (!sec) return 0;
+    const vh = window.innerHeight;
+    return Math.min(1, Math.max(0, (vh * 0.8 - sec.getBoundingClientRect().top) / (vh * 0.5)));
+  });
   // Read live from the layout on each scroll frame: sections above can change
   // height after mount (other pinned sections measure themselves), so a
   // position stored at load would go stale.
@@ -149,7 +159,12 @@ export function ServicesCarousel() {
   };
 
   return (
-    <section className={styles.section} aria-labelledby="whatwedo-title">
+    <motion.section
+      ref={sectionRef}
+      className={styles.section}
+      style={{ "--dark": dark } as unknown as MotionStyle}
+      aria-labelledby="whatwedo-title"
+    >
       <div className={styles.stage}>
         <Mandala
           src={asset("/images/union-whatwedo.svg")}
@@ -169,7 +184,9 @@ export function ServicesCarousel() {
               </p>
             </Reveal>
             <Reveal delay={0.1} className={styles.actions}>
-              <PillButton href="/services/">THANDORA’s Services</PillButton>
+              <PillButton href="/services/" className={styles.cta}>
+                THANDORA’s Services
+              </PillButton>
               {!live && (
                 <div className={styles.arrows}>
                   <button type="button" aria-label="Previous service" onClick={() => goTo(index - 1)} disabled={index === 0}>
@@ -251,6 +268,6 @@ export function ServicesCarousel() {
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

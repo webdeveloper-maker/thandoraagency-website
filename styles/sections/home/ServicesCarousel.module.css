@@ -1,7 +1,22 @@
 /* Desktop - 32: 1440 x 1141 */
+/* --dark (0 → 1, set from scroll in JS) turns the section from white to
+   black as it rises into view; every colour below is mixed from it. */
 .section {
+  --dark: 0;
+  --pct: calc(var(--dark) * 100%);
   position: relative;
   overflow-x: clip;
+  background: color-mix(in srgb, #000 var(--pct), #fff);
+}
+
+.intro h2 {
+  color: color-mix(in srgb, #fff var(--pct), var(--navy-900));
+}
+
+/* Button: blue → white with dark text (Figma black state) */
+.actions .cta {
+  background: color-mix(in srgb, #fff var(--pct), var(--blue-600-alt));
+  color: color-mix(in srgb, var(--black-850) var(--pct), #fff);
 }
 
 .stage {
@@ -26,7 +41,7 @@
   font-size: var(--fs-intro);
   line-height: 1.818;
   font-weight: 500;
-  color: var(--navy-900);
+  color: color-mix(in srgb, #fff var(--pct), var(--navy-900));
 }
 
 .copy b {
