@@ -22,46 +22,33 @@
   height: 100%;
 }
 
-/* Human hand (image 62): 959.6 x 839.7 rotated -17.37°, box left -368 / top 76 */
+/* Human hand: cut-out flush with the bottom-left corner of the frame; its
+   index fingertip ends at about x 621, y 500 (Figma). */
 .handLeft {
   position: absolute;
-  left: calc(-368 * var(--u));
-  top: calc(76 * var(--u));
-  width: calc(1166.535 * var(--u));
-  height: calc(1087.889 * var(--u));
-  display: grid;
-  place-items: center;
+  left: 0;
+  bottom: 0;
+  width: calc(622 * var(--u));
+  aspect-ratio: 623 / 516;
   z-index: 2;
 }
 
-.handLeft img {
-  width: calc(959.641 * var(--u));
-  height: calc(839.744 * var(--u));
-  max-width: none;
-  object-fit: cover;
-  object-position: 15% center;
-  rotate: -17.37deg;
-}
-
-/* Robot hand (image 63, right half of the artwork): 630.4 x 950.9, rotated -2.99° */
+/* Robot hand: arm flush with the right edge, fingertip at about x 834,
+   y 431, just short of the human finger. */
 .handRight {
   position: absolute;
-  right: calc(-43.56 * var(--u));
-  top: calc(-12.47 * var(--u));
-  width: calc(679.147 * var(--u));
-  height: calc(982.469 * var(--u));
-  display: grid;
-  place-items: center;
+  right: 0;
+  top: calc(110 * var(--u));
+  width: calc(606 * var(--u));
+  aspect-ratio: 613 / 476;
   z-index: 2;
 }
 
+.handLeft img,
 .handRight img {
-  width: calc(630.427 * var(--u));
-  height: calc(950.894 * var(--u));
-  max-width: none;
-  object-fit: cover;
-  object-position: 100% center;
-  rotate: -2.99deg;
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 /* Logo (image 33, 598 x 515 box at top 180): visible artwork ~405 wide from top 256 */

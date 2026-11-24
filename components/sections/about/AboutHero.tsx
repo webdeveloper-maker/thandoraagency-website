@@ -8,6 +8,9 @@ import { u } from "@/lib/u";
 import styles from "@/styles/sections/about/AboutHero.module.css";
 import { asset } from "@/lib/asset";
 
+/** Seconds until the page-transition curtain has cleared the screen. */
+const CURTAIN = 0.7;
+
 /**
  * About hero (Figma "Desktop - 42", Variant2 → Default). On load the two
  * reaching hands slide in from the edges, the logo fades up between them and
@@ -15,7 +18,9 @@ import { asset } from "@/lib/asset";
  */
 export function AboutHero() {
   const reduce = useReducedMotion();
-  const t = (delay = 0) => ({ duration: 1.1, ease: ease.out, delay });
+  // Starts once the page curtain (app/template: 250ms delay + 500ms sweep)
+  // has lifted; otherwise most of the slide played hidden behind it.
+  const t = (delay = 0) => ({ duration: 1.3, ease: ease.out, delay: CURTAIN + delay });
 
   return (
     <section className={styles.hero} aria-labelledby="about-hero-title">
@@ -36,23 +41,23 @@ export function AboutHero() {
       <motion.div
         className={styles.handLeft}
         aria-hidden
-        initial={reduce ? false : { x: "-53%", y: "40%" }}
+        initial={reduce ? false : { x: "-75%", y: "35%" }}
         animate={{ x: 0, y: 0 }}
         transition={t(0.1)}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={asset("/images/about-hand.avif")} alt="" width={1280} height={960} fetchPriority="high" />
+        <img src={asset("/images/about-hand-human.avif")} alt="" width={623} height={516} fetchPriority="high" />
       </motion.div>
 
       <motion.div
         className={styles.handRight}
         aria-hidden
-        initial={reduce ? false : { x: "87%", y: "-42%" }}
+        initial={reduce ? false : { x: "75%", y: "-35%" }}
         animate={{ x: 0, y: 0 }}
         transition={t(0.1)}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={asset("/images/about-hands.avif")} alt="" width={1448} height={1086} fetchPriority="high" />
+        <img src={asset("/images/about-hand-robot.avif")} alt="" width={613} height={476} fetchPriority="high" />
       </motion.div>
 
       <motion.img
