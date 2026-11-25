@@ -71,7 +71,7 @@ export function EnquiryForm() {
     defaultValues: { service: "", budget: "", timeline: "" },
   });
 
-  const figureSrc = asset("/images/contact-figure.avif");
+  const figureSrc = asset("/images/contact/contact-figure.avif");
   const id = (name: keyof Enquiry) => `${uid}-${name}`;
   const a11y = (name: keyof Enquiry) => ({
     id: id(name),
@@ -143,7 +143,7 @@ export function EnquiryForm() {
         <div className={styles.watermark} aria-hidden>
           <div className={styles.watermarkInner}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={asset("/images/logo-mark-white.avif")} alt="" width={141} height={131} />
+            <img src={asset("/images/brand/logo-mark-white.avif")} alt="" width={141} height={131} />
             <span>THANDORA</span>
           </div>
         </div>

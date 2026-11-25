@@ -22,10 +22,13 @@
 }
 
 /* Hands copy: only the strip right of the board edge (75% across the
-   flipped art), layered over the card. */
+   flipped art), layered over the card. The clip starts a few px left of the
+   card's edge: starting on or after it left a hairline of the black card
+   showing across the fingers. Left of the card both layers show the same
+   pixels, so the overlap is invisible. */
 .hands {
   z-index: 4;
-  clip-path: inset(0 0 0 75.4%);
+  clip-path: inset(0 0 0 74.6%);
 }
 
 .figure img {

@@ -24,7 +24,7 @@ export function ServicesInAction() {
           <Reveal as="li" key={c.id} delay={i * 0.08} className={styles.card}>
             <div className={styles.media} aria-hidden>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={asset("/images/logo-mark-white.avif")} alt="" width={120} height={112} />
+              <img src={asset("/images/brand/logo-mark-white.avif")} alt="" width={120} height={112} />
             </div>
             <div className={styles.meta}>
               <h3>{c.client}</h3>

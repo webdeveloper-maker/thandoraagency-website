@@ -30,7 +30,7 @@ export const socials = [
     footerLabel: "Instagram",
     handle: "@tandora.agency",
     href: "https://www.instagram.com/tandora.agency",
-    icon: asset("/images/icon-instagram.svg"),
+    icon: asset("/images/icons/icon-instagram.svg"),
     iconSize: { w: 41, h: 41 },
   },
   {
@@ -39,7 +39,7 @@ export const socials = [
     footerLabel: "Facebook",
     handle: "@tandora.agency",
     href: "https://www.facebook.com/tandora.agency",
-    icon: asset("/images/icon-facebook.svg"),
+    icon: asset("/images/icons/icon-facebook.svg"),
     iconSize: { w: 41, h: 41 },
   },
   {
@@ -48,7 +48,7 @@ export const socials = [
     footerLabel: "X / Twitter",
     handle: "@tandora",
     href: "https://x.com/tandora",
-    icon: asset("/images/icon-x.svg"),
+    icon: asset("/images/icons/icon-x.svg"),
     iconSize: { w: 40, h: 46 },
   },
 ] as const;

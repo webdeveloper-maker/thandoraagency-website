@@ -35,11 +35,12 @@
   box-decoration-break: clone;
 }
 
-/* VR sculpture: 500 x 501, flush right, 54px above the band */
+/* VR sculpture: 500 x 501, flush right, standing on the band's bottom edge
+   (it rises above the band's top). Fixed: no scroll drift. */
 .art {
   position: absolute;
   right: 0;
-  top: calc(-54 * var(--u));
+  bottom: 0;
   width: calc(500 * var(--u));
   z-index: 1;
 }

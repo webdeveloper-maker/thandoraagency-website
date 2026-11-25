@@ -63,14 +63,14 @@ export function ServiceCatalogue() {
     <section className={styles.section} aria-labelledby="catalogue-title">
       <Mandala
         className={styles.mark}
-        src={asset("/images/union-whatwedo.svg")}
+        src={asset("/images/decor/union-whatwedo.svg")}
         width={442.643}
         height={412.221}
         style={{ left: u(860), top: u(-40), width: u(820), height: u(800) }}
       />
       <Mandala
         className={styles.mark}
-        src={asset("/images/union-whatwedo.svg")}
+        src={asset("/images/decor/union-whatwedo.svg")}
         width={442.643}
         height={412.221}
         style={{ left: u(-330), top: u(1500), width: u(820), height: u(800) }}

@@ -11,7 +11,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
     <>
       <div className={styles.curtain} aria-hidden>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={asset("/images/logo-mark-white.avif")} alt="" width={64} height={60} />
+        <img src={asset("/images/brand/logo-mark-white.avif")} alt="" width={64} height={60} />
       </div>
       {children}
     </>

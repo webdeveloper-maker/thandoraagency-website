@@ -35,8 +35,12 @@ const last = processSteps.length - 1;
  */
 const SPLIT = [0.1, 0.3] as const;
 const ROW = [0.33, 0.93] as const;
-/** The full temple stands 232 Figma px lower than the row's ground line. */
-const DROP = 232;
+/** The full temple stands 362 Figma px lower than the row's ground line... */
+const DROP = 362;
+/** ...and 1.3x the size of a step, growing left and up from its right foot
+ *  (where the note's arrow points), so it reads at full size on wide screens
+ *  where the frame is scaled to the screen height. */
+const REST_SCALE = 1.3;
 /** Column pitch in Figma px: 583 wide + 60 gap. */
 const PITCH = 643;
 /** Figma px → CSS length in the pinned frame's units. */
@@ -119,6 +123,7 @@ export function HowWeDoIt() {
   const rowT = useTransform(p, (v) => scrollRange(v, ROW[0], ROW[1], 0, 1));
   const rowX = useTransform([rowT, travel], ([t, dist]: number[]) => -t * dist);
   const rowY = useTransform(split, (t) => fu((1 - t) * DROP));
+  const rowScale = useTransform(split, (t) => 1 + (1 - t) * (REST_SCALE - 1));
   const noteOpacity = useTransform(p, (v) => scrollRange(v, 0.1, 0.16, 1, 0));
   const noteY = useTransform(p, (v) => scrollRange(v, 0.1, 0.16, 0, 24));
   const introOpacity = useTransform(p, (v) => scrollRange(v, 0.16, 0.26, 1, 0));
@@ -136,7 +141,7 @@ export function HowWeDoIt() {
     <section ref={ref} className={styles.section} aria-labelledby="how-title">
       <div className={styles.stage}>
         <Mandala
-          src={asset("/images/union-how.svg")}
+          src={asset("/images/decor/union-how.svg")}
           width={959.728}
           height={893.766}
           style={{ left: u(248), top: u(-78.42), width: u(1257.131), height: u(1227.399) }}
@@ -158,7 +163,7 @@ export function HowWeDoIt() {
           <motion.ol
             ref={rowRef}
             className={styles.row}
-            style={live ? { x: rowX, y: rowY } : undefined}
+            style={live ? { x: rowX, y: rowY, scale: rowScale, transformOrigin: `${fu(583)} ${fu(592)}` } : undefined}
             aria-label="Our process"
           >
             {processSteps.map((s, i) => (
@@ -194,7 +199,7 @@ export function HowWeDoIt() {
             generations, and remain unforgettable, like this
           </p>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img className={styles.arrow} src={asset("/images/arrow-curl.avif")} alt="" width={196} height={116} aria-hidden />
+          <img className={styles.arrow} src={asset("/images/decor/arrow-curl.avif")} alt="" width={196} height={116} aria-hidden />
         </motion.div>
       </div>
     </section>

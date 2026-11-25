@@ -5,27 +5,27 @@ export const believeCards = [
   {
     title: "Strategy Before Decoration",
     body: "Design without strategy is just decoration. Every creative decision we make is grounded in research, positioning, and purpose.",
-    image: asset("/images/believe-1.avif"),
+    image: asset("/images/about/believe/believe-1.avif"),
   },
   {
     title: "Clarity Over Noise",
     body: "In a world of constant noise, clarity is the ultimate competitive advantage. We strip away what's unnecessary.",
-    image: asset("/images/believe-2.avif"),
+    image: asset("/images/about/believe/believe-2.avif"),
   },
   {
     title: "Design With Purpose",
     body: "Every element exists for a reason. We don't add things because they look nice — we add them because they work.",
-    image: asset("/images/believe-3.avif"),
+    image: asset("/images/about/believe/believe-3.avif"),
   },
   {
     title: "One Connected Brand",
     body: "Your brand isn't your logo. It's the sum of every touchpoint. We make sure they all speak with one voice.",
-    image: asset("/images/believe-4.avif"),
+    image: asset("/images/about/believe/believe-4.avif"),
   },
   {
     title: "Built for Real People",
     body: "Every element exists for a reason. We don't add things because they look nice — we add them because they work.",
-    image: asset("/images/believe-5.avif"),
+    image: asset("/images/about/believe/believe-5.avif"),
   },
 ] as const;
 
@@ -51,13 +51,13 @@ export type Service = {
   short: string;
   title: string;
   category: ServiceCategory;
-  /** 3D icon in public/images/services/, at its Figma size (null until sent). */
+  /** 3D icon in public/images/services/icons/, at its Figma size (null until sent). */
   image: { src: string; w: number; h: number } | null;
   /** Card gradient, top → bottom (sampled from the Figma card). */
   color: { from: string; to: string };
 };
 
-const icon = (slug: string, w: number, h: number) => ({ src: asset(`/images/services/${slug}.avif`), w, h });
+const icon = (slug: string, w: number, h: number) => ({ src: asset(`/images/services/icons/${slug}.avif`), w, h });
 
 /**
  * The 13 service cards of the Services page, in Figma order. The grid deals

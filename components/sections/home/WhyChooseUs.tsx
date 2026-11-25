@@ -38,14 +38,15 @@ export function WhyChooseUs() {
     const measure = () => {
       const strip = stripRef.current;
       if (!strip) return;
-      // The row ends with the last card standing between the two sculptures
-      // (Figma: its left edge at frame x 465), not tucked behind the right one.
+      // The row ends with the last card centred between the two sculptures
+      // (sage's right edge at frame x 424, young's left at 881), not tucked
+      // behind the right one. Cards are 480 Figma px wide on desktop.
       const lastCard = strip.lastElementChild as HTMLElement | null;
       const viewport = strip.parentElement;
       if (!lastCard || !viewport) return;
-      const unit = lastCard.offsetWidth / 581.962; // px per Figma px
+      const unit = lastCard.offsetWidth / 480; // px per Figma px
       const lastLeft = viewport.getBoundingClientRect().left + lastCard.offsetLeft;
-      setTravel(Math.max(0, lastLeft - 465 * unit));
+      setTravel(Math.max(0, lastLeft - ((424 + 881) / 2 - 240) * unit));
     };
     measure();
     window.addEventListener("resize", measure);
@@ -126,11 +127,11 @@ export function WhyChooseUs() {
 
           <motion.div className={styles.sage} {...enter({ x: "-70%", y: "45%", opacity: 0 })} aria-hidden>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={asset("/images/why-sage.avif")} alt="" width={465} height={643} loading="eager" fetchPriority="low" />
+            <img src={asset("/images/home/why-choose-us/why-sage.avif")} alt="" width={465} height={643} loading="eager" fetchPriority="low" />
           </motion.div>
           <motion.div className={styles.young} {...enter({ x: "65%", y: "45%", opacity: 0 }, 0.1)} aria-hidden>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={asset("/images/why-young.avif")} alt="" width={599} height={658} loading="eager" fetchPriority="low" />
+            <img src={asset("/images/home/why-choose-us/why-young.avif")} alt="" width={599} height={658} loading="eager" fetchPriority="low" />
           </motion.div>
         </div>
       </div>

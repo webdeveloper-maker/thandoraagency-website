@@ -1,4 +1,6 @@
-/* Banner: 1440 x 360. The BG image carries the white notch in its alpha. */
+/* Banner: 1440 x 360. The BG image is used only as a mask for its shape
+   (the white notch lives in its alpha); its pixels have a green-black cast
+   and an olive streak, so the colour is painted here in navy instead. */
 .banner {
   position: relative;
   height: calc(360 * var(--u));
@@ -10,9 +12,9 @@
   position: absolute;
   inset: 0;
   overflow: hidden;
-  background: url("../../../public/images/banner-bg.avif") center / 100% 100% no-repeat;
-  -webkit-mask: url("../../../public/images/banner-bg.avif") center / 100% 100% no-repeat;
-  mask: url("../../../public/images/banner-bg.avif") center / 100% 100% no-repeat;
+  background: linear-gradient(90deg, #0b1233 0%, #04081a 50%, #050a1f 100%);
+  -webkit-mask: url("../../../public/images/shared/banner/banner-bg.avif") center / 100% 100% no-repeat;
+  mask: url("../../../public/images/shared/banner/banner-bg.avif") center / 100% 100% no-repeat;
 }
 
 .flip .bg {
@@ -89,7 +91,7 @@
   flex-direction: column;
   gap: calc(36 * var(--s));
   width: calc(920 * var(--u));
-  z-index: 1;
+  z-index: 3; /* above the sculptures fading in from the section above */
 }
 
 .withEyebrow .copy {
@@ -161,6 +163,7 @@
   position: absolute;
   right: 0;
   bottom: 0;
+  z-index: 2; /* in front of the sculptures of the section above */
   width: calc(588 * var(--u));
 }
 

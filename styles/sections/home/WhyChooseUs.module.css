@@ -1,6 +1,7 @@
 /* Desktop - 35: 1440 x 1115 (Default state positions) */
 .section {
   position: relative;
+  z-index: 1; /* the sculptures stand in front of the banner below */
   overflow-x: clip;
 }
 
@@ -241,10 +242,57 @@
   .stage {
     position: sticky;
     top: max(0px, calc(100vh - 692 * var(--u)));
+    /* Clip the sides and top only: the sculptures reach 110 below the band,
+       over the top of the next banner, and fade into it (their cut-outs
+       end in a hard edge, which read as the banner slicing them). */
+    overflow: visible;
+    clip-path: inset(0 0 calc(-110 * var(--u)) 0);
+  }
+
+  .sage {
+    bottom: calc(-110 * var(--u));
+    width: calc(423.7 * var(--u));
+    height: calc(585.8 * var(--u));
+  }
+
+  .young {
+    bottom: calc(-110 * var(--u));
+    width: calc(559.5 * var(--u));
+    height: calc(614.6 * var(--u));
+  }
+
+  .sage,
+  .young {
+    -webkit-mask: linear-gradient(to bottom, #000 72%, transparent 100%);
+    mask: linear-gradient(to bottom, #000 72%, transparent 100%);
+  }
+
+  /* Cards at 480 (Figma's are 582: too large on screen), text scaled with
+     them, set a little lower in the band so they sit between the sculptures. */
+  .viewport {
+    top: calc(56 * var(--u));
   }
 
   .card {
+    width: calc(480 * var(--u));
+    height: calc(480 * var(--u));
     min-width: 0;
     min-height: 0;
+  }
+
+  .cardText {
+    left: calc(36 * var(--u));
+    right: calc(34 * var(--u));
+    bottom: calc(36 * var(--u));
+    gap: calc(18 * var(--u));
+  }
+
+  .cardText h3 {
+    font-size: calc(52 * var(--u));
+  }
+
+  .cardText p {
+    font-size: calc(19 * var(--u));
+    line-height: 1.7;
   }
 }

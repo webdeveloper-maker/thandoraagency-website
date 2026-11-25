@@ -58,14 +58,14 @@ export function Testimonials() {
     <section className={styles.section} aria-labelledby="say-title">
       <div className={styles.glowA} aria-hidden>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={asset("/images/say-ellipse-698.svg")} alt="" />
+        <img src={asset("/images/home/testimonials/say-ellipse-698.svg")} alt="" />
       </div>
       <div className={styles.glowB} aria-hidden>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={asset("/images/say-ellipse-696.svg")} alt="" />
+        <img src={asset("/images/home/testimonials/say-ellipse-696.svg")} alt="" />
       </div>
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img className={styles.pillar} src={asset("/images/hero-pillar.avif")} alt="" width={577} height={923} loading="lazy" aria-hidden />
+      <img className={styles.pillar} src={asset("/images/home/hero/hero-pillar.avif")} alt="" width={577} height={923} loading="lazy" aria-hidden />
       <GridDecor tone="blue" style={{ left: u(1019), top: u(-372) }} />
 
       <div className={styles.head}>
@@ -80,7 +80,7 @@ export function Testimonials() {
 
       <Reveal className={styles.figure} x={-40} y={0}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={asset("/images/say-architect.avif")} alt="" width={829} height={778} loading="lazy" />
+        <img src={asset("/images/home/testimonials/say-architect.avif")} alt="" width={829} height={778} loading="lazy" />
       </Reveal>
 
       <div className={styles.rows}>

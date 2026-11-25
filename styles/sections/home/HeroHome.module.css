@@ -94,20 +94,28 @@
   scale: -1 1;
 }
 
-/* Architrave: 1122 x 369, centred, top -71 */
+/* Architrave: 1122 x 369 at top -71, 159 in from each side at 1440. It keeps
+   those 159 side insets on every screen, so on wider screens (where the
+   pillars stay at the window edges) it grows to keep meeting them. */
 .arch {
   position: absolute;
   top: calc(-71 * var(--u));
-  left: 50%;
-  width: calc(1122 * var(--u));
+  left: calc(159 * var(--u));
+  right: calc(159 * var(--u));
   height: calc(369 * var(--u));
-  translate: -50% 0;
   z-index: 3;
 }
 
-.arch img {
+/* The art's carved bracket ends (340 each side) are drawn at their size; the
+   beam between them repeats in whole tiles. At 1122 wide it is the image as is. */
+.archFill {
+  display: block;
   width: 100%;
   height: 100%;
+  box-sizing: border-box;
+  border-style: solid;
+  border-width: 0 calc(340 * var(--u));
+  border-image: url("../../../public/images/home/hero/hero-arch.avif") 0 340 fill / 0 calc(340 * var(--u)) round;
 }
 
 .content {
@@ -179,25 +187,97 @@
   font-size: calc(100 * var(--u));
 }
 
-.king {
+/* Socials (Figma): icons at left 114 / 387 / 658, top 555; label 11 caps
+   #9cadc9, handle 17 navy. */
+.socials {
+  position: absolute;
+  left: calc(114 * var(--u));
+  top: calc(555 * var(--u));
+  z-index: 3;
+  display: flex;
+  margin: 10;
+  padding: 0;
+  padding-top: 29;
+  list-style: none;
+}
+
+.socials li {
+  width: calc(273 * var(--u));
+}
+
+.socials a {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(18 * var(--u));
+}
+
+.socials img {
+  flex: none;
+  width: calc(40 * var(--u));
+  height: calc(40 * var(--u));
+  object-fit: contain;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.socials a:hover img {
+  transform: scale(1.1);
+}
+
+.handle {
+  display: flex;
+  flex-direction: column;
+  gap: calc(6 * var(--u));
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.handleLabel {
+  font-size: calc(11 * var(--u));
+  letter-spacing: 1.7px;
+  color: var(--slate-300);
+}
+
+.handleValue {
+  font-size: calc(17 * var(--u));
+  color: var(--navy-900);
+}
+
+/* Scroll cue (components/ui/ScrollCue): mouse at left 140 / top 678. */
+.scrollCue {
+  left: calc(120 * var(--u));
+  top: calc(678 * var(--u));
+}
+
+/* King + bust group: the king's 880 x 557 box, bottom right. */
+.figures {
   position: absolute;
   right: 0;
   bottom: 0;
   width: calc(880 * var(--u));
-  height: auto;
+  aspect-ratio: 880 / 557;
   z-index: 2;
   will-change: transform;
 }
 
-/* Stone bust: behind the king and his desk (Figma) */
+.king {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+  z-index: 2;
+}
+
+/* Stone bust (Figma): 382 wide, flush with the right edge, its top at frame
+   y 224, so the book stack stands on the king's desk (89 above the frame
+   bottom), behind the king. */
 .scholar {
   position: absolute;
-  right: calc(40 * var(--u));
-  bottom: 0;
-  width: calc(382 * var(--u));
+  right: 0;
+  bottom: calc(89 / 557 * 100%);
+  width: calc(382 / 880 * 100%);
   height: auto;
   z-index: 1;
-  will-change: transform;
 }
 
 .stacked {
@@ -215,7 +295,7 @@
     position: relative;
     height: calc(910 * var(--u));
     overflow: hidden;
-    background: url("../../../public/images/hero2-bg.avif") center / cover;
+    background: url("../../../public/images/home/hero/hero2-bg.avif") center / cover;
   }
 
   .stacked p {
@@ -279,12 +359,15 @@
 
   .arch {
     top: -24px;
-    width: 120%;
+    left: -10%;
+    right: -10%;
     height: auto;
+    aspect-ratio: 1122 / 369;
   }
 
-  .arch img {
-    height: auto;
+  .archFill {
+    border-width: 0 calc(120vw * 340 / 1122);
+    border-image-width: 0 calc(120vw * 340 / 1122);
   }
 
   .content {
@@ -342,7 +425,7 @@
   .stacked {
     display: block;
     padding: 24px 20px 0;
-    background: url("../../../public/images/hero2-bg.avif") center / cover;
+    background: url("../../../public/images/home/hero/hero2-bg.avif") center / cover;
     overflow: hidden;
   }
 

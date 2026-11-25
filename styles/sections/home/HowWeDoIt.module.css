@@ -172,18 +172,19 @@
     padding: 0;
   }
 
+  /* Heading and copy at page scale, the same size and columns as the other
+     sections (e.g. "Why choose Us."): only the temple scene is scaled to fit
+     the screen height. */
+  .section {
+    --page-u: var(--u);
+  }
+
   .intro {
-    grid-template-columns: calc(617 * var(--u)) calc(568 * var(--u));
+    --u: var(--page-u);
+    --s: max(1px, var(--u));
+    grid-template-columns: calc(617 * var(--u)) minmax(0, calc(568 * var(--s)));
     row-gap: 0;
-    padding: calc(98 * var(--u)) 0 0 calc(var(--frame-x) + 125 * var(--u));
-  }
-
-  .intro h2 {
-    font-size: calc(88 * var(--u));
-  }
-
-  .copy {
-    font-size: calc(22 * var(--u));
+    padding: calc(72 * var(--u)) 0 0 var(--inset);
   }
 
   /* Row: columns 583 wide, 60 apart, from left 35; temples stand on y = 638,

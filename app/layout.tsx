@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Thandora",
-    images: ["/images/brand-logo-stacked.avif"],
+    images: ["/images/brand/brand-logo-stacked.avif"],
   },
 };
 

@@ -29,7 +29,7 @@ export function CtaBand() {
       </div>
       <Reveal className={styles.art} x={40} y={0}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={asset("/images/cta-scene.avif")} alt="" width={862} height={485} loading="lazy" />
+        <img src={asset("/images/shared/cta/cta-scene.avif")} alt="" width={862} height={485} loading="lazy" />
       </Reveal>
     </section>
   );

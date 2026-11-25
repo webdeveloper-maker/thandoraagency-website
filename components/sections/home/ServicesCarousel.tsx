@@ -167,7 +167,7 @@ export function ServicesCarousel() {
     >
       <div className={styles.stage}>
         <Mandala
-          src={asset("/images/union-whatwedo.svg")}
+          src={asset("/images/decor/union-whatwedo.svg")}
           width={442.643}
           height={412.221}
           style={{ left: u(-13), top: 0, width: u(579.811), height: u(566.098) }}

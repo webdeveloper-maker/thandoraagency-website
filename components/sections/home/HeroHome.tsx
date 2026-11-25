@@ -10,6 +10,8 @@ import {
 } from "motion/react";
 import { useRef, type PointerEvent } from "react";
 import { PillButton } from "@/components/ui/PillButton";
+import { ScrollCue } from "@/components/ui/ScrollCue";
+import { socials } from "@/content/site";
 import { TypingLoop } from "@/components/ui/TypingLoop";
 import { ease, scrollRange } from "@/lib/motion";
 import { useMedia } from "@/lib/useMedia";
@@ -22,7 +24,7 @@ import { asset } from "@/lib/asset";
  * Desktop: a pinned scroll scene. Scene 1 is the temple arch exactly as in
  * Figma; scrolling hands over to the hidden Figma layer — the typing
  * headline "BECOME THE BRAND PEOPLE REMEMBER." with the king and the stone
- * scholar arriving together, from the bottom and the right.
+ * scholar rising together from the bottom.
  * Mobile / reduced motion: the two scenes simply stack.
  */
 export function HeroHome() {
@@ -52,10 +54,10 @@ export function HeroHome() {
   const s2Opacity = useTransform(p, (v) => scrollRange(v, 0.24, 0.42, 0, 1));
   const typeY = useTransform(p, [0.28, 0.46], [40, 0]);
   // Both figures arrive together and stay (Figma: the king at his desk in
-  // front of the stone bust): the king rises from the bottom while the bust
-  // slides in from the right over the same stretch of scroll.
-  const kingY = useTransform(p, [0.4, 0.62], ["100%", "0%"]);
-  const scholarX = useTransform(p, [0.4, 0.62], ["110%", "0%"]);
+  // front of the stone bust). They rise from the bottom as one group; the
+  // bust stands 129 above the king's box, so the group travels its own
+  // height plus that (686 / 557) to start fully out of view.
+  const figuresY = useTransform(p, [0.4, 0.62], ["125%", "0%"]);
 
   const live = pinned && !reduce;
 
@@ -64,7 +66,7 @@ export function HeroHome() {
       <div className={styles.stage} onPointerMove={onPointerMove}>
         {/* Scene 1 — temple arch */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img className={styles.bg} src={asset("/images/hero-bg.avif")} alt="" width={1440} height={910} fetchPriority="high" />
+        <img className={styles.bg} src={asset("/images/home/hero/hero-bg.avif")} alt="" width={1440} height={910} fetchPriority="high" />
 
         <motion.div className={styles.scene1} style={live ? { opacity: s1Opacity } : undefined}>
           <motion.div
@@ -75,7 +77,7 @@ export function HeroHome() {
           >
             <motion.div className={styles.pillarScroll} style={live ? { x: pillarL } : undefined}>
               <motion.img
-                src={asset("/images/hero-pillar.avif")}
+                src={asset("/images/home/hero/hero-pillar.avif")}
                 alt=""
                 width={577}
                 height={923}
@@ -92,7 +94,7 @@ export function HeroHome() {
           >
             <motion.div className={styles.pillarScroll} style={live ? { x: pillarR } : undefined}>
               <motion.img
-                src={asset("/images/hero-pillar.avif")}
+                src={asset("/images/home/hero/hero-pillar.avif")}
                 alt=""
                 width={577}
                 height={923}
@@ -102,11 +104,11 @@ export function HeroHome() {
             </motion.div>
           </motion.div>
           <motion.div className={styles.arch} style={live ? { y: archY } : undefined}>
-            <motion.img
-              src={asset("/images/hero-arch.avif")}
-              alt=""
-              width={1122}
-              height={369}
+            {/* Painted with border-image (see the CSS): the carved brackets
+                keep their shape and the beam between them repeats, so the
+                arch always reaches both pillars whatever the screen width. */}
+            <motion.span
+              className={styles.archFill}
               initial={reduce ? false : { opacity: 0, y: -24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, ease: ease.out }}
@@ -116,7 +118,7 @@ export function HeroHome() {
           <motion.div className={styles.content} style={live ? { y: s1Y } : undefined}>
             <motion.img
               className={styles.logo}
-              src={asset("/images/brand-logo-stacked.avif")}
+              src={asset("/images/brand/brand-logo-stacked.avif")}
               alt="Thandora — Whoever has ears, let them hear."
               width={521}
               height={449}
@@ -168,28 +170,50 @@ export function HeroHome() {
         {/* Scene 2 — typing headline (hidden layer in Figma) */}
         <motion.div className={styles.scene2} style={live ? { opacity: s2Opacity } : undefined} aria-hidden={live ? undefined : true}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img className={styles.bg} src={asset("/images/hero2-bg.avif")} alt="" width={1440} height={910} loading="eager" fetchPriority="low" />
+          <img className={styles.bg} src={asset("/images/home/hero/hero2-bg.avif")} alt="" width={1440} height={910} loading="eager" fetchPriority="low" />
           <motion.div className={styles.typing} style={live ? { y: typeY } : undefined}>
             <TypingLoop />
           </motion.div>
-          <motion.img
-            className={styles.king}
-            src={asset("/images/hero2-king.avif")}
-            alt=""
-            width={880}
-            height={557}
-            loading="eager" fetchPriority="low"
-            style={live ? { y: kingY } : undefined}
-          />
-          <motion.img
-            className={styles.scholar}
-            src={asset("/images/hero2-scholar.avif")}
-            alt=""
-            width={382}
-            height={597}
-            loading="eager" fetchPriority="low"
-            style={live ? { x: scholarX } : undefined}
-          />
+          {/* Socials under the headline and the scroll cue (Figma). */}
+          <motion.ul className={styles.socials} style={live ? { y: typeY } : undefined}>
+            {socials.map((s) => (
+              <li key={s.id}>
+                <a href={s.href} target="_blank" rel="noopener noreferrer" tabIndex={live ? undefined : -1}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={s.icon} alt="" width={s.iconSize.w} height={s.iconSize.h} loading="lazy" />
+                  <span className={styles.handle}>
+                    <span className={styles.handleLabel}>{s.label}</span>
+                    <span className={styles.handleValue}>{s.handle}</span>
+                  </span>
+                </a>
+              </li>
+            ))}
+          </motion.ul>
+          <ScrollCue className={styles.scrollCue} />
+          {/* King and bust as one group: they rise together, so the bust
+              always stays in place behind the desk. */}
+          <motion.div className={styles.figures} style={live ? { y: figuresY } : undefined}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              className={styles.scholar}
+              src={asset("/images/home/hero/hero2-scholar.avif")}
+              alt=""
+              width={382}
+              height={597}
+              loading="eager"
+              fetchPriority="low"
+            />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              className={styles.king}
+              src={asset("/images/home/hero/hero2-king.avif")}
+              alt=""
+              width={880}
+              height={557}
+              loading="eager"
+              fetchPriority="low"
+            />
+          </motion.div>
         </motion.div>
       </div>
 
@@ -197,7 +221,7 @@ export function HeroHome() {
       <div className={styles.stacked}>
         <TypingLoop />
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={asset("/images/hero2-king.avif")} alt="" width={880} height={557} loading="eager" fetchPriority="low" />
+        <img src={asset("/images/home/hero/hero2-king.avif")} alt="" width={880} height={557} loading="eager" fetchPriority="low" />
       </div>
     </section>
   );

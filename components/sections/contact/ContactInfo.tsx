@@ -32,7 +32,7 @@ export function ContactInfo() {
   return (
     <section className={styles.section} aria-labelledby="contact-info-title">
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img className={styles.scene} src={asset("/images/cta-scene.avif")} alt="" width={862} height={485} loading="lazy" />
+      <img className={styles.scene} src={asset("/images/shared/cta/cta-scene.avif")} alt="" width={862} height={485} loading="lazy" />
 
       <div className={styles.content}>
         <Reveal>
@@ -70,7 +70,7 @@ export function ContactInfo() {
         <Reveal delay={0.16}>
           <a className={styles.map} href={contact.mapsUrl} target="_blank" rel="noopener noreferrer" aria-label="Open Chennai, Tamil Nadu in Google Maps">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={asset("/images/contact-map.avif")} alt="" width={450} height={223} loading="lazy" />
+            <img src={asset("/images/contact/contact-map.avif")} alt="" width={450} height={223} loading="lazy" />
           </a>
         </Reveal>
       </div>

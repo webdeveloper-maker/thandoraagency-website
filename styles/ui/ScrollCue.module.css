@@ -1,0 +1,62 @@
+/* "Scroll" cue (Figma): a 45 x 74 mouse outline with "Scroll" below; the
+   wheel dot slides down and fades, on a loop. Place it with a className
+   (position is absolute; set left/right/top). Sized in --u. */
+.cue {
+  position: absolute;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(22 * var(--u));
+  width: calc(85 * var(--u));
+  font-size: calc(22 * var(--u));
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--blue-600);
+  pointer-events: none;
+}
+
+.mouse {
+  position: relative;
+  width: calc(45 * var(--u));
+  height: calc(74 * var(--u));
+  border: max(1.5px, calc(2 * var(--u))) solid var(--blue-600);
+  border-radius: 999px;
+}
+
+.wheel {
+  position: absolute;
+  left: 50%;
+  top: calc(16 * var(--u));
+  width: calc(4 * var(--u));
+  height: calc(9 * var(--u));
+  margin-left: calc(-2 * var(--u));
+  border-radius: 999px;
+  background: var(--blue-600);
+  animation: wheel 1.8s var(--ease-out) infinite;
+}
+
+@keyframes wheel {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+  20% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+    transform: translateY(calc(26 * var(--u)));
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(calc(30 * var(--u)));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wheel {
+    animation: none;
+  }
+}
+

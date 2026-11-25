@@ -55,7 +55,7 @@ function CardFace({ card, lazy = true, textOpacity }: { card: Card; lazy?: boole
         <div className={styles.cardBody}>
           <p>{card.body}</p>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={asset("/images/icon-quote.svg")} alt="" width={50} height={50} />
+          <img src={asset("/images/icons/icon-quote.svg")} alt="" width={50} height={50} />
         </div>
       </motion.div>
     </>
@@ -159,7 +159,7 @@ export function Believe() {
         </div>
 
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img className={styles.symbol} src={asset("/images/carved-symbol.svg")} alt="" width={858} height={813} aria-hidden />
+        <img className={styles.symbol} src={asset("/images/brand/carved-symbol.svg")} alt="" width={858} height={813} aria-hidden />
         <motion.div className={styles.noteWrap} style={live ? { opacity: noteOpacity, y: noteY } : undefined}>
           <Reveal className={styles.note}>
             <p>
@@ -168,7 +168,7 @@ export function Believe() {
             </p>
           </Reveal>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img className={styles.arrow} src={asset("/images/arrow-loop.avif")} alt="" width={170} height={146} aria-hidden />
+          <img className={styles.arrow} src={asset("/images/decor/arrow-loop.avif")} alt="" width={170} height={146} aria-hidden />
         </motion.div>
 
         {live ? (

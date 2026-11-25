@@ -69,14 +69,21 @@
   display: inline-block;
 }
 
-/* Temple box: left -143 / top 236.5, 1467 wide; clipped at the frame bottom
-   (945) so the layers rise out of the ground. */
+/* Temple box: the three layers' 1467 x 733 composite, anchored to the
+   screen's left edge (not the centred frame) and the hero's bottom edge, at
+   its native size (top of the gopuram at y 245 of
+   945). Overflow clips the layers as they rise out of the ground. */
 .temple {
   position: absolute;
+  /* Figma crops the gopuram's left side at the screen edge (its tip at
+     x 230), leaving the bottom right free for the scroll cue. */
   left: calc(-143 * var(--u));
-  top: calc(236.5 * var(--u));
+  /* The base is drawn in perspective: it slopes ~22 from the far (left) end
+     down to the front. Sinking the box by that much puts the whole base on
+     the hero's bottom edge, the front's lowest step just under it. */
+  bottom: calc(-22 * var(--u));
   width: calc(1467 * var(--u));
-  height: calc(708.5 * var(--u));
+  height: calc(733 * var(--u));
   overflow: hidden;
   pointer-events: none;
   z-index: 1;
@@ -145,6 +152,21 @@
   z-index: 2;
 }
 
+/* Scroll cue: bottom right of the frame (Figma: mouse at top ~800, "Scroll"
+   ending 20 in from the right). The cue inside is absolute; this box places it. */
+.scrollCue {
+  position: absolute;
+  right: calc(105 * var(--u));
+  top: calc(795 * var(--u));
+  z-index: 2;
+}
+
+@media (max-width: 1023px) {
+  .scrollCue {
+    display: none;
+  }
+}
+
 /* Desktop: the whole 1440 x 945 frame fits the screen (width or height,
    whichever is tighter) and is centred in the window. */
 @media (min-width: 1024px) {
@@ -206,10 +228,6 @@
     order: 2;
   }
 
-  .temple {
-    order: 3;
-  }
-
   .mark {
     left: 35%;
     top: 40px;
@@ -234,10 +252,9 @@
 
   .temple {
     --u: calc(100vw / 1360);
-    flex: none;
     position: relative;
     left: auto;
-    top: auto;
-    margin: 24px 0 0 calc(-1 * var(--pad) - 20 * var(--u));
+    bottom: auto;
+    margin: 24px 0 calc(-22 * var(--u)) calc(-1 * var(--pad) - 20 * var(--u));
   }
 }

@@ -19,8 +19,8 @@ function Fill({ children, progress }: { children: ReactNode; progress: MotionVal
 
 /**
  * Blue statement band (Figma "Section" 624:4083). The highlighted words fill
- * with navy left to right as the section scrolls into view, and the VR
- * sculpture drifts upward.
+ * with navy left to right as the section scrolls into view. The VR
+ * sculpture stays put, standing on the band's bottom edge.
  */
 export function Statement() {
   const ref = useRef<HTMLElement>(null);
@@ -28,13 +28,11 @@ export function Statement() {
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start 85%", "center 45%"] });
   const fillA = useTransform(scrollYProgress, [0, 0.55], ["0%", "100%"]);
   const fillB = useTransform(scrollYProgress, [0.35, 1], ["0%", "100%"]);
-  const { scrollYProgress: pass } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const artY = useTransform(pass, [0, 1], [60, -60]);
 
   return (
     <section ref={ref} className={styles.section} aria-label="Tradition meets technology">
       <Mandala
-        src={asset("/images/union-statement.svg")}
+        src={asset("/images/decor/union-statement.svg")}
         width={465.933}
         height={433.911}
         style={{ left: u(852), top: u(-84), width: u(610.318), height: u(595.884) }}
@@ -53,10 +51,10 @@ export function Statement() {
         </Reveal>
       </div>
 
-      <motion.div className={styles.art} style={{ y: reduce ? 0 : artY }}>
+      <div className={styles.art}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={asset("/images/statement-sculpture.avif")} alt="" width={500} height={501} loading="lazy" />
-      </motion.div>
+        <img src={asset("/images/home/statement/statement-sculpture.avif")} alt="" width={500} height={501} loading="lazy" />
+      </div>
     </section>
   );
 }

@@ -16,9 +16,9 @@
     rgba(24, 67, 137, 0.5) 50%,
     rgba(33, 110, 209, 0) 100%
   );
-  -webkit-mask: url("../../public/images/grid-mask.svg") calc(-28 * var(--u) * var(--g)) calc(-28 * var(--u) * var(--g)) / calc(770 * var(--u) * var(--g))
+  -webkit-mask: url("../../public/images/decor/grid-mask.svg") calc(-28 * var(--u) * var(--g)) calc(-28 * var(--u) * var(--g)) / calc(770 * var(--u) * var(--g))
     calc(770 * var(--u) * var(--g)) no-repeat;
-  mask: url("../../public/images/grid-mask.svg") calc(-28 * var(--u) * var(--g)) calc(-28 * var(--u) * var(--g)) / calc(770 * var(--u) * var(--g))
+  mask: url("../../public/images/decor/grid-mask.svg") calc(-28 * var(--u) * var(--g)) calc(-28 * var(--u) * var(--g)) / calc(770 * var(--u) * var(--g))
     calc(770 * var(--u) * var(--g)) no-repeat;
   z-index: 0;
 }

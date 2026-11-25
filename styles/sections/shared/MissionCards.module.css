@@ -36,6 +36,21 @@
   transform: scale(1.1157);
 }
 
+/* Mission / Story: their figure stands near the middle of the art, so when
+   the card opens it would sit under the text panel. Open, the art slides
+   right so the figure stands beside the text (as Vision's king does); the
+   strip it uncovers on the left is the art's paper tone, under the blurred
+   panel. */
+.mission,
+.story {
+  background: #ece5dc;
+}
+
+.open.mission .image,
+.open.story .image {
+  transform: translateX(28%);
+}
+
 /* Closed: bottom 306px fades to black */
 .shade {
   position: absolute;
