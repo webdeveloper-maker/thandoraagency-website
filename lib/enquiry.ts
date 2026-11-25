@@ -19,11 +19,13 @@ export type Enquiry = z.infer<typeof enquirySchema>;
 /**
  * The site is a static export (GitHub Pages), so enquiries go to a Google
  * Apps Script web app that appends a row to the enquiries Google Sheet
- * (scripts/google-sheets/enquiry.gs). Its URL is set at build time as
- * NEXT_PUBLIC_ENQUIRY_ENDPOINT (GitHub repo variable ENQUIRY_ENDPOINT); without
- * it the visitor's email client opens with the enquiry pre-filled.
+ * (scripts/google-sheets/enquiry.gs). The URL is public by nature (it ships
+ * in the browser bundle), so it lives here; NEXT_PUBLIC_ENQUIRY_ENDPOINT can
+ * override it at build time (e.g. to test a different sheet).
  */
-const ENDPOINT = process.env.NEXT_PUBLIC_ENQUIRY_ENDPOINT;
+const SHEET_ENDPOINT =
+  "https://script.google.com/macros/s/AKfycbz9dVhYQWr-P7izRVa_JTDwYLEdDxVuFRKnWaH3-hL5qk1VUuEMZhNzPbsjRwfXfAxZ/exec";
+const ENDPOINT = process.env.NEXT_PUBLIC_ENQUIRY_ENDPOINT || SHEET_ENDPOINT;
 
 export async function sendEnquiry(data: Enquiry): Promise<void> {
   if (ENDPOINT) {
