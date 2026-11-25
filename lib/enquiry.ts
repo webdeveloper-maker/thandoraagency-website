@@ -10,25 +10,32 @@ export const enquirySchema = z.object({
   note: z.string().trim().min(10, "A line or two about your project helps us prepare."),
   budget: z.string().optional(),
   timeline: z.string().optional(),
+  /** Honeypot: hidden from people, so only bots fill it; the sheet script drops those. */
+  website: z.string().optional(),
 });
 
 export type Enquiry = z.infer<typeof enquirySchema>;
 
 /**
- * The site is a static export (GitHub Pages), so enquiries go to a form
- * endpoint such as Formspree. Set NEXT_PUBLIC_ENQUIRY_ENDPOINT at build time;
- * without it the visitor's email client opens with the enquiry pre-filled.
+ * The site is a static export (GitHub Pages), so enquiries go to a Google
+ * Apps Script web app that appends a row to the enquiries Google Sheet
+ * (scripts/google-sheets/enquiry.gs). Its URL is set at build time as
+ * NEXT_PUBLIC_ENQUIRY_ENDPOINT (GitHub repo variable ENQUIRY_ENDPOINT); without
+ * it the visitor's email client opens with the enquiry pre-filled.
  */
 const ENDPOINT = process.env.NEXT_PUBLIC_ENQUIRY_ENDPOINT;
 
 export async function sendEnquiry(data: Enquiry): Promise<void> {
   if (ENDPOINT) {
+    // Sent as text/plain so the browser makes a "simple" request: Apps Script
+    // cannot answer a CORS preflight, which JSON or Accept headers would trigger.
     const res = await fetch(ENDPOINT, {
       method: "POST",
-      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
       body: JSON.stringify(data),
     });
-    if (!res.ok) throw new Error(`Enquiry failed (${res.status})`);
+    const reply = (await res.json().catch(() => null)) as { ok?: boolean } | null;
+    if (!res.ok || !reply?.ok) throw new Error(`Enquiry failed (${res.status})`);
     return;
   }
 

@@ -31,6 +31,9 @@ jobs:
         env:
           # Site is served from https://<user>.github.io/<repo>/
           NEXT_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
+          # Google Apps Script web app that saves enquiries to the Google Sheet
+          # (repo Settings → Secrets and variables → Actions → Variables).
+          NEXT_PUBLIC_ENQUIRY_ENDPOINT: ${{ vars.ENQUIRY_ENDPOINT }}
       - name: Disable Jekyll
         run: touch out/.nojekyll
       - name: Upload Pages artifact

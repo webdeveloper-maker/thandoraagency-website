@@ -198,6 +198,9 @@ export function EnquiryForm() {
             >
               <h2 className={styles.title}>Lets Talk</h2>
 
+              {/* Honeypot for spam bots: hidden from people and screen readers. */}
+              <input className={styles.honeypot} type="text" tabIndex={-1} autoComplete="off" aria-hidden {...register("website")} />
+
               <div className={styles.grid}>
                 <Field label="Name" id={id("name")} error={errors.name}>
                   <input className={styles.input} type="text" autoComplete="name" placeholder="Your name" {...a11y("name")} {...register("name")} />
