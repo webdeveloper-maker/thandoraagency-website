@@ -91,8 +91,27 @@ export function AboutHero() {
         ))}
       </motion.ul>
 
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img className={styles.arrow} src={asset("/images/decor/arrow-loop.avif")} alt="" width={125} height={108} aria-hidden />
+      {/* Hand-drawn arrow (Figma): curves up from the statement to the
+          tagline, drawing itself in once the hero has settled. */}
+      <svg className={styles.arrow} viewBox="0 0 60 92" fill="none" aria-hidden>
+        <motion.path
+          d="M56 88C34 80 14 56 15 14"
+          stroke="currentColor"
+          strokeWidth="2.6"
+          strokeLinecap="round"
+          initial={reduce ? false : { pathLength: 0 }}
+          animate={{ pathLength: 1 }}
+          transition={t(0.9)}
+        />
+        <motion.path
+          d="M7.5 20 15.5 3 23 19.5Z"
+          fill="currentColor"
+          initial={reduce ? false : { opacity: 0, scale: 0.4 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={t(1.5)}
+          style={{ transformOrigin: "15px 12px" }}
+        />
+      </svg>
 
       <motion.h1
         id="about-hero-title"

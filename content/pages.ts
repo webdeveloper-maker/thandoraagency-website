@@ -36,56 +36,15 @@ export const team = [
   { name: "Marcus Hale", role: "Design Lead", photo: null },
 ] as const;
 
-export const serviceCategories = [
-  { id: "all", label: "All" },
-  { id: "digital-marketing", label: "Digital Marketing" },
-  { id: "creative-branding", label: "Creative Branding" },
-  { id: "content-communication", label: "Content & Communication" },
-] as const;
-
-export type ServiceCategory = Exclude<(typeof serviceCategories)[number]["id"], "all">;
-
-export type Service = {
-  slug: string;
-  /** Short label above the name on the card (e.g. "SMO"). */
-  short: string;
-  title: string;
-  category: ServiceCategory;
-  /** 3D icon in public/images/services/icons/, at its Figma size (null until sent). */
-  image: { src: string; w: number; h: number } | null;
-  /** Card gradient, top → bottom (sampled from the Figma card). */
-  color: { from: string; to: string };
-};
-
-const icon = (slug: string, w: number, h: number) => ({ src: asset(`/images/services/icons/${slug}.avif`), w, h });
-
 /**
- * The 13 service cards of the Services page, in Figma order. The grid deals
- * them alternately into the left and right columns.
- * TODO(client): send the Blog Writing (open book) and SEO Content Writing
- * (scroll + magnifier) icons: the export had duplicates of two other icons.
+ * "Services in Action" cards. The images are the Figma card exports, with the
+ * client / flow / label already drawn on them; the text here is for screen
+ * readers and search.
  */
-export const services: Service[] = [
-  { slug: "smo", short: "SMO", title: "Social Media Optimization", category: "digital-marketing", image: icon("smo", 462, 374), color: { from: "#916f4e", to: "#a5896e" } },
-  { slug: "seo", short: "SEO", title: "Search Engine Optimization", category: "digital-marketing", image: icon("seo", 412, 301), color: { from: "#632818", to: "#7e4c3d" } },
-  { slug: "sem", short: "SEM", title: "Search Engine Marketing", category: "digital-marketing", image: icon("sem", 483, 353), color: { from: "#4b5c42", to: "#6a7962" } },
-  { slug: "smm", short: "SMM", title: "Social Media Management", category: "digital-marketing", image: icon("smm", 583, 426), color: { from: "#cb6b34", to: "#d38551" } },
-  { slug: "logo-design", short: "LOGO", title: "Logo Design", category: "creative-branding", image: icon("logo-design", 453, 355), color: { from: "#bd723f", to: "#c98b5f" } },
-  { slug: "brand-identity-design", short: "BRAND", title: "Brand Identity Design", category: "creative-branding", image: icon("brand-identity-design", 518, 406), color: { from: "#bb503d", to: "#c56d5d" } },
-  { slug: "graphic-design", short: "DESIGN", title: "Graphic Design", category: "creative-branding", image: icon("graphic-design", 518, 406), color: { from: "#4e6a55", to: "#6d8673" } },
-  { slug: "marketing-creatives", short: "CREATIVE", title: "Marketing Creatives", category: "creative-branding", image: icon("marketing-creatives", 487, 382), color: { from: "#c96c35", to: "#d28552" } },
-  { slug: "website-content-writing", short: "WEB", title: "Website Content Writing", category: "content-communication", image: icon("website-content-writing", 514, 403), color: { from: "#455d96", to: "#6579a8" } },
-  { slug: "blog-writing", short: "BLOG", title: "Blog Writing", category: "content-communication", image: null, color: { from: "#887947", to: "#9d9166" } },
-  { slug: "seo-content-writing", short: "SEO", title: "SEO Content Writing", category: "content-communication", image: null, color: { from: "#447d89", to: "#5e929c" } },
-  { slug: "social-media-content", short: "SOCIAL", title: "Social Media Content", category: "content-communication", image: icon("social-media-content", 518, 406), color: { from: "#e76d48", to: "#ea8666" } },
-  { slug: "marketing-copywriting", short: "COPY", title: "Marketing Copywriting", category: "content-communication", image: icon("marketing-copywriting", 524, 411), color: { from: "#742c21", to: "#8c4f46" } },
-];
-
-/** TODO(client): case-study client name repeats in Figma and has no imagery yet. */
 export const caseStudies = [
-  { id: "case-1", client: "Marcello Leigh", flow: ["Strategy", "Identity", "Print"], label: "Full Brand System" },
-  { id: "case-2", client: "Marcello Leigh", flow: ["Strategy", "Identity", "Print"], label: "Full Brand System" },
-] as const;
+  { id: "case-1", client: "Marcello Leigh", flow: ["Strategy", "Identity", "Print"], label: "Full Brand System", image: asset("/images/services/in-action/case-1.avif") },
+  { id: "case-2", client: "Marcello Leigh", flow: ["Strategy", "Identity", "Print"], label: "Full Brand System", image: asset("/images/services/in-action/case-2.avif") },
+];
 
 /** TODO(client): dropdown options are not defined in Figma. */
 export const enquiryOptions = {

@@ -1,148 +1,84 @@
+/* Services in Action (new design): continues the black "What we Do." and
+   fades to the CTA band's blue. Cards 575 x 572 at left 131, gap 25. */
 .section {
-  padding: calc(120 * var(--u)) var(--pad) calc(140 * var(--u));
-  /* Continues the black "What we Do." section, fading into the blue CTA band. */
-  background: linear-gradient(180deg, #000 0%, #000 22%, #0d1d5c 62%, #2f5cf0 100%);
+  padding: calc(40 * var(--u)) 0 calc(130 * var(--u));
+  background: linear-gradient(180deg, #000 0%, #000 30%, #0d1d5c 62%, var(--blue-600-alt) 100%);
+  color: var(--white);
 }
 
 .head {
-  max-width: calc(1190 * var(--s));
-  margin: 0 auto;
+  padding-left: calc(131 * var(--u));
 }
 
+/* SERVICES IN ACTION: Inter SemiBold 14, blue, tracked */
 .eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: calc(8 * var(--s));
-  font-size: calc(12.581 * var(--s));
-  line-height: calc(18.872 * var(--s));
+  font-size: max(12px, calc(14 * var(--u)));
   font-weight: 600;
-  letter-spacing: 1.7613px;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--blue-400);
 }
 
-.eyebrow span {
-  width: calc(6 * var(--s));
-  height: calc(6 * var(--s));
-  border-radius: calc(3 * var(--s));
-  background: var(--blue-400);
-}
-
+/* Inter SemiBold 52 / 58 */
 .title {
-  max-width: calc(760 * var(--s));
-  padding-top: calc(24 * var(--s));
-  font-size: var(--fs-h2-close);
-  line-height: 1.05;
+  margin-top: calc(12 * var(--u));
+  font-size: max(clamp(30px, calc(16px + 2.4vw), 52px), calc(52 * var(--u)));
+  line-height: 1.12;
   font-weight: 600;
   letter-spacing: -0.03em;
-  color: var(--white);
 }
 
 .cards {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: calc(24 * var(--s));
-  max-width: calc(1190 * var(--s));
-  margin: calc(56 * var(--s)) auto 0;
-  padding: 0;
+  grid-template-columns: repeat(2, calc(575 * var(--u)));
+  gap: calc(25 * var(--u));
+  margin: calc(64 * var(--u)) 0 0;
+  padding: 0 0 0 calc(131 * var(--u));
   list-style: none;
 }
 
+/* Card exports carry their own rounded corners, border and caption. */
 .card {
+  position: relative;
+  aspect-ratio: 583 / 585;
   overflow: hidden;
-  border-radius: var(--r-card);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  border-radius: calc(16 * var(--s));
 }
 
-.media {
-  display: grid;
-  place-items: center;
-  aspect-ratio: 16 / 10;
-  overflow: hidden;
-  background: radial-gradient(circle at 70% 30%, #216ed1 0%, var(--navy-900) 60%);
-}
-
-.media img {
-  width: calc(96 * var(--s));
-  height: auto;
-  opacity: 0.85;
+.card img {
+  display: block;
+  width: 100%;
+  height: 100%;
   transition: transform var(--dur-slow) var(--ease-out);
 }
 
-.card:hover .media img {
-  transform: scale(1.05);
+.card:hover img {
+  transform: scale(1.03);
 }
 
-.meta {
-  display: grid;
-  gap: calc(8 * var(--s));
-  padding: calc(24 * var(--s)) calc(28 * var(--s)) calc(28 * var(--s));
-}
-
-.meta h3 {
-  font-size: calc(22 * var(--s));
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  color: var(--white);
-}
-
-.flow {
+.actions {
   display: flex;
-  flex-wrap: wrap;
-  gap: calc(8 * var(--s));
-  font-size: calc(15 * var(--s));
-  color: rgba(255, 255, 255, 0.8);
+  justify-content: center;
+  margin-top: calc(48 * var(--u));
 }
 
-.flow span {
-  display: inline-flex;
-  gap: calc(8 * var(--s));
-  opacity: 0;
-  animation: step-in 500ms var(--ease-out) forwards;
-}
-
-.flow i {
-  font-style: normal;
-  color: var(--blue-400);
-}
-
-@keyframes step-in {
-  from {
-    opacity: 0;
-    transform: translateX(-6px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-.label {
-  font-size: calc(15 * var(--s));
-  font-weight: 600;
-  color: var(--blue-400);
-}
-
-@media (max-width: 767px) {
+@media (max-width: 1023px) {
   .section {
-    padding: 72px 0;
+    padding: 48px 0 72px;
   }
 
   .head {
-    padding: 0 20px;
+    padding: 0 var(--pad);
   }
 
   .cards {
     display: flex;
     gap: 16px;
-    margin-top: 36px;
-    padding: 0 20px;
+    margin-top: 32px;
+    padding: 0 var(--pad);
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    scroll-padding: 0 20px;
+    scroll-padding: 0 var(--pad);
     scrollbar-width: none;
   }
 
@@ -151,7 +87,8 @@
   }
 
   .card {
-    flex: 0 0 85%;
+    flex: 0 0 min(85%, 420px);
     scroll-snap-align: start;
   }
+
 }

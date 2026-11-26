@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import { CtaBand } from "@/components/layout/CtaBand";
-import { ServiceCatalogue } from "@/components/sections/services/ServiceCatalogue";
 import { ServicesHero } from "@/components/sections/services/ServicesHero";
 import { ServicesInAction } from "@/components/sections/services/ServicesInAction";
+import { ServicesShowcase } from "@/components/sections/services/ServicesShowcase";
+import { ServicesStatement } from "@/components/sections/services/ServicesStatement";
 
 export const metadata: Metadata = {
   title: "Services",
@@ -15,10 +15,8 @@ export default function ServicesPage() {
   return (
     <>
       <ServicesHero />
-      {/* The catalogue reads ?category= from the URL, so it renders on the client. */}
-      <Suspense>
-        <ServiceCatalogue />
-      </Suspense>
+      <ServicesStatement />
+      <ServicesShowcase />
       <ServicesInAction />
       <CtaBand />
     </>

@@ -22,24 +22,32 @@
   height: 100%;
 }
 
-/* Human hand: cut-out flush with the bottom-left corner of the frame; its
-   index fingertip ends at about x 621, y 500 (Figma). */
+/* The hands start from the window edges (sleeve on the left, arm on the
+   right; no fade) and reach in until their fingertips meet the logo where
+   Figma puts them: the human finger at the "T" (99 left of centre, y 500),
+   the robot finger at the mark (114 right of centre, y 431). Each hand's
+   width is the distance from its edge to its fingertip, so on wider windows
+   the hands grow instead of leaving a gap; at 1440 they are exactly Figma's.
+   Their top is set so the fingertip stays at the Figma height. */
+
+/* Human hand: art 623 x 516, fingertip at the right edge, 14.3% down
+   (top = 500 - 0.1188 x width). Runs off the bottom when large. */
 .handLeft {
   position: absolute;
   left: 0;
-  bottom: 0;
-  width: calc(622 * var(--u));
+  top: calc(500 * var(--u) - 0.1188 * (50vw - 99 * var(--u)));
+  width: calc(50vw - 99 * var(--u));
   aspect-ratio: 623 / 516;
   z-index: 2;
 }
 
-/* Robot hand: arm flush with the right edge, fingertip at about x 834,
-   y 431, just short of the human finger. */
+/* Robot hand: art 613 x 476, fingertip at the left edge, 68.3% down
+   (top = 431 - 0.5302 x width). */
 .handRight {
   position: absolute;
   right: 0;
-  top: calc(110 * var(--u));
-  width: calc(606 * var(--u));
+  top: calc(431 * var(--u) - 0.5302 * (50vw - 114 * var(--u)));
+  width: calc(50vw - 114 * var(--u));
   aspect-ratio: 613 / 476;
   z-index: 2;
 }
@@ -124,16 +132,17 @@
   color: var(--navy-900);
 }
 
-/* Loop arrow: 108 x 125 at left 704 / top 648 */
+/* Curved arrow (Figma): 52 x 90, tip at about x 740 / y 667 under the
+   tagline, tail by the statement's first line. */
 .arrow {
   position: absolute;
-  left: calc(50% - 16 * var(--u));
-  top: calc(648 * var(--u));
-  width: calc(125 * var(--u));
-  height: calc(108 * var(--u));
+  left: calc(50% + 7 * var(--u));
+  top: calc(663 * var(--u));
+  width: calc(52 * var(--u));
+  height: calc(90 * var(--u));
   z-index: 3;
-  rotate: -90deg;
-  scale: 1 -1;
+  color: var(--navy-900);
+  overflow: visible;
 }
 
 /* Desktop: fit the whole 1440 x 945 frame on screen (width or height,
@@ -154,6 +163,7 @@
     gap: calc(50 * var(--u));
   }
 }
+
 
 @media (max-width: 767px) {
   .hero {

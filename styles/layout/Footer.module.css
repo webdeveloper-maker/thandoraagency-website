@@ -96,8 +96,16 @@
   align-items: flex-end;
   gap: calc(18 * var(--s));
   translate: calc(-50% + 0.5px) 0;
+  /* Hug the content: as an absolutely placed box starting at 50% it was
+     narrower than the text, which spilled out to the right off-centre. */
+  width: max-content;
   pointer-events: none;
   white-space: nowrap;
+}
+
+.wordmark img,
+.wordmark span {
+  flex: none;
 }
 
 .wordmark img {
@@ -134,12 +142,12 @@
   }
 
   .wordmark img {
-    width: calc(217 * var(--u) * 1.2);
-    height: calc(202 * var(--u) * 1.2);
+    width: calc(217 * var(--u));
+    height: calc(202 * var(--u));
   }
 
   .wordmark span {
-    font-size: calc(300 * var(--u) * 1.2);
+    font-size: calc(300 * var(--u));
     height: auto;
     line-height: 0.86;
   }
@@ -206,17 +214,18 @@
     padding: 4px 0;
   }
 
+  /* Sized to the window so the whole wordmark fits (~92% wide). */
   .wordmark {
-    gap: 8px;
+    gap: 2vw;
     bottom: -4px;
   }
 
   .wordmark img {
-    width: 70px;
-    height: 65px;
+    width: 14.5vw;
+    height: 13.5vw;
   }
 
   .wordmark span {
-    font-size: 96px;
+    font-size: 20vw;
   }
 }

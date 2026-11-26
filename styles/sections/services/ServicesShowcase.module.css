@@ -1,0 +1,392 @@
+/* Services "What we Do." (new design): black section, 1440 frame in --u. */
+.section {
+  position: relative;
+  overflow-x: clip;
+  padding: calc(84 * var(--u)) 0 calc(210 * var(--u));
+  background: #000;
+  color: var(--white);
+}
+
+.grid {
+  opacity: 0.6;
+}
+
+/* Title at left 117; copy at left 708, 650 wide (Inter Medium 22 / 40) */
+.head {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: calc(591 * var(--u)) minmax(0, calc(650 * var(--s)));
+  padding-left: calc(117 * var(--u));
+}
+
+.copy {
+  padding-top: calc(6 * var(--u));
+  font-size: var(--fs-intro);
+  line-height: 1.818;
+  font-weight: 500;
+  color: var(--white);
+}
+
+.copy b {
+  color: var(--blue-400);
+  font-weight: 600;
+}
+
+/* Stage: the photo card (left 196, 1096 x 463) and the floating cards placed
+   around it, its top 517 below the section top. */
+.stage {
+  position: relative;
+  width: calc(1440 * var(--u));
+  height: calc(463 * var(--u));
+  margin: calc(225 * var(--u)) auto 0;
+}
+
+.card {
+  position: absolute;
+  left: calc(196 * var(--u));
+  top: 0;
+  width: calc(1096 * var(--u));
+  aspect-ratio: 1084 / 458;
+  z-index: 2;
+  overflow: hidden;
+  border-radius: calc(14 * var(--s));
+  container-type: inline-size;
+}
+
+.card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* "More": a real pill over the one drawn in the image (art pill at 52.3% /
+   74.4%, 13.2% x 12.5% of the card), a hair larger so the drawn one never
+   peeks out. Sized in card-width units (cqw) so it scales with the photo. */
+.more {
+  position: absolute;
+  left: 51.9%;
+  top: 73.6%;
+  width: 14%;
+  height: 14.1%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.55cqw 0 2.3cqw;
+  border-radius: 999px;
+  background: linear-gradient(100deg, #3f55d6 0%, #2c3ea8 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    0 0.6cqw 1.8cqw rgba(10, 20, 80, 0.45);
+  color: var(--white);
+  font-size: 2.05cqw;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  transition:
+    background-color var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out),
+    transform var(--dur-base) var(--ease-out);
+}
+
+.moreIcon {
+  display: grid;
+  place-items: center;
+  width: 4.1cqw;
+  aspect-ratio: 1;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 50%;
+  transition:
+    background-color var(--dur-base) var(--ease-out),
+    color var(--dur-base) var(--ease-out),
+    border-color var(--dur-base) var(--ease-out);
+}
+
+.moreIcon svg {
+  width: 45%;
+  height: 45%;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+/* Hover / focus: the pill brightens and lifts, the arrow circle fills white
+   and the arrow nudges forward. */
+.more:hover,
+.more:focus-visible {
+  background: linear-gradient(100deg, #4b63ff 0%, #315cff 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    0 0.9cqw 2.6cqw rgba(49, 92, 255, 0.55);
+  transform: translateY(-2px);
+}
+
+.more:hover .moreIcon,
+.more:focus-visible .moreIcon {
+  border-color: var(--white);
+  background: var(--white);
+  color: var(--blue-600);
+}
+
+.more:hover .moreIcon svg,
+.more:focus-visible .moreIcon svg {
+  transform: translateX(15%);
+}
+
+.more:focus-visible {
+  outline: 2px solid var(--white);
+  outline-offset: 3px;
+}
+
+.more:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Floating UI cards (white, soft shadow), positions relative to the photo
+   card's top. Text in --s so it stays legible. */
+.float {
+  position: absolute;
+  z-index: 3;
+  display: grid;
+  border-radius: calc(12 * var(--s));
+  background: var(--white);
+  color: #1d2433;
+  box-shadow: 0 calc(18 * var(--s)) calc(40 * var(--s)) rgba(0, 0, 0, 0.35);
+  font-size: calc(12 * var(--s));
+  line-height: 1.4;
+  pointer-events: none;
+}
+
+.float strong {
+  display: block;
+  font-weight: 600;
+}
+
+.float small {
+  display: block;
+  color: #8a93a8;
+  font-size: calc(10.5 * var(--s));
+}
+
+/* Upload: left 125, 33 below the card top, 310 wide */
+.upload {
+  left: calc(125 * var(--u));
+  top: calc(33 * var(--u));
+  width: calc(310 * var(--u));
+  gap: calc(10 * var(--s));
+  padding: calc(14 * var(--s)) calc(14 * var(--s)) calc(12 * var(--s));
+}
+
+.uploadTop {
+  display: flex;
+  align-items: center;
+  gap: calc(12 * var(--s));
+}
+
+.uploadTop strong {
+  font-size: calc(13.5 * var(--s));
+}
+
+.uploadIcon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: calc(36 * var(--s));
+  height: calc(36 * var(--s));
+  border-radius: 50%;
+  background: #e8eeff;
+  color: var(--blue-600);
+}
+
+.uploadIcon svg {
+  width: 55%;
+  height: 55%;
+}
+
+.barRow {
+  display: flex;
+  align-items: center;
+  gap: calc(10 * var(--s));
+}
+
+.bar {
+  flex: 1;
+  display: block;
+  height: calc(4 * var(--s));
+  border-radius: 99px;
+  background: #e5e8f0;
+  overflow: hidden;
+}
+
+.bar i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--blue-600);
+}
+
+/* Pause: two bars in a small grey circle */
+.pause {
+  flex: none;
+  width: calc(16 * var(--s));
+  height: calc(16 * var(--s));
+  border-radius: 50%;
+  background:
+    linear-gradient(#1d2433, #1d2433) calc(5 * var(--s)) 50% / calc(2 * var(--s)) calc(7 * var(--s)) no-repeat,
+    linear-gradient(#1d2433, #1d2433) calc(9 * var(--s)) 50% / calc(2 * var(--s)) calc(7 * var(--s)) no-repeat,
+    #eceff5;
+}
+
+/* Total sales: left 1155, 118 above the card, 207 x 220; behind the photo
+   card, which covers its lower left (Figma). */
+.stat {
+  z-index: 1;
+  left: calc(1155 * var(--u));
+  top: calc(-118 * var(--u));
+  width: calc(207 * var(--u));
+  gap: calc(6 * var(--s));
+  padding: calc(12 * var(--s));
+}
+
+.statHead {
+  display: flex;
+  align-items: center;
+  gap: calc(8 * var(--s));
+}
+
+.statIcon {
+  width: calc(24 * var(--s));
+  height: calc(24 * var(--s));
+  border-radius: calc(6 * var(--s));
+  background: #eef1f7;
+}
+
+.amount {
+  font-size: calc(19 * var(--s));
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.amount span {
+  color: var(--blue-600);
+}
+
+.amount em {
+  font-style: normal;
+  color: #c3c9d6;
+}
+
+.delta {
+  color: #e5484d !important;
+}
+
+.chart {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: calc(4 * var(--s));
+}
+
+.axis {
+  display: flex;
+  justify-content: space-between;
+  color: #a3abbd;
+  font-size: calc(9 * var(--s));
+}
+
+/* Profile: left 1046, 246 below the card top, 308 wide */
+.profile {
+  left: calc(1046 * var(--u));
+  top: calc(246 * var(--u));
+  width: calc(308 * var(--u));
+  gap: calc(8 * var(--s));
+  padding: calc(14 * var(--s)) calc(14 * var(--s)) calc(12 * var(--s));
+}
+
+.profileHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.profileHead strong {
+  font-size: calc(13.5 * var(--s));
+}
+
+.dots {
+  color: #1d2433;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.profile p {
+  margin: calc(4 * var(--s)) 0 0;
+  color: #3a4357;
+}
+
+.people {
+  display: flex;
+  align-items: center;
+  gap: calc(8 * var(--s));
+}
+
+.avatars {
+  display: flex;
+}
+
+.avatars i {
+  width: calc(22 * var(--s));
+  height: calc(22 * var(--s));
+  margin-right: calc(-7 * var(--s));
+  border: 2px solid var(--white);
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6b4a2b, #2a1d14);
+}
+
+.avatars i:nth-child(2) {
+  background: linear-gradient(135deg, #a07a52, #3c2a1c);
+}
+
+.avatars i:nth-child(3) {
+  background: linear-gradient(135deg, #3f3f46, #111);
+}
+
+.people small {
+  margin-left: calc(8 * var(--s));
+}
+
+.follow {
+  display: block;
+  margin-top: calc(4 * var(--s));
+  padding: calc(8 * var(--s));
+  border-radius: calc(6 * var(--s));
+  background: var(--blue-600);
+  color: var(--white);
+  font-weight: 600;
+  text-align: center;
+}
+
+@media (max-width: 1023px) {
+  .section {
+    padding: 64px 0 72px;
+  }
+
+  .head {
+    grid-template-columns: 1fr;
+    row-gap: 12px;
+    padding: 0 var(--pad);
+  }
+
+  .stage {
+    width: auto;
+    height: auto;
+    margin: 40px var(--pad) 0;
+  }
+
+  .card {
+    position: relative;
+    left: auto;
+    width: 100%;
+  }
+
+  .float {
+    display: none;
+  }
+}

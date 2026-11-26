@@ -63,10 +63,10 @@ export const footer = {
     {
       title: "Services",
       links: [
-        { label: "Strategy", href: "/services/?category=digital-marketing" },
-        { label: "Identity", href: "/services/?category=creative-branding" },
+        { label: "Strategy", href: "/services/" },
+        { label: "Identity", href: "/services/" },
         { label: "Experience", href: "/services/" },
-        { label: "Marketing", href: "/services/?category=content-communication" },
+        { label: "Marketing", href: "/services/" },
       ],
     },
     {
